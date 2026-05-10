@@ -71,15 +71,16 @@ export const experience = [
     skills: "Delivery of projects, Entrepreneurship, …",
   },
   {
-    title: "Human Being",
-    org: "Planet Earth",
-    type: "Internship",
-    date: "Jan 2008 – Present",
+    title: "Educator",
+    org: "Kumon",
+    type: "Casual employment",
+    date: "Jan 2023 – Dec 2025",
     place: "Australia · On-site",
     summary:
-      "Key roles: breathing 24/7; blinking ~15/min; sleeping ~8h/night; converting food to energy ~3×/day.",
+      "Key roles: helping students solve complex mathematical and literature problems, marking students work, recording students progress, technical support and implementation related to the Kumon CONNECT platform",
     skills: "Network Services, …",
   },
+  
 ] as const;
 
 export const education = [
