@@ -93,6 +93,12 @@ export const education = [
       "Activities: QUT AI/ML society (member); QUT TECH / The Emerging Coders Hub (member).",
   },
   {
+    school: "Y Combinator — Startup School",
+    detail: "Enrolled in Startup School — YC’s free online program for founders (curriculum, advice, and community).",
+    date: "Apr 2026 – Present",
+    extra: "",
+  },
+  {
     school: "BOP Industries — Young Entrepreneurs Hub",
     detail: "Youth accelerator — workshops, mentoring, and dedicated build time (Brisbane WeWork).",
     date: "Apr 2026 – Sep 2026",
@@ -103,6 +109,13 @@ export const education = [
     detail: "BSB50120 Diploma Of Business",
     date: "Issued May 2025 · Credential ID 11907942-7747750",
     extra: "CRM, Accounting, …",
+  },
+  {
+    school: "Mansfield State High School",
+    detail:
+      "Queensland Certificate of Education (QCE), Queensland Curriculum & Assessment Authority (QCAA) — Queensland curriculum pathway.",
+    date: "Jan 2020 – Nov 2025",
+    extra: "Skills: Delivery of projects, Data analysis, +7 skills (full list on LinkedIn).",
   },
 ] as const;
 
