@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply min-h-dvh bg-canvas font-sans text-body text-copy antialiased;
+}
+
+::selection {
+  @apply bg-ink/10 text-ink;
+}
+
+/* Focus: flat ink border — no glow (DESIGN.md text-input-focused signal) */
+.focus-ring {
+  @apply outline-none ring-2 ring-ink ring-offset-2 ring-offset-canvas;
+}
+
+.btn-primary {
+  @apply inline-flex h-9 items-center justify-center rounded-sm bg-ink px-5 text-button text-on-primary;
+}
+
+.btn-primary:active {
+  @apply bg-ink-deep;
+}
+
+.btn-secondary {
+  @apply inline-flex h-9 items-center justify-center rounded-sm border border-hairline-strong bg-canvas px-5 text-button text-ink;
+}
+
+.link-footer {
+  @apply text-caption text-mute underline-offset-4 hover:text-ink hover:underline;
+}
