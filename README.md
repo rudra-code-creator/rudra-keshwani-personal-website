@@ -2,7 +2,7 @@
 
 Source for my personal site: portfolio, TIBER framework, experience, and contact.
 
-**Live site:** [https://rudra-keshwani-personal-website-ft8czuvap.vercel.app](https://rudra-keshwani-personal-website-ft8czuvap.vercel.app)
+**Live site:** [https://rudra-keshwani-personal-website.vercel.app](https://rudra-keshwani-personal-website.vercel.app)
 
 ## Stack
 
