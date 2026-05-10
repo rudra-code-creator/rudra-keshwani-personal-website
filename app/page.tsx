@@ -303,7 +303,7 @@ export default function Home() {
             <div className="lg:col-span-3">
               <p className="text-body-sm-strong text-on-dark">Colophon</p>
               <p className="mt-4 text-body-sm text-mute">
-                Personal site styled after the Raycast marketing design language — continuous dark canvas,
+                Rudra Keshwani's personal site styled after the Raycast design language: continuous dark canvas,
                 Inter + ss03, hairline borders, white primary actions, command-palette metaphor.
               </p>
             </div>
