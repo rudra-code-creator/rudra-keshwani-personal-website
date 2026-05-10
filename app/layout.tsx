@@ -1,33 +1,46 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-const mono = JetBrains_Mono({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  variable: "--font-mono",
+  variable: "--font-inter",
   display: "swap",
+  weight: ["400", "500", "600"],
 });
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+function resolveMetadataBase(): URL {
+  const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (raw) {
+    const withProtocol = raw.startsWith("http://") || raw.startsWith("https://") ? raw : `https://${raw}`;
+    try {
+      return new URL(withProtocol);
+    } catch {
+      /* fall through */
+    }
+  }
+  if (process.env.VERCEL_URL) {
+    return new URL(`https://${process.env.VERCEL_URL}`);
+  }
+  return new URL("http://localhost:3000");
+}
 
 export const metadata: Metadata = {
-  title: "Rudra Keshwani — Technology, entrepreneurship & DevOps",
+  title: "Rudra Keshwani (The TIBER guy) — student technologist",
   description:
-    "Personal site for Rudra Keshwani — technology, entrepreneurship, and DevOps. Brisbane-based. RaaS: Rudra as a Service.",
-  metadataBase: new URL(siteUrl),
+    "Cofounder @ unpaste.ai · VC research @ SH1P · Intern @ Chatstat · Secretary @ QUT TECH. TIBER: Technology, Innovation, Business, Entrepreneurship, Research. Brisbane, Australia.",
+  metadataBase: resolveMetadataBase(),
   openGraph: {
-    title: "Rudra Keshwani",
+    title: "Rudra Keshwani (The TIBER guy)",
     description:
-      "Technology, entrepreneurship, and DevOps. Creative builder based in Brisbane.",
+      "Student technologist · DevOps, cloud, infrastructure · Brisbane · Open to work.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Rudra Keshwani",
-    description: "Technology, entrepreneurship, and DevOps.",
+    description:
+      "The TIBER guy · Builder · Brisbane · Technology, Innovation, Business, Entrepreneurship, Research.",
     creator: "@rudrakesh123",
   },
 };
@@ -38,7 +51,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={mono.variable}>
+    <html lang="en" className={inter.variable}>
       <body className="font-sans">{children}</body>
     </html>
   );

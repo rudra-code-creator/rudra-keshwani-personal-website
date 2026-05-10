@@ -1,96 +1,161 @@
 ---
 version: alpha
-name: OpenCode
+name: Raycast
+属于: A dark-canvas developer-tools system that treats the marketing page like an extended product screenshot — pure-near-black background, command-palette mockups as the hero, Inter typography with the ss03 stylistic set turned on, and a single white CTA pill that doesn't break the inky atmosphere. The chrome reads like Raycast's own command-palette UI scaled up to a marketing page: monochrome dark surfaces with a faint surface ladder (#07080a → #0d0d0d → #101111), tight 6–10px radius on cards, hairline 1px borders in #242728, and rare splashes of saturated accent (Hacker News yellow, Slack red, Mac green, info blue) reserved for product-tile category illustrations. The signature visual moment is a red gradient hero wordmark — three diagonal red stripes laid across the very top of the home page like a launch-banner — paired with full-bleed product UI screenshots that show Raycast's actual command palette, store, and AI chat surfaces.
 description: |
-  A terminal-native marketing system rendered entirely in Berkeley Mono — every word on the page, from the hero headline down to the footer fine print, is monospaced. The page itself reads like a manpage or a static-site README: warm cream canvas (`#fdfcfc`), nearly-black ink (`#201d1d`), 4px-radius rectangles for the few interactive elements, and bracketed `[+]`/`[-]` ASCII markers used as bullets. The brand's only "visual moment" is a single dark hero card that mocks up the OpenCode TUI itself — black background, monospaced terminal output, ASCII pipe characters, and a wordmark rendered as block-pixel ASCII. Every section sits as a hairline-bordered text block on the cream canvas with no shadows, no gradients, no decorative imagery, and no non-monospaced character anywhere in the system.
+  Raycast's marketing system reads like an extended product screenshot. The chrome IS the in-product chrome at marketing scale: pure-near-black canvas, hairline 1px borders, command-palette-style cards, Inter typography with the ss03 stylistic set enabled site-wide, white CTA pill, and a small set of saturated category accent colors (yellow / red / green / blue) reserved for extension and feature illustrations. Section rhythm is generous (~96px) but the page never breaks tonal continuity — the whole site sits in one continuous dark mode.
 
 colors:
-  primary: "#201d1d"
-  on-primary: "#fdfcfc"
-  ink: "#201d1d"
-  ink-deep: "#0f0000"
-  charcoal: "#302c2c"
-  body: "#424245"
-  mute: "#646262"
-  stone: "#6e6e73"
-  ash: "#9a9898"
-  canvas: "#fdfcfc"
-  surface-soft: "#f8f7f7"
-  surface-card: "#f1eeee"
-  surface-dark: "#201d1d"
-  surface-dark-elevated: "#302c2c"
-  hairline: "rgba(15,0,0,0.12)"
-  hairline-strong: "#646262"
-  on-dark: "#fdfcfc"
-  on-dark-mute: "#9a9898"
-  accent: "#007aff"
-  accent-hover: "#0056b3"
-  accent-active: "#004085"
-  warning: "#ff9f0a"
-  warning-hover: "#cc7f08"
-  warning-active: "#995f06"
-  danger: "#ff3b30"
-  danger-hover: "#d70015"
-  danger-active: "#a50011"
-  success: "#30d158"
+  primary: "#ffffff"
+  primary-pressed: "#e8e8e8"
+  on-primary: "#000000"
+  ink: "#f4f4f6"
+  body: "#cdcdcd"
+  charcoal: "#d3d3d4"
+  mute: "#9c9c9d"
+  ash: "#6a6b6c"
+  stone: "#434345"
+  on-dark: "#ffffff"
+  on-dark-mute: "rgba(255,255,255,0.72)"
+  canvas: "#07080a"
+  surface: "#0d0d0d"
+  surface-elevated: "#101111"
+  surface-card: "#121212"
+  button-fg: "#18191a"
+  hairline: "#242728"
+  hairline-soft: "rgba(255,255,255,0.08)"
+  hairline-strong: "rgba(255,255,255,0.16)"
+  accent-blue: "#57c1ff"
+  accent-blue-soft: "rgba(87,193,255,0.15)"
+  accent-red: "#ff6161"
+  accent-red-soft: "rgba(255,97,97,0.15)"
+  accent-green: "#59d499"
+  accent-green-soft: "rgba(89,212,153,0.15)"
+  accent-yellow: "#ffc533"
+  accent-yellow-soft: "rgba(255,197,51,0.15)"
+  hero-stripe-start: "#ff5757"
+  hero-stripe-end: "#a1131a"
+  key-bg-start: "#121212"
+  key-bg-end: "#0d0d0d"
 
 typography:
   display-xl:
-    fontFamily: Berkeley Mono
-    fontSize: 38px
-    fontWeight: 700
-    lineHeight: 1.5
+    fontFamily: Inter
+    fontSize: 64px
+    fontWeight: 600
+    lineHeight: 1.1
     letterSpacing: 0
+    fontFeature: '"calt", "kern", "liga", "ss03"'
+  display-lg:
+    fontFamily: Inter
+    fontSize: 56px
+    fontWeight: 500
+    lineHeight: 1.17
+    letterSpacing: 0.2px
+    fontFeature: '"calt", "kern", "liga", "ss03"'
+  heading-xl:
+    fontFamily: Inter
+    fontSize: 24px
+    fontWeight: 500
+    lineHeight: 1.6
+    letterSpacing: 0.2px
+    fontFeature: '"calt", "kern", "liga", "ss03"'
+  heading-lg:
+    fontFamily: Inter
+    fontSize: 22px
+    fontWeight: 500
+    lineHeight: 1.15
+    letterSpacing: 0
+    fontFeature: '"calt", "kern", "liga", "ss03"'
   heading-md:
-    fontFamily: Berkeley Mono
-    fontSize: 16px
-    fontWeight: 700
-    lineHeight: 1.5
+    fontFamily: Inter
+    fontSize: 20px
+    fontWeight: 500
+    lineHeight: 1.4
+    letterSpacing: 0.2px
+    fontFeature: '"calt", "kern", "liga", "ss03"'
+  heading-sm:
+    fontFamily: Inter
+    fontSize: 18px
+    fontWeight: 500
+    lineHeight: 1.4
+    letterSpacing: 0.2px
+    fontFeature: '"calt", "kern", "liga", "ss03"'
+  body-lg:
+    fontFamily: Inter
+    fontSize: 18px
+    fontWeight: 400
+    lineHeight: 1.6
     letterSpacing: 0
+    fontFeature: '"calt", "kern", "liga", "ss03"'
   body-md:
-    fontFamily: Berkeley Mono
+    fontFamily: Inter
     fontSize: 16px
     fontWeight: 400
-    lineHeight: 1.5
+    lineHeight: 1.6
     letterSpacing: 0
+    fontFeature: '"calt", "kern", "liga", "ss03"'
   body-strong:
-    fontFamily: Berkeley Mono
+    fontFamily: Inter
     fontSize: 16px
     fontWeight: 500
-    lineHeight: 1.5
-    letterSpacing: 0
-  body-tight:
-    fontFamily: Berkeley Mono
-    fontSize: 16px
-    fontWeight: 500
-    lineHeight: 1
-    letterSpacing: 0
-  link-md:
-    fontFamily: Berkeley Mono
-    fontSize: 16px
-    fontWeight: 400
-    lineHeight: 1.5
-    letterSpacing: 0
-  button-md:
-    fontFamily: Berkeley Mono
-    fontSize: 16px
-    fontWeight: 500
-    lineHeight: 2
-    letterSpacing: 0
-  caption-md:
-    fontFamily: Berkeley Mono
+    lineHeight: 1.4
+    letterSpacing: 0.2px
+    fontFeature: '"calt", "kern", "liga", "ss03"'
+  body-sm:
+    fontFamily: Inter
     fontSize: 14px
     fontWeight: 400
-    lineHeight: 2
+    lineHeight: 1.6
     letterSpacing: 0
+    fontFeature: '"calt", "kern", "liga", "ss03"'
+  body-sm-strong:
+    fontFamily: Inter
+    fontSize: 14px
+    fontWeight: 500
+    lineHeight: 1.6
+    letterSpacing: 0.2px
+    fontFeature: '"calt", "kern", "liga", "ss03"'
+  caption-md:
+    fontFamily: Inter
+    fontSize: 13px
+    fontWeight: 400
+    lineHeight: 1.4
+    letterSpacing: 0.1px
+    fontFeature: '"calt", "kern", "liga", "ss03"'
+  caption-sm:
+    fontFamily: Inter
+    fontSize: 12px
+    fontWeight: 400
+    lineHeight: 1.5
+    letterSpacing: 0.4px
+    fontFeature: '"calt", "kern", "liga", "ss03"'
+  link-md:
+    fontFamily: Inter
+    fontSize: 16px
+    fontWeight: 500
+    lineHeight: 1.4
+    letterSpacing: 0.3px
+    fontFeature: '"calt", "kern", "liga", "ss03"'
+  button-md:
+    fontFamily: Inter
+    fontSize: 14px
+    fontWeight: 500
+    lineHeight: 1.6
+    letterSpacing: 0.2px
+    fontFeature: '"calt", "kern", "liga", "ss03"'
 
 rounded:
   none: 0px
-  sm: 4px
+  xs: 4px
+  sm: 6px
+  md: 8px
+  lg: 10px
+  xl: 16px
   full: 9999px
 
 spacing:
-  xxs: 1px
+  xxs: 2px
   xs: 4px
   sm: 8px
   md: 12px
@@ -104,242 +169,288 @@ components:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.on-primary}"
     typography: "{typography.button-md}"
-    rounded: "{rounded.sm}"
-    padding: 4px 20px
+    rounded: "{rounded.md}"
+    padding: 8px 16px
     height: 36px
-  button-primary-active:
-    backgroundColor: "{colors.ink-deep}"
+  button-primary-pressed:
+    backgroundColor: "{colors.primary-pressed}"
     textColor: "{colors.on-primary}"
     typography: "{typography.button-md}"
-    rounded: "{rounded.sm}"
+    rounded: "{rounded.md}"
   button-secondary:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    typography: "{typography.button-md}"
-    rounded: "{rounded.sm}"
-    padding: 4px 20px
-  button-tab:
     backgroundColor: "transparent"
-    textColor: "{colors.mute}"
+    textColor: "{colors.on-dark}"
     typography: "{typography.button-md}"
-    rounded: "{rounded.none}"
+    rounded: "{rounded.md}"
     padding: 8px 16px
-  button-tab-active:
-    backgroundColor: "transparent"
-    textColor: "{colors.ink}"
+    height: 36px
+  button-tertiary:
+    backgroundColor: "{colors.surface-elevated}"
+    textColor: "{colors.on-dark}"
     typography: "{typography.button-md}"
-    rounded: "{rounded.none}"
+    rounded: "{rounded.md}"
+    padding: 8px 16px
+    height: 36px
   button-disabled:
-    backgroundColor: "{colors.surface-card}"
+    backgroundColor: "{colors.surface-elevated}"
     textColor: "{colors.ash}"
-    rounded: "{rounded.sm}"
-  badge-news:
-    backgroundColor: "{colors.surface-dark}"
+    rounded: "{rounded.md}"
+  install-button:
+    backgroundColor: "transparent"
     textColor: "{colors.on-dark}"
-    typography: "{typography.caption-md}"
-    rounded: "{rounded.sm}"
-    padding: 2px 8px
+    typography: "{typography.button-md}"
+    rounded: "{rounded.md}"
+    padding: 6px 14px
   text-input:
-    backgroundColor: "{colors.surface-soft}"
-    textColor: "{colors.ink}"
+    backgroundColor: "{colors.surface-elevated}"
+    textColor: "{colors.on-dark}"
     typography: "{typography.body-md}"
-    rounded: "{rounded.sm}"
+    rounded: "{rounded.md}"
     padding: 8px 12px
-    height: 40px
+    height: 36px
   text-input-focused:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.sm}"
-  textarea:
-    backgroundColor: "{colors.surface-soft}"
-    textColor: "{colors.ink}"
+    backgroundColor: "{colors.surface-elevated}"
+    textColor: "{colors.on-dark}"
+    rounded: "{rounded.md}"
+  store-search-bar:
+    backgroundColor: "{colors.surface-elevated}"
+    textColor: "{colors.on-dark}"
+    typography: "{typography.body-md}"
+    rounded: "{rounded.md}"
+    padding: 10px 16px
+    height: 44px
+  command-palette-row:
+    backgroundColor: "transparent"
+    textColor: "{colors.on-dark}"
     typography: "{typography.body-md}"
     rounded: "{rounded.sm}"
-    padding: 12px
-  install-snippet:
+    padding: 6px 10px
+  command-palette-row-active:
     backgroundColor: "{colors.surface-card}"
-    textColor: "{colors.ink}"
-    typography: "{typography.body-md}"
-    rounded: "{rounded.sm}"
-    padding: 12px 16px
-  hero-tui-mockup:
-    backgroundColor: "{colors.surface-dark}"
-    textColor: "{colors.on-dark}"
-    typography: "{typography.body-md}"
-    rounded: "{rounded.none}"
-    padding: 64px 32px
-  tui-prompt-row:
-    backgroundColor: "{colors.surface-dark-elevated}"
     textColor: "{colors.on-dark}"
     typography: "{typography.body-md}"
     rounded: "{rounded.sm}"
-    padding: 8px 12px
-  list-row:
-    backgroundColor: "{colors.canvas}"
+  pill-tab:
+    backgroundColor: "transparent"
     textColor: "{colors.body}"
-    typography: "{typography.body-md}"
-    rounded: "{rounded.none}"
-    padding: 8px 0px
-  faq-row:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    typography: "{typography.body-md}"
-    rounded: "{rounded.none}"
-    padding: 12px 0px
-  testimonial-row:
-    backgroundColor: "{colors.surface-soft}"
-    textColor: "{colors.body}"
-    typography: "{typography.body-md}"
-    rounded: "{rounded.sm}"
-    padding: 16px 20px
-  chart-tile:
-    backgroundColor: "{colors.canvas}"
+    typography: "{typography.body-sm}"
+    rounded: "{rounded.full}"
+    padding: 4px 10px
+  pill-tab-active:
+    backgroundColor: "{colors.surface-elevated}"
+    textColor: "{colors.on-dark}"
+    typography: "{typography.body-sm}"
+    rounded: "{rounded.full}"
+  badge-pro:
+    backgroundColor: "{colors.surface-elevated}"
+    textColor: "{colors.on-dark-mute}"
+    typography: "{typography.caption-sm}"
+    rounded: "{rounded.xs}"
+    padding: 2px 6px
+  badge-info-soft:
+    backgroundColor: "{colors.accent-blue-soft}"
+    textColor: "{colors.accent-blue}"
+    typography: "{typography.caption-sm}"
+    rounded: "{rounded.xs}"
+    padding: 2px 8px
+  keycap:
+    backgroundColor: "{colors.surface-card}"
     textColor: "{colors.body}"
     typography: "{typography.caption-md}"
-    rounded: "{rounded.none}"
+    rounded: "{rounded.xs}"
+    padding: 1px 6px
+    height: 20px
+  command-palette-card:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-dark}"
+    typography: "{typography.body-md}"
+    rounded: "{rounded.lg}"
+    padding: 0px
+  feature-card-dark:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-dark}"
+    typography: "{typography.body-md}"
+    rounded: "{rounded.lg}"
+    padding: 24px
+  feature-card-elevated:
+    backgroundColor: "{colors.surface-elevated}"
+    textColor: "{colors.on-dark}"
+    typography: "{typography.body-md}"
+    rounded: "{rounded.lg}"
+    padding: 24px
+  store-extension-card:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-dark}"
+    typography: "{typography.body-md}"
+    rounded: "{rounded.md}"
     padding: 16px
+  pricing-tier-card:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-dark}"
+    typography: "{typography.body-md}"
+    rounded: "{rounded.lg}"
+    padding: 24px
+  pricing-tier-card-featured:
+    backgroundColor: "{colors.surface-elevated}"
+    textColor: "{colors.on-dark}"
+    typography: "{typography.body-md}"
+    rounded: "{rounded.lg}"
+    padding: 24px
+  hero-stripe-band:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.on-dark}"
+    typography: "{typography.display-xl}"
+    rounded: "{rounded.none}"
+    padding: 96px 48px
+  app-icon-tile:
+    backgroundColor: "{colors.surface-card}"
+    rounded: "{rounded.md}"
+    size: 48px
+  app-icon-tile-large:
+    backgroundColor: "{colors.surface-card}"
+    rounded: "{rounded.md}"
+    size: 64px
   primary-nav:
     backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    typography: "{typography.body-strong}"
+    textColor: "{colors.on-dark}"
+    typography: "{typography.body-sm-strong}"
     rounded: "{rounded.none}"
     height: 56px
   footer-section:
     backgroundColor: "{colors.canvas}"
     textColor: "{colors.body}"
-    typography: "{typography.caption-md}"
+    typography: "{typography.body-sm}"
     rounded: "{rounded.none}"
-    padding: 32px 0px
+    padding: 64px 48px
   link-inline:
-    textColor: "{colors.ink}"
+    textColor: "{colors.on-dark}"
     typography: "{typography.link-md}"
-  badge-section-label:
-    backgroundColor: "transparent"
-    textColor: "{colors.ink}"
-    typography: "{typography.heading-md}"
-    rounded: "{rounded.none}"
 ---
 
 ## Overview
 
-OpenCode's marketing site is rendered entirely in Berkeley Mono — every word on the page, from the 38px hero headline down to the 14px footer fine print, sits in the same monospaced face. The visual identity comes from that single typographic decision: the page reads like a manpage or a static-site README, complete with bracketed `[+]` / `[-]` / `[x]` ASCII markers used in place of icons or bullets, and a wordmark rendered as block-pixel ASCII art at the top of the nav. There is no sans-serif anywhere, no display face, no italics, no decorative ornament — the system is one font and one weight away from being a 1990s `whatis` page rendered at modern resolutions.
+Raycast's marketing site reads like an extended product screenshot. The chrome IS the in-product command palette at marketing scale: pure near-black canvas (`{colors.canvas}` — `#07080a`), hairline 1px borders (`{colors.hairline}` — `#242728`), command-palette-style cards with rounded corners between 6 and 16px, Inter typography with the **ss03 stylistic set enabled site-wide** (a single character — the alternate `g` — that gives Raycast's typography its signature subtle distinction), a single white CTA pill that anchors every primary action, and small splashes of saturated accent reserved for category illustrations.
 
-The chrome is austere: warm cream canvas (`{colors.canvas}` — `#fdfcfc` with a faint blush), nearly-black ink (`{colors.ink}` — `#201d1d`), and a 4-tier neutral gray ladder for body, metadata, and disabled text. Cards don't exist as raised surfaces — sections are just hairline-bordered text blocks (`{colors.hairline}` 1px) sitting directly on the canvas with `{spacing.section}` (96px) air between them. The single "visual" moment in the entire system is a full-bleed dark hero card (`{colors.surface-dark}` — true near-black) that mocks up the OpenCode TUI itself: a terminal frame with `tab` / `ctrl-p` keybinding hints, a "Build" command line, and the OpenCode wordmark rendered as a pixel-block ASCII title.
+The system has effectively one surface mode — dark — with a faint three-step surface ladder (`{colors.canvas}` → `{colors.surface}` → `{colors.surface-elevated}` → `{colors.surface-card}`) carrying cards, in-card panels, and key-cap glyph backgrounds. The signature decorative moment is a **red diagonal-stripe gradient band** across the very top of the home page hero, used as a launch-banner motif behind the headline (the only time saturated red appears on chrome). Beyond that single moment, color in the chrome is reserved for category accents inside extension and feature illustrations: Hacker News yellow, Slack red, Linear green, info blue.
 
-The semantic palette is unusual for a brand-marketing site: it ships the full Apple Human Interface Guidelines accent ramp — `{colors.accent}` (Apple Blue `#007aff`), `{colors.danger}` (`#ff3b30`), `{colors.warning}` (`#ff9f0a`), `{colors.success}` (`#30d158`) plus their hover/active deepenings — even though the marketing surfaces themselves only use these colors in the dark hero TUI mockup as syntax-highlight stand-ins. The wider palette belongs to the in-product TUI; the marketing pages mostly stay in monochrome.
+The design philosophy is "the marketing page is the product." Section rhythm is generous (`{spacing.section}` 96px) but the page never breaks tonal continuity — the whole site sits in one continuous dark mode, full-bleed product UI screenshots show Raycast's actual command palette / store / AI chat surfaces, and the typography ligature settings (`ss03`) are inherited from the in-product app's text rendering.
 
 **Key Characteristics:**
-- 100% Berkeley Mono typography across every text role — no sans-serif fallback anywhere in the chrome
-- Warm cream `{colors.canvas}` (#fdfcfc) as the only body background — no surface alternation across sections
-- Single dark surface (`{colors.surface-dark}` — #201d1d) reserved exclusively for the hero TUI mockup
-- 4px radius (`{rounded.sm}`) on every interactive element; sections themselves are sharp rectangles bordered in 1px hairline
-- ASCII bracket markers (`[+]`, `[-]`, `[x]`) used as bullet glyphs in feature lists and FAQ rows
-- Block-pixel ASCII wordmark in the primary nav and inside the hero TUI — the brand identity is its own ASCII art
-- 96px `{spacing.section}` rhythm between every section, with no decorative dividers; only thin 1px `{colors.hairline}` rules separate content blocks
+- Single dark surface mode with a 4-step surface ladder: `{colors.canvas}` (#07080a) → `{colors.surface}` (#0d0d0d) → `{colors.surface-elevated}` (#101111) → `{colors.surface-card}` (#121212)
+- White CTA pill (`{colors.primary}` — #ffffff) is the universal primary action; everything else is monochrome dark
+- Inter typography with `font-feature-settings: "calt", "kern", "liga", "ss03"` enabled site-wide — the ss03 alternate `g` is part of the brand voice
+- Hairline 1px borders (`{colors.hairline}` — #242728) carry every card edge; there are no drop shadows in the system
+- Multi-radius card vocabulary: `{rounded.sm}` (6px) for keycaps, `{rounded.md}` (8px) for buttons and small cards, `{rounded.lg}` (10px) for feature cards, `{rounded.xl}` (16px) for hero command-palette mockup containers
+- Saturated category accents (`{colors.accent-yellow}` for Hacker News, `{colors.accent-red}` for Slack/Apple, `{colors.accent-green}` for productivity tools, `{colors.accent-blue}` for info) appear only inside extension tile imagery — never on chrome
+- Signature red diagonal-stripe gradient band at the very top of the hero — three angled stripes in `{colors.hero-stripe-start}` → `{colors.hero-stripe-end}`, used once per page maximum
 
 ## Colors
 
-> **Source pages:** `/` (home), `/zen`, `/enterprise`. The chrome palette is identical across all three.
+> **Source pages:** `/` (home), `/store` (extension marketplace), `/core-features/ai` (feature page), `/pricing` (plan tiers), `/thomas/hacker-news` (single extension detail). The chrome palette is identical across all five pages — the dark surface ladder, hairline borders, white CTA, and ss03-enabled typography are the same on every page.
 
 ### Brand & Accent
-- **Ink** (`{colors.primary}` / `{colors.ink}` — `#201d1d`): the brand's only "color." Headlines, body text, primary CTA fill, nav links, and every solid icon. Treats nearly-black as the brand color rather than pure black to keep type readable on the warm cream canvas.
-- **Ink Deep** (`{colors.ink-deep}` — `#0f0000`): pressed-state for the primary CTA. Carries a faint red undertone matching the canvas's warm cast.
-- **Cream** (`{colors.canvas}` — `#fdfcfc`): the brand's signature warm white. Used for every page body, every card surface, the on-primary text color, and the ASCII wordmark fill on dark.
+- **White** (`{colors.primary}` — `#ffffff`): the universal primary CTA pill background. "Download" / "Install Extension" / "Get Pro" — every primary action carries it.
+- **White Pressed** (`{colors.primary-pressed}` — `#e8e8e8`): pressed-state for the primary pill — a single notch dimmer.
+- **On Primary** (`{colors.on-primary}` — `#000000`): pure black text on the white CTA — the only place black appears as text in the system.
 
 ### Surface
-- **Canvas Cream** (`{colors.canvas}` — `#fdfcfc`): every page body, every card.
-- **Soft Surface** (`{colors.surface-soft}` — `#f8f7f7`): text-input default background, testimonial row fill, alternating row tint.
-- **Surface Card** (`{colors.surface-card}` — `#f1eeee`): install-snippet pill, disabled button fill, slightly-elevated section row.
-- **Surface Dark** (`{colors.surface-dark}` — `#201d1d`): the hero TUI mockup background and the dark CTA pill on the home page. Identical to `{colors.ink}` — the brand uses one near-black for both text and dark surfaces.
-- **Surface Dark Elevated** (`{colors.surface-dark-elevated}` — `#302c2c`): the prompt-row inside the hero TUI mockup, one notch lighter than the dark surface itself.
-- **Hairline** (`{colors.hairline}` — `rgba(15,0,0,0.12)`): 1px section divider. The translucent warm tint matches the cream canvas's undertone.
-- **Hairline Strong** (`{colors.hairline-strong}` — `#646262`): tab strip's bottom rule and stronger inline divider.
+- **Canvas** (`{colors.canvas}` — `#07080a`): pure-near-black page background. The dominant surface across every page.
+- **Surface** (`{colors.surface}` — `#0d0d0d`): card and elevated panel background — one notch lighter than canvas.
+- **Surface Elevated** (`{colors.surface-elevated}` — `#101111`): button-tertiary fill, text-input fill, store-search-bar fill, pill-tab-active fill.
+- **Surface Card** (`{colors.surface-card}` — `#121212`): app-icon-tile background, keycap fill, command-palette row hover.
+- **Button FG (in-card)** (`{colors.button-fg}` — `#18191a`): rare deep-card variant used inside featured pricing tier card backgrounds.
+- **Hairline** (`{colors.hairline}` — `#242728`): the universal 1px card border. Carries every card edge across every page.
+- **Hairline Soft** (`{colors.hairline-soft}` — `rgba(255,255,255,0.08)`): even fainter border on translucent over-image overlays.
+- **Hairline Strong** (`{colors.hairline-strong}` — `rgba(255,255,255,0.16)`): stronger 1px divider where a regular hairline reads as too soft.
 
 ### Text
-- **Ink** (`{colors.ink}` — `#201d1d`): headlines, body text, primary nav links, button text on light surfaces.
-- **Charcoal** (`{colors.charcoal}` — `#302c2c`): subtly softer body where pure ink is too heavy.
-- **Body** (`{colors.body}` — `#424245`): default paragraph text and FAQ answers.
-- **Mute** (`{colors.mute}` — `#646262`): tab labels (default state), metadata, footer link text, in-list secondary annotations.
-- **Stone** (`{colors.stone}` — `#6e6e73`): least-emphasis utility text, breadcrumb separators.
-- **Ash** (`{colors.ash}` — `#9a9898`): disabled text and secondary annotation in dark TUI mockup, also TUI mockup secondary color.
+- **Ink** (`{colors.ink}` — `#f4f4f6`): primary headlines on dark canvas. Slightly off-white for tonal coherence with the near-black background.
+- **Body** (`{colors.body}` — `#cdcdcd`): default paragraph text and inline-link color.
+- **Charcoal** (`{colors.charcoal}` — `#d3d3d4`): subtly brighter body where ink reads too soft.
+- **Mute** (`{colors.mute}` — `#9c9c9d`): metadata, footer link text, secondary captions.
+- **Ash** (`{colors.ash}` — `#6a6b6c`): disabled-state text, lowest-emphasis utility.
+- **Stone** (`{colors.stone}` — `#434345`): least-emphasis caption text and disabled icon color.
+- **On Dark** (`{colors.on-dark}` — `#ffffff`): interactive-state primary text (button label, focused tab).
+- **On Dark Mute** (`{colors.on-dark-mute}` — `rgba(255,255,255,0.72)`): translucent secondary text on dark surfaces.
 
 ### Semantic
-The full Apple Human Interface Guidelines semantic ramp ships with the system. On marketing pages these colors appear primarily inside the hero TUI mockup as syntax-highlight stand-ins; in the in-product TUI they carry their conventional meaning.
+- **Accent Blue** (`{colors.accent-blue}` — `#57c1ff`) + **Soft** (`{colors.accent-blue-soft}` — `rgba(87,193,255,0.15)`): info and informational badge — used inside feature illustrations and the rare "New" pill.
+- **Accent Red** (`{colors.accent-red}` — `#ff6161`) + **Soft** (`{colors.accent-red-soft}` — `rgba(255,97,97,0.15)`): destructive/error indicator + Slack/Apple category accent in extension illustrations.
+- **Accent Green** (`{colors.accent-green}` — `#59d499`) + **Soft** (`{colors.accent-green-soft}` — `rgba(89,212,153,0.15)`): success state + productivity category accent in extension illustrations.
+- **Accent Yellow** (`{colors.accent-yellow}` — `#ffc533`) + **Soft** (`{colors.accent-yellow-soft}` — `rgba(255,197,51,0.15)`): "warning" semantic + the Hacker News orange-yellow that appears as the most prominent accent illustration on the home page hero.
 
-- **Accent** (`{colors.accent}` — `#007aff`): primary informational signal, in-product link color, TUI command highlight.
-- **Accent Hover** (`{colors.accent-hover}` — `#0056b3`): pressed informational link.
-- **Accent Active** (`{colors.accent-active}` — `#004085`): deeply-pressed informational state.
-- **Danger** (`{colors.danger}` — `#ff3b30`): destructive confirmation, error state.
-- **Danger Hover** (`{colors.danger-hover}` — `#d70015`): pressed destructive.
-- **Danger Active** (`{colors.danger-active}` — `#a50011`): deeply-pressed destructive.
-- **Warning** (`{colors.warning}` — `#ff9f0a`): caution callouts.
-- **Warning Hover** (`{colors.warning-hover}` — `#cc7f08`): pressed caution.
-- **Warning Active** (`{colors.warning-active}` — `#995f06`): deeply-pressed caution.
-- **Success** (`{colors.success}` — `#30d158`): positive confirmation, in-TUI success indicator.
+### Brand Gradient
+- **Hero Stripe Gradient** — three diagonal red stripes layered across the very top of the home page hero, fading from `{colors.hero-stripe-start}` (`#ff5757`) to `{colors.hero-stripe-end}` (`#a1131a`). The system's only chromatic gradient on chrome — used once per page maximum and reserved for hero launch-banner moments.
+- **Keycap Gradient** — the small key-glyph background uses a subtle linear-gradient from `{colors.key-bg-start}` (`#121212`) to `{colors.key-bg-end}` (`#0d0d0d`) that gives Raycast's keycap UI its slight 3D-key feel.
 
 ## Typography
 
 ### Font Family
-**Berkeley Mono** is the proprietary monospaced face used across every text role in the system. It carries weights 400 (regular), 500 (medium), and 700 (bold) and falls back through a long monospace stack — IBM Plex Mono → ui-monospace → SFMono-Regular → Menlo → Monaco → Consolas → Liberation Mono → Courier New.
+**Inter** is the system's primary face, loaded with the `Inter Fallback` system fallback variant. Critically, Raycast enables `font-feature-settings: "calt", "kern", "liga", "ss03"` site-wide — the **ss03 stylistic set** swaps in Inter's alternate `g` glyph (single-story open `g`), which is the brand's signature typographic detail. Standard ligatures (`liga`), kerning (`kern`), and contextual alternates (`calt`) are also active. The display tier additionally enables `ss02` and `ss08` and disables standard `liga` to render the hero "Raycast Pro" wordmark with its distinctive geometric construction.
 
-The single-font decision is the brand. There is no display face, no body sans, no italic alternative, and no fallback to a proportional font anywhere — even the legal copyright row uses Berkeley Mono at 14px. This is the most aggressive typographic restraint of any site in the marketing-tools category: OpenCode's identity is "the marketing page is a man page."
+There is no monospace face used outside of inline `<code>` chips in documentation; the marketing pages use Inter for everything.
 
 ### Hierarchy
 
 | Token | Size | Weight | Line Height | Letter Spacing | Use |
 |---|---|---|---|---|---|
-| `{typography.display-xl}` | 38px | 700 | 1.5 | 0 | Hero headline ("The open source AI coding agent") |
-| `{typography.heading-md}` | 16px | 700 | 1.5 | 0 | Section label ("What is OpenCode?", "FAQ", "Built for privacy first") |
-| `{typography.body-md}` | 16px | 400 | 1.5 | 0 | Body copy, paragraph text, list-row text, install-snippet code |
-| `{typography.body-strong}` | 16px | 500 | 1.5 | 0 | Inline emphasis, primary nav link, tab-label active |
-| `{typography.body-tight}` | 16px | 500 | 1 | 0 | Compact label rendered without breathing room |
-| `{typography.link-md}` | 16px | 400 | 1.5 | 0 | Inline anchor link in body prose |
-| `{typography.button-md}` | 16px | 500 | 2 | 0 | Every button label across the system |
-| `{typography.caption-md}` | 14px | 400 | 2 | 0 | Footer link text, badge label, copyright row, chart caption |
+| `{typography.display-xl}` | 64px | 600 | 1.1 | 0 | Hero "Built for the perfect tools" / "The new way to..." headline (with `liga: 0`, `ss02`, `ss08`) |
+| `{typography.display-lg}` | 56px | 500 | 1.17 | 0.2px | Section headline ("Explore", "Pricing", store hero "Store") |
+| `{typography.heading-xl}` | 24px | 500 | 1.6 | 0.2px | Sub-section heading, pricing-tier name |
+| `{typography.heading-lg}` | 22px | 500 | 1.15 | 0 | Mid-section feature heading |
+| `{typography.heading-md}` | 20px | 500 | 1.4 | 0.2px | Card group title, in-card heading |
+| `{typography.heading-sm}` | 18px | 500 | 1.4 | 0.2px | Small heading, extension card title |
+| `{typography.body-lg}` | 18px | 400 | 1.6 | 0 | Pricing tier description, hero subtitle |
+| `{typography.body-md}` | 16px | 400 | 1.6 | 0 | Default body, paragraph text |
+| `{typography.body-strong}` | 16px | 500 | 1.4 | 0.2px | Inline emphasis, primary nav link |
+| `{typography.body-sm}` | 14px | 400 | 1.6 | 0 | Card description, secondary copy |
+| `{typography.body-sm-strong}` | 14px | 500 | 1.6 | 0.2px | In-card label, table-header text |
+| `{typography.caption-md}` | 13px | 400 | 1.4 | 0.1px | Caption, metadata |
+| `{typography.caption-sm}` | 12px | 400 | 1.5 | 0.4px | Smallest utility text, badge label |
+| `{typography.link-md}` | 16px | 500 | 1.4 | 0.3px | Inline body anchor link |
+| `{typography.button-md}` | 14px | 500 | 1.6 | 0.2px | Standard button label |
 
 ### Principles
-The hierarchy is built almost entirely from size and weight contrast on a single face. The display headline (38px / 700) and the heading-md label (16px / 700) share a weight; the difference is just size. Body and link share size, weight, and line-height — only context distinguishes them. Buttons get a deliberately tall line-height (2.0) so labels feel calmly spaced inside the 4px-radius rectangle.
+The hierarchy works on a 1.6-line-height ladder for body and a 1.1–1.4 ladder for display/heading. Letter-spacing is consistently positive (0.1–0.4px) — slightly opening the type — which gives Raycast's chrome an airy quality at body sizes despite the dark canvas. The `ss03` stylistic set is the brand's most distinctive typographic detail; without it, the body face renders identically to plain Inter and loses Raycast's signature rendering.
 
 ### Note on Font Substitutes
-Berkeley Mono is a paid commercial font. Open-source substitutes that approximate its metrics within ~3% at body sizes:
-- **JetBrains Mono** — closest match for stroke contrast and x-height; pair at weights 400 / 500 / 700.
-- **IBM Plex Mono** — official secondary fallback in the documented font stack; slightly more open counters but matches line-height behavior.
-- **Geist Mono** — modern alternative with similar geometric construction.
-
-When substituting, line-height behavior is preserved by keeping `lineHeight: 1.5` for body and `lineHeight: 2` for buttons — adjusting weight is rarely needed.
+Inter is open-source and Google-Fonts-hosted; load it directly. To preserve the brand's signature look, you must enable `font-feature-settings: "calt", "kern", "liga", "ss03"` on the body element. Without `ss03`, the typography is recognizably "Inter default" rather than "Raycast." On systems where Inter cannot be loaded, the documented fallback is `Inter Fallback` (a self-hosted variant) → `system-ui`. **JetBrains Mono** or **Geist Mono** are acceptable substitutes for inline code chips when needed, though Raycast's marketing chrome rarely uses code-styled text.
 
 ## Layout
 
 ### Spacing System
-- **Base unit:** 8px (with finer 1/2/4px steps available for tight inline gaps).
-- **Tokens (front matter):** `{spacing.xxs}` (1px) · `{spacing.xs}` (4px) · `{spacing.sm}` (8px) · `{spacing.md}` (12px) · `{spacing.lg}` (16px) · `{spacing.xl}` (24px) · `{spacing.xxl}` (32px) · `{spacing.section}` (96px).
-- **Universal section rhythm:** every page in the set uses `{spacing.section}` (96px) as the vertical gap between major content blocks. This is the largest spacing token in the system and is the dominant layout cue across the home, `/zen`, and `/enterprise` pages.
-- **Section internal padding:** content rows inside a section sit at `{spacing.lg}` (16px) vertical with no horizontal padding — text starts flush at the section's left edge.
+- **Base unit:** 8px (with 2/4/12px steps for tight inline gaps).
+- **Tokens (front matter):** `{spacing.xxs}` (2px) · `{spacing.xs}` (4px) · `{spacing.sm}` (8px) · `{spacing.md}` (12px) · `{spacing.lg}` (16px) · `{spacing.xl}` (24px) · `{spacing.xxl}` (32px) · `{spacing.section}` (96px).
+- **Universal section rhythm:** every page in the set uses `{spacing.section}` (96px) as the vertical gap between major content blocks. Card grids use `{spacing.lg}` (16px) gutters; in-card padding sits at `{spacing.xl}` (24px) for feature cards and `{spacing.lg}` (16px) for store extension cards.
 
 ### Grid & Container
-- **Max width:** ~960px content column for body sections; the dark hero TUI mockup is full-bleed within an outer ~1100px content frame.
-- **Two-column split:** `/enterprise` pairs a left text block (~360px wide) with a right-aligned form column (~480px wide). The home page is single-column reading.
-- **Footer:** 5-up horizontal link row (GitHub / Docs / Changelog / Discord / X) at desktop, collapsing to 2-up at tablet and 1-up at mobile.
+- **Max width:** ~1240px content area at desktop with 24px gutters (~48px at ultrawide). Hero command-palette mockups run wider (~1080px) with the page background extending to full bleed.
+- **Store extension grid:** 2-up at desktop with rows of 2 cards stacked, collapsing to 1-up at mobile. Each card is a horizontal layout with a large square app icon at the left and copy + Install button at the right.
+- **Pricing tier grid:** 3-up at desktop (Free / Pro / Pro+Advanced AI), collapsing to 1-up stacked at mobile.
+- **Featured extension card grid:** 3-up at desktop in the "Featured" row at the top of the store page.
+- **Comparison table:** full-width on the pricing page below the tier cards — 5-column table (Free / Pro / Advanced AI / Custom for Teams / Enterprise) with feature rows.
+- **Footer:** 6-column horizontal link grid at desktop, collapsing to 2-up at tablet and 1-up at mobile.
 
 ### Whitespace Philosophy
-Whitespace is structural and generous. Sections sit 96px apart with no decorative dividers between them — the `{colors.hairline}` 1px rule is the only signal of separation. Inside a section, content is left-flush against the column edge with no internal indentation; bullets use ASCII bracket prefixes (`[+]` / `[-]`) instead of indent-based layout. The result is a page that feels like a printed code listing rather than a styled marketing layout.
+Whitespace is generous and the canvas is uninterrupted. Sections sit 96px apart with no decorative dividers between them — the dark canvas continues edge-to-edge from hero to footer. Inside a section, content is left-aligned in a tight column, with command-palette mockup imagery occupying the right 50–60% of the band on home-page feature rows. The signature decorative element — the red diagonal-stripe gradient band — only appears in the very first hero band; from the second section down, the page is monochrome dark.
 
 ## Elevation & Depth
 
 | Level | Treatment | Use |
 |---|---|---|
-| 0 — Flat | No border, no shadow | Default for body sections, list rows, hero text block, footer |
-| 1 — Hairline rule | 1px solid `{colors.hairline}` (translucent warm tint) | Section dividers, between major content blocks |
-| 2 — Hairline strong | 1px solid `{colors.hairline-strong}` | Tab strip bottom rule, in-list emphasized divider |
-| 3 — Inverted dark | `{colors.surface-dark}` fill | Hero TUI mockup, dark CTA pill — the system's only "elevated" surface uses color, not shadow |
+| 0 — Flat | No border, no shadow | Default for canvas-on-canvas blocks, hero text, footer body |
+| 1 — Hairline border | 1px solid `{colors.hairline}` (#242728) | Every card on `{colors.surface}`, store extension card, pricing tier card |
+| 2 — Hairline strong | 1px solid `{colors.hairline-strong}` | Stronger inline divider, table-row separator on the comparison table |
+| 3 — Surface ladder elevation | `{colors.canvas}` → `{colors.surface}` → `{colors.surface-elevated}` → `{colors.surface-card}` | Multi-step background-color ladder used to create elevation without shadows |
 
-There are no drop shadows in the system. Nothing lifts, nothing floats. The only way an element registers as "above" another is the dark surface used in the hero mockup.
+The system has no drop-shadow elevation at all. Depth is built entirely from the surface-color ladder: each notch lighter on the dark scale reads as one step closer to the viewer.
 
 ### Decorative Depth
-Depth comes from typography density and the single dark TUI mockup, not from CSS effects:
-- **ASCII block-pixel wordmark** — the OpenCode brand name rendered as a 5-row block of monospaced character cells, used in the primary nav and as the centerpiece of the hero TUI mockup.
-- **Hero TUI mockup** — full-bleed `{colors.surface-dark}` rectangle containing a faux terminal interface: ASCII wordmark, a `tui-prompt-row` showing a Build command line, and `tab switch agent` / `ctrl-p commands` keybinding hints in `{colors.ash}` at the bottom edge.
-- **Chart tiles** — three thin-line ASCII charts inside the home page's "open source AI coding agent" stat block, with abstract dotted/sparse-line plots in `{colors.body}` against the cream canvas. Captions sit beneath in `{typography.caption-md}` (`Fig 1. 150K GitHub Stars`, `Fig 2. 850 Contributors`, `Fig 3. 6.5M Monthly Devs`).
+Depth comes from product imagery and a single stripe-gradient band:
+- **Hero stripe gradient** — three diagonal red stripes (`{colors.hero-stripe-start}` → `{colors.hero-stripe-end}`) layered across the home-page hero band, evoking a launch-banner / motion-blur effect. The system's signature decorative moment.
+- **Command-palette mockups** — full-fidelity Raycast in-product UI screenshots (the actual Spotlight-style overlay with rounded keycaps, command rows, and accent-color glyphs) sitting inside the home-page hero and feature rows. These ARE the brand decoration.
+- **App icon tiles** — small 48–64px rounded-corner tiles displaying real app icons (Slack, Spotify, Figma, Notion, Linear, Hacker News) inside store and feature illustrations.
+- **Keycap glyphs** — subtle gradient-filled rounded keycap glyphs used inline to indicate keyboard shortcuts (e.g., `⌘ K`), with a faint `{colors.key-bg-start}` → `{colors.key-bg-end}` linear gradient suggesting a physical key surface.
 
 ## Shapes
 
@@ -347,18 +458,22 @@ Depth comes from typography density and the single dark TUI mockup, not from CSS
 
 | Token | Value | Use |
 |---|---|---|
-| `{rounded.none}` | 0px | Sections, hero TUI mockup, primary nav, footer, list rows — every container that isn't a button |
-| `{rounded.sm}` | 4px | Every interactive element — primary CTA, secondary CTA, text inputs, install snippet, badges, prompt rows |
-| `{rounded.full}` | 9999px | Avatar circles in testimonials |
+| `{rounded.none}` | 0px | Hero band, primary nav, footer, full-bleed structural surfaces |
+| `{rounded.xs}` | 4px | Keycap glyphs, badge-pro chips, small inline tags |
+| `{rounded.sm}` | 6px | Command-palette row, inline buttons, micro chips |
+| `{rounded.md}` | 8px | Standard buttons, text inputs, store search bar, app-icon tiles, store extension card |
+| `{rounded.lg}` | 10px | Feature card, command-palette mockup card, pricing tier card |
+| `{rounded.xl}` | 16px | Large hero command-palette mockup container, oversized feature panel |
+| `{rounded.full}` | 9999px | Pill-tab chips, avatar circles |
 
-The radius vocabulary is two values: 4px for interactive elements and 0px for everything else. Avatar circles in testimonial rows are the only fully-rounded element in the system.
+The radius vocabulary clusters tightly between 4 and 16px, with most chrome at 6–10px. The system never goes flat (0px) on cards and never above 16px except for fully-rounded pills.
 
 ### Photography Geometry
-There is no photography. Visual elements are limited to:
-- **ASCII block-pixel wordmark** in the nav and hero TUI mockup.
-- **Inline ASCII charts** inside the stat-block section — abstract sparse-line and dotted plots without specific data points.
-- **Avatar dots** (~32px) inside testimonial rows on `/zen` — flat colored circles in `{rounded.full}`.
-- **In-product icons** (kbd, A+, ⊕, ↻, K, Z) rendered as small monospaced character glyphs, not bitmaps or SVG.
+There is no traditional photography. Visual elements are limited to:
+- **Command-palette mockups** — full-fidelity Raycast UI screenshots at 16:9 or 4:3 aspect inside `{rounded.xl}` (16px) containers.
+- **App icon tiles** — 48–64px square at `{rounded.md}` (8px), displaying real app icons.
+- **Avatar circles** — 32–40px at `{rounded.full}` for in-extension author attribution.
+- **Hero stripe gradient** — full-bleed wash with no aspect ratio.
 
 ## Components
 
@@ -366,114 +481,140 @@ There is no photography. Visual elements are limited to:
 
 ### Buttons
 
-**`button-primary`** — the universal OpenCode CTA
-- Background `{colors.primary}`, text `{colors.on-primary}`, type `{typography.button-md}`, padding `4px 20px`, height ~36px, rounded `{rounded.sm}` (4px).
-- Used for "Download" (top nav), "Get started with Zen", "Send" (enterprise contact form), "Subscribe" (newsletter footer), "Read docs →".
-- Pressed state lives in `button-primary-active` — background drops to `{colors.ink-deep}`.
+**`button-primary`** — the universal Raycast CTA
+- Background `{colors.primary}` (white), text `{colors.on-primary}` (black), type `{typography.button-md}`, padding `8px 16px`, height ~36px, rounded `{rounded.md}`.
+- Used for "Download" (sticky top-nav CTA), "Get Pro", "Install" — every primary action across every surface.
+- Pressed state lives in `button-primary-pressed` — background dims to `{colors.primary-pressed}`.
 
-**`button-secondary`** — outlined alternative
-- Background `{colors.canvas}`, text `{colors.ink}`, 1px solid `{colors.hairline-strong}` border, type `{typography.button-md}`, padding `4px 20px`, rounded `{rounded.sm}`.
-- Lower-emphasis CTA — appears beside the primary fill where two actions are paired.
+**`button-secondary`** — transparent text button
+- Background transparent, text `{colors.on-dark}`, type `{typography.button-md}`, padding `8px 16px`, height ~36px, rounded `{rounded.md}`.
+- Lower-emphasis action: "Sign in" (top nav), "Learn more →", "View on GitHub".
 
-**`button-tab`** + **`button-tab-active`** — install-tab strip
-- Default: transparent background, text `{colors.mute}`, type `{typography.button-md}`, padding `8px 16px`, rounded `{rounded.none}`.
-- Active: same surface, text `{colors.ink}`, with a 2px `{colors.ash}` bottom underline indicating selection.
-- Used in the install-method tab strip on the home page (`curl` / `npm` / `bun` / `brew` / `yay`).
+**`button-tertiary`** — soft surface button
+- Background `{colors.surface-elevated}`, text `{colors.on-dark}`, type `{typography.button-md}`, padding `8px 16px`, height ~36px, rounded `{rounded.md}`.
+- Mid-emphasis: "Watch demo", "View extension", "Manage" buttons inside cards.
 
 **`button-disabled`**
-- Background `{colors.surface-card}`, text `{colors.ash}`, rounded `{rounded.sm}`.
+- Background `{colors.surface-elevated}`, text `{colors.ash}` — dim utility state.
 
-### Badges & Chips
+**`install-button`** — the store-page install pill
+- Background transparent with 1px solid `{colors.hairline-strong}` border, text `{colors.on-dark}`, type `{typography.button-md}`, padding `6px 14px`, rounded `{rounded.md}`.
+- Sits at the right edge of every store extension card with the label "Install Extension".
 
-**`badge-news`** — small dark chip in the news/announcement strip
-- Background `{colors.surface-dark}`, text `{colors.on-dark}`, type `{typography.caption-md}`, padding `2px 8px`, rounded `{rounded.sm}`.
-- Sits inline with body copy as a "News" / "Beta" / "Live now" tag on the home page above the hero headline.
+### Filter & Tab Chips
 
-**`badge-section-label`** — bracketed section header
-- Background transparent, text `{colors.ink}`, type `{typography.heading-md}`, rounded `{rounded.none}`.
-- Renders as a bare `**Heading**` line above a 1px `{colors.hairline}` rule with no chip background — but the way the text reads ("[+]", "[x]", `What is OpenCode?`) makes it function as a label component.
+**`pill-tab`** + **`pill-tab-active`** — small filter chip strip
+- Default: transparent background, text `{colors.body}`, type `{typography.body-sm}`, padding `4px 10px`, rounded `{rounded.full}`.
+- Active: background flips to `{colors.surface-elevated}`, text `{colors.on-dark}` — the chip "lifts" by one surface notch.
+- Used in the store filter row ("All Extensions", "Recently Added", "Most Popular") and similar segmented controls.
+
+**`badge-pro`** — small Pro/Plan label
+- Background `{colors.surface-elevated}`, text `{colors.on-dark-mute}`, type `{typography.caption-sm}`, padding `2px 6px`, rounded `{rounded.xs}`.
+- Inline "Pro" / "Pro+" / "Free" tier indicators on pricing tier cards.
+
+**`badge-info-soft`** — translucent info chip
+- Background `{colors.accent-blue-soft}`, text `{colors.accent-blue}`, type `{typography.caption-sm}`, padding `2px 8px`, rounded `{rounded.xs}`.
+- Rare "New" / "Beta" inline tag.
 
 ### Inputs & Forms
 
 **`text-input`** + **`text-input-focused`**
-- Default: background `{colors.surface-soft}`, text `{colors.ink}`, 1px solid `{colors.hairline}`, type `{typography.body-md}`, padding `8px 12px`, height ~40px, rounded `{rounded.sm}`.
-- Focused: background flips to `{colors.canvas}`, border becomes 1px solid `{colors.ink}` (the canvas's flat focus signal — no halo, no glow).
-- Used for every contact-form field on `/enterprise` (Full name, Role, Company, Company email, Phone number) and the newsletter email field at the home page footer.
+- Default: background `{colors.surface-elevated}`, text `{colors.on-dark}`, 1px solid `{colors.hairline}`, type `{typography.body-md}`, padding `8px 12px`, height ~36px, rounded `{rounded.md}`.
+- Focused: same surface; 1px border becomes `{colors.hairline-strong}` — a subtle brightening rather than a colored ring.
 
-**`textarea`**
-- Background `{colors.surface-soft}`, text `{colors.ink}`, 1px solid `{colors.hairline}`, type `{typography.body-md}`, padding `12px`, rounded `{rounded.sm}`.
-- "What problem are you trying to solve?" multi-line textarea on `/enterprise`.
-
-**`install-snippet`** — the home page's signature install code block
-- Background `{colors.surface-card}` (`#f1eeee`), text `{colors.ink}` rendered in `{typography.body-md}` (already monospaced — Berkeley Mono), padding `12px 16px`, rounded `{rounded.sm}`.
-- Contains the literal `curl -fsSL https://opencode.ai/install | bash` command with a small copy-icon at the right edge. Sits below the install-method tab strip.
+**`store-search-bar`** — the store-page search field
+- Background `{colors.surface-elevated}`, text `{colors.on-dark}`, type `{typography.body-md}`, padding `10px 16px`, height ~44px, rounded `{rounded.md}`.
+- Sits at the top of the store page hero with a magnifier icon at the left and "Search the store..." placeholder. Slightly taller than the standard `text-input`.
 
 ### Cards & Containers
 
-**`hero-tui-mockup`** — the home page's signature TUI preview
-- Container: full-bleed `{colors.surface-dark}` (~near-black), padding `64px 32px`, rounded `{rounded.none}`.
-- Contents (top → bottom): ASCII block-pixel "OPENCODE" wordmark centered in `{colors.on-dark}`; a `{component.tui-prompt-row}` showing a "Build" command line with model selector text; an `tab switch agent  ctrl-p commands` keybinding hint row at the bottom in `{colors.ash}`.
+**`command-palette-card`** — the home-page hero command-palette mockup
+- Container: background `{colors.surface}`, 1px solid `{colors.hairline}`, padding 0 (the mockup contents fill the card), rounded `{rounded.lg}` or `{rounded.xl}` depending on hero size.
+- Layout: top header strip with macOS traffic-light dots + a search input row, body with a vertical stack of `{component.command-palette-row}` items, bottom-right keycap hint cluster.
 
-**`tui-prompt-row`** — the inset command line inside the TUI mockup
-- Background `{colors.surface-dark-elevated}` (`#302c2c`), text `{colors.on-dark}` in `{typography.body-md}`, padding `8px 12px`, rounded `{rounded.sm}`.
-- Renders an inline command (`Build  Claude Opus 4.5  OpenCode Zen`) with a leading vertical pipe and the model name styled as a bracketed token.
+**`command-palette-row`** + **`command-palette-row-active`** — single row inside the command palette
+- Default: transparent background, text `{colors.on-dark}` in `{typography.body-md}`, padding `6px 10px`, rounded `{rounded.sm}`.
+- Active: background `{colors.surface-card}` (one notch lighter than the surrounding palette card) — the selection state.
+- Each row contains a small app-icon tile + label + optional keycap shortcut at the right edge.
 
-**`list-row`** — feature/benefit row with ASCII bracket bullet
-- Background `{colors.canvas}`, text `{colors.body}` in `{typography.body-md}`, padding `8px 0`.
-- Each row begins with a `[+]` / `[-]` / `[x]` ASCII marker followed by a bold label and a regular description: e.g., `[+] LSP enabled    Automatically loads the right LSPs for the IDE`. The bracket marker is part of the text content, not a separate icon.
+**`feature-card-dark`** — standard product feature card
+- Container: background `{colors.surface}`, 1px solid `{colors.hairline}`, padding `{spacing.xl}` (24px), rounded `{rounded.lg}`.
+- Used in 2- or 3-up grids on home and feature pages — pairs a small product mockup or app-icon row with body copy and a "Learn more →" `{component.button-secondary}`.
 
-**`faq-row`** — FAQ entry with bracket toggle
-- Background `{colors.canvas}`, text `{colors.ink}` in `{typography.body-md}`, padding `12px 0`, with a 1px `{colors.hairline}` bottom rule.
-- Each row leads with `+` / `−` ASCII markers indicating expand/collapse state. Always rendered as plain text rows — no chevron icons, no animated accordion chrome.
+**`feature-card-elevated`** — slightly-elevated variant
+- Same chrome as `feature-card-dark` but background flips to `{colors.surface-elevated}` — used to break visual rhythm in alternating feature rows.
 
-**`testimonial-row`** — `/zen` peer-quote row
-- Background `{colors.surface-soft}`, text `{colors.body}` in `{typography.body-md}`, padding `16px 20px`, rounded `{rounded.sm}`.
-- Layout: a 32px avatar circle (`{rounded.full}`) at left, name + role + company in `{typography.body-strong}` on the first line, quote in `{typography.body-md}` `{colors.body}` on the second line.
+**`store-extension-card`** — store-page extension card
+- Container: background `{colors.surface}`, 1px solid `{colors.hairline}`, padding `{spacing.lg}` (16px), rounded `{rounded.md}`.
+- Layout: 48px `{component.app-icon-tile}` at left, vertical stack of name + by-author metadata + 1-line description in the center, `{component.install-button}` at the right edge.
 
-**`chart-tile`** — the stat-block sparse-line chart
-- Background `{colors.canvas}`, text `{colors.body}` in `{typography.caption-md}`, rounded `{rounded.none}`, padding `16px`.
-- Contains an inline SVG/CSS-drawn ASCII-style sparse-line plot (dotted, abstract — never specific data points) with a `Fig N. <stat label>` caption beneath in `{colors.mute}`.
+**`pricing-tier-card`** — pricing plan card (default tier)
+- Container: background `{colors.surface}`, 1px solid `{colors.hairline}`, padding `{spacing.xl}` (24px), rounded `{rounded.lg}`.
+- Layout: tier name in `{typography.heading-xl}` (24px), price in larger numeric in `{typography.display-lg}`, body description in `{typography.body-lg}`, CTA `{component.button-primary}` (or `{component.button-secondary}` for free tier), feature checklist with `✓` glyphs.
+
+**`pricing-tier-card-featured`** — middle "Pro" featured tier
+- Same chrome but background flips to `{colors.surface-elevated}` (one notch lighter) — the only visual cue distinguishing the featured tier from the surrounding cards.
+
+**`hero-stripe-band`** — home-page hero with red stripe gradient
+- Background `{colors.canvas}` with three diagonal red stripes layered across the top half (`{colors.hero-stripe-start}` → `{colors.hero-stripe-end}`).
+- Padding `{spacing.section}` 96px vertical / 48px horizontal, rounded `{rounded.none}`.
+- Carries the hero headline in `{typography.display-xl}` and a single `{component.button-primary}` "Download" CTA.
+
+### Decorative
+
+**`app-icon-tile`** — small 48px square app icon
+- Background `{colors.surface-card}`, padding 0 (icon fills the tile), rounded `{rounded.md}`, size 48×48.
+- Used in command-palette rows and store extension cards.
+
+**`app-icon-tile-large`** — 64px feature variant
+- Same but at 64×64. Used in featured store cards and home-page hero illustration rows.
+
+**`keycap`** — keyboard shortcut glyph
+- Background `{colors.surface-card}` with a subtle linear gradient `{colors.key-bg-start}` → `{colors.key-bg-end}`, text `{colors.body}` in `{typography.caption-md}`, padding `1px 6px`, height ~20px, rounded `{rounded.xs}`.
+- Renders inline command-palette shortcut hints like `⌘ K`, `⏎`, `Esc`. The signature "physical-key" feel on a flat dark canvas.
 
 ### Navigation
 
 **`primary-nav`**
-- Background `{colors.canvas}`, text `{colors.ink}` in `{typography.body-strong}`, height ~56px, rounded `{rounded.none}`, with a 1px `{colors.hairline}` bottom rule.
-- Layout (desktop): block-pixel ASCII OpenCode wordmark at left (~120×24px), nav links cluster center-right ("GitHub [150K] · Docs · Zen · Go · Enterprise"), `{component.button-primary}` "Download" CTA at the far right with a small download glyph.
+- Background `{colors.canvas}`, text `{colors.on-dark}`, height ~56px, type `{typography.body-sm-strong}`, rounded `{rounded.none}`, with a 1px `{colors.hairline}` bottom rule.
+- Layout (desktop): Raycast wordmark at left, centered nav cluster ("Pro · AI · Store · Manual · Changelog · Blog · Pricing"), right cluster (Sign in link + the always-white `{component.button-primary}` "Download" CTA pill).
 
 **Top Nav (Mobile)**
-- ASCII wordmark stays at left, nav links collapse into a hamburger drawer at the right. The Download CTA remains visible at every breakpoint.
+- Hamburger menu icon at left, Raycast wordmark at center, "Download" white CTA pill at right. Primary nav collapses into a full-screen drawer that slides from the left.
 
 ### Footer
 
 **`footer-section`**
-- Background `{colors.canvas}`, text `{colors.body}` in `{typography.caption-md}`, padding `32px 0`, with a 1px `{colors.hairline}` top rule.
-- Top row: 5-column horizontal link grid (GitHub [150K] · Docs · Changelog · Discord · X), each rendered as a centered cell separated by 1px `{colors.hairline}` vertical rules.
-- Bottom row: `©2026 Anomaly` copyright at left, `Brand · Privacy · Terms · English ▼` utility cluster at right, all in `{typography.caption-md}` `{colors.mute}`.
+- Background `{colors.canvas}`, text `{colors.body}` in `{typography.body-sm}`, padding `64px 48px`, with a 1px `{colors.hairline}` top rule.
+- Layout: 6-column horizontal link grid (Product · Core Features · Top Extensions · Company · Community · By Raycast) with column headers in `{typography.body-sm-strong}` `{colors.on-dark}` and link lists in `{typography.body-sm}` `{colors.body}`.
+- Bottom row: small Raycast wordmark + a subscribe newsletter input field with `{component.button-primary}` "Subscribe" at the right.
+- The very top of the footer band has a faint red stripe-gradient repeat — a smaller echo of the hero's diagonal stripe motif.
 
 ### Inline
 
 **`link-inline`** — body-prose anchor link
-- `{colors.ink}` text with underline. The brand's only link affordance — even links inside body paragraphs use ink color rather than `{colors.accent}` blue. Apple Blue is reserved for the in-product TUI.
+- `{colors.on-dark}` text with no underline by default; underlines on focus. Inline body links are full-white rather than a tinted accent color, which keeps the dark canvas tonally pure.
 
 ## Do's and Don'ts
 
 ### Do
-- Render every text role in Berkeley Mono. The single-font decision is the entire identity.
-- Keep `{colors.canvas}` (`#fdfcfc`) as the only body background. Don't introduce gray section bands.
-- Use ASCII bracket markers (`[+]`, `[-]`, `[x]`, `+`, `−`) as bullets, toggles, and section glyphs. They are the brand's only iconography.
-- Anchor the dark `{component.hero-tui-mockup}` exactly once per landing page as the hero centerpiece. Never use the dark surface for body content.
-- Reserve `{colors.accent}` (Apple Blue) and the rest of the semantic ramp for in-TUI states; marketing chrome stays monochrome.
-- Use `{rounded.sm}` (4px) on every interactive element and `{rounded.none}` (0px) on every container.
-- Stack content sections at `{spacing.section}` (96px) rhythm with only 1px `{colors.hairline}` rules between them.
+- Render the entire site in one continuous dark mode. There is no light variant in the system.
+- Use `{colors.primary}` (white pill) for every primary CTA. There is no second primary color — white IS the brand action.
+- Build elevation from the surface-color ladder (`{colors.canvas}` → `{colors.surface}` → `{colors.surface-elevated}` → `{colors.surface-card}`), never from drop shadows.
+- Enable `font-feature-settings: "calt", "kern", "liga", "ss03"` on the body element. The ss03 alternate `g` is part of the brand identity.
+- Anchor a `{component.command-palette-card}` mockup as the hero's load-bearing visual. Real Raycast UI is the brand.
+- Use `{component.keycap}` glyphs inline to indicate keyboard shortcuts. Subtle key-bg gradient (`{colors.key-bg-start}` → `{colors.key-bg-end}`) is the brand's only "depth" decoration.
+- Reserve `{colors.hero-stripe-start}` → `{colors.hero-stripe-end}` red gradient for the hero band exactly once per page. Never repeat the stripe gradient deeper in the page.
+- Use saturated category accents (`{colors.accent-yellow}`, `{colors.accent-red}`, `{colors.accent-green}`, `{colors.accent-blue}`) only inside extension and feature illustrations — never on chrome buttons or text.
 
 ### Don't
-- Don't introduce a sans-serif body font, a display face, or an italic style. Berkeley Mono carries everything.
-- Don't add drop shadows, gradients, or atmospheric backgrounds. The system is flat-on-cream.
-- Don't replace the ASCII bracket markers with SVG icons. The brackets are the icons.
-- Don't use the semantic accent ramp (`{colors.accent}`, `{colors.warning}`, `{colors.danger}`, `{colors.success}`) on marketing CTAs. They belong to the in-product TUI.
-- Don't pad cards with 24px+ internal padding. List rows sit at 8px vertical; FAQ rows at 12px.
-- Don't render the OpenCode wordmark as a vector logo. It is always block-pixel ASCII.
-- Don't fill the hero TUI mockup with photography or illustration. It is text-only and always shows a faux terminal command line.
+- Don't introduce a light mode. The system is dark-only by design.
+- Don't add drop shadows on cards. Elevation is built from the surface ladder, not from shadows.
+- Don't replace `{colors.primary}` (white) with a tinted accent for the primary CTA. Pure white is the brand action color.
+- Don't use the saturated accent colors (`{colors.accent-yellow}`, `{colors.accent-red}`, `{colors.accent-green}`, `{colors.accent-blue}`) on text, buttons, or chrome surfaces. They belong inside extension illustrations.
+- Don't repeat the hero stripe gradient outside the top hero band. The one-band rule is the system's restraint.
+- Don't use Inter without the `ss03` feature flag enabled. The chrome will lose its signature voice.
+- Don't pad cards with 32px+ on all sides. The system runs tight at 16–24px in-card padding.
 
 ## Responsive Behavior
 
@@ -481,41 +622,48 @@ There is no photography. Visual elements are limited to:
 
 | Name | Width | Key Changes |
 |---|---|---|
-| desktop-large | 1280px+ | Default — 960px content column, 5-up footer link grid |
-| desktop | 1024px | Same layout; nav remains horizontal |
-| tablet | 850px | Footer collapses to 2-up grid; `/enterprise` two-column form stacks |
-| tablet-narrow | 768px | Primary nav becomes hamburger drawer; Download CTA stays visible |
-| mobile | 640px | Single-column everything; hero display drops 38px → ~28px; section padding tightens |
+| ultrawide | 1920px+ | Content max-width holds at 1240px; outer gutters grow to ~80px |
+| desktop-large | 1440px | Default — 3-up pricing grid, 2-up store extension grid |
+| desktop | 1280px | Same with narrower outer gutters |
+| desktop-small | 1024px | 3-up pricing collapses to 2+1; primary nav remains horizontal |
+| tablet | 768px | Pricing → 1-up stacked; primary nav becomes hamburger drawer |
+| mobile | 480px | Single-column everything; hero `{typography.display-xl}` scales 64px → ~36px |
+| mobile-narrow | 320px | Section padding tightens to 48px |
 
 ### Touch Targets
-All interactive elements meet WCAG AA at the ~36–40px height range. `{component.button-primary}` sits at ~36px with 20px horizontal padding. `{component.text-input}` and `{component.textarea}` sit at ~40px. `{component.button-tab}` rows in the install-method strip sit at ~32–36px depending on label length but extend to a full 44px tappable cell via inline padding. Footer links use `{typography.caption-md}` (14px) but receive ~28px line-height (caption-md is 2.0) plus 8px vertical padding for a comfortable ~44px tappable row.
+All interactive elements meet WCAG AA at 36px+. `{component.button-primary}` and `{component.button-tertiary}` sit at 36px height with 16px padding. `{component.text-input}` sits at 36px. `{component.store-search-bar}` sits at 44px (above AAA). `{component.pill-tab}` is ~24–28px height with 10px padding extending to 36–40px tappable via inline padding (above AA but below AAA — intentional, the chips are compact). `{component.install-button}` sits at ~32px height with 14px padding.
 
 ### Collapsing Strategy
-- **Primary nav:** desktop horizontal cluster → tablet-narrow hamburger drawer at 768px. The dark "Download" CTA stays visible at all widths.
-- **Hero TUI mockup:** maintains its full-bleed dark surface at every breakpoint; the ASCII wordmark scales proportionally and the keybinding-hint row may wrap to two lines on narrow screens.
-- **Install snippet + tab strip:** desktop fixed-width pill → mobile full-width pill with horizontal scroll on the tab strip if labels overflow.
-- **Footer:** 5-up horizontal link grid → 2-up at tablet → 1-up at mobile (each link becomes a full-width row).
-- **`/enterprise` two-column layout:** desktop 50/50 → tablet stacks to single-column with the form below the text block.
+- **Primary nav:** desktop horizontal cluster → tablet hamburger drawer at 768px. The white "Download" CTA stays visible at every breakpoint.
+- **Hero command-palette mockup:** desktop full-fidelity 2-column with copy at left + mockup at right → tablet stacks vertical with mockup below copy → mobile mockup scales down to ~80% width.
+- **Store extension grid:** 2-up → 1-up at tablet.
+- **Pricing tier grid:** 3-up → 2+1 at desktop-small → 1-up stacked at tablet.
+- **Comparison table:** desktop full 5-column → tablet horizontal scroll → mobile vertical card stack with one tier per card.
+- **Footer:** 6-up link columns → 3-up at tablet → 2-up at mobile-landscape → 1-up at mobile.
 - **Section padding:** `{spacing.section}` (96px) desktop → 64px tablet → 48px mobile.
-- **Hero headline:** `{typography.display-xl}` (38px) at desktop, scaling to ~28px at mobile, line-height holding at 1.5.
+- **Hero headline:** `{typography.display-xl}` (64px) at desktop, scaling 56px / 44px / 36px down the breakpoint stack.
 
 ### Image Behavior
-There are no raster images in the system aside from the favicon and OG share image. Every visual element — wordmarks, charts, icons — is rendered as type or inline SVG and scales without aspect-ratio considerations.
+The only "imagery" in the system is in-product Raycast UI screenshots and small app-icon assets:
+- **Command-palette mockups** scale fluidly with the container; the in-product UI itself is responsive and re-renders for each breakpoint.
+- **App-icon tiles** stay at 48–64px fixed size at every breakpoint; they tile in flexible rows that wrap at narrower widths.
+- **Hero stripe gradient** stays at the top of the hero band at every breakpoint with the stripe angle preserved.
 
 ## Iteration Guide
 
 1. Focus on ONE component at a time. Pull its YAML entry and verify every property resolves.
-2. Reference component names and tokens directly (`{colors.ink}`, `{component.hero-tui-mockup}`, `{rounded.sm}`) — do not paraphrase.
+2. Reference component names and tokens directly (`{colors.primary}`, `{component.button-primary-pressed}`, `{rounded.md}`) — do not paraphrase.
 3. Run `npx @google/design.md lint DESIGN.md` after edits — `broken-ref`, `contrast-ratio`, and `orphaned-tokens` warnings flag issues automatically.
-4. Add new variants as separate component entries (`-active`, `-disabled`) — do not bury them inside prose.
-5. Default body to `{typography.body-md}`; reach for `{typography.body-strong}` for emphasis; reserve `{typography.display-xl}` strictly for the page-top hero headline.
-6. Keep `{colors.surface-dark}` scarce — at most one full-bleed dark mockup per page. The dark surface is a narrative device, not a chrome treatment.
-7. When introducing a new component, ask whether it can be expressed with the existing ASCII-bracket + 4px-radius + Berkeley-Mono vocabulary before adding new tokens. The system's strength is that it almost never needs new ones.
+4. Add new variants as separate component entries (`-pressed`, `-disabled`, `-active`) — do not bury them inside prose.
+5. Default body to `{typography.body-md}` (16px / 400 / 1.6); reach for `{typography.body-strong}` for emphasis; reserve `{typography.display-xl}` strictly for the hero band.
+6. Keep `{colors.primary}` (white CTA pill) scarce per viewport — at most one solid white pill per fold.
+7. When introducing a new component, ask whether it can be expressed with the existing surface-ladder + 8px-radius + ss03-Inter vocabulary before adding new tokens. The system's strength is that it almost never needs new ones.
 
 ## Known Gaps
 
-- **Mobile screenshots not captured** — responsive behavior synthesizes OpenCode's mobile pattern (hamburger drawer, single-column, footer accordion) from desktop evidence and the breakpoint stack.
-- **Hover states not documented** by system policy.
-- **In-product TUI screenshots** beyond the marketing hero mockup are not in the captured set; the actual `opencode` terminal interface (full keybindings, panels, status bar) is not documented here.
-- **`/go` page** not extracted — the marketing page for the Go SDK likely shares the same chrome but introduces code-sample blocks not documented above.
-- **Form validation state styling** (success / error inline messages) not present in the captured surfaces.
+- **Mobile screenshots not captured** — responsive behavior synthesizes Raycast's mobile pattern (hamburger drawer, single-column grid, hero downscale) from desktop evidence and the breakpoint stack.
+- **Hover states not documented** by system policy. Raycast's in-product app has rich hover behavior on command-palette rows that this document doesn't capture.
+- **In-product app chrome** (the actual Raycast launcher running on macOS) is referenced in marketing screenshots but not documented as a separate UI system here. The marketing site is documented; the in-product app surface is its own design system.
+- **Dark mode is the only mode** — no light variant exists in the captured surfaces.
+- **Form validation states** beyond the focused-input border treatment are not present in the captured surfaces.
+- **Authenticated chrome** (account dashboard, billing settings, team management) not in the captured pages.

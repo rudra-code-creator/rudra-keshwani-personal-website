@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 html {
@@ -11,30 +11,47 @@ html {
 }
 
 body {
-  @apply min-h-dvh bg-canvas font-sans text-body text-copy antialiased;
+  @apply min-h-dvh bg-canvas font-sans text-body-md text-body antialiased;
+  font-feature-settings: "calt", "kern", "liga", "ss03";
 }
 
 ::selection {
-  @apply bg-ink/10 text-ink;
+  @apply bg-white/10 text-ink;
 }
 
-/* Focus: flat ink border — no glow (DESIGN.md text-input-focused signal) */
 .focus-ring {
-  @apply outline-none ring-2 ring-ink ring-offset-2 ring-offset-canvas;
+  @apply outline-none ring-2 ring-hairline-strong ring-offset-2 ring-offset-canvas;
 }
 
+.focus-ring:focus-visible {
+  @apply ring-white/40;
+}
+
+/* Raycast button-primary: white pill, black label */
 .btn-primary {
-  @apply inline-flex h-9 items-center justify-center rounded-sm bg-ink px-5 text-button text-on-primary;
-}
-
-.btn-primary:active {
-  @apply bg-ink-deep;
+  @apply inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 text-button-md text-on-primary active:bg-primary-pressed;
 }
 
 .btn-secondary {
-  @apply inline-flex h-9 items-center justify-center rounded-sm border border-hairline-strong bg-canvas px-5 text-button text-ink;
+  @apply inline-flex h-9 items-center justify-center rounded-md bg-transparent px-4 text-button-md text-on-dark active:bg-white/5;
+}
+
+.btn-tertiary {
+  @apply inline-flex h-9 items-center justify-center rounded-md bg-surface-elevated px-4 text-button-md text-on-dark active:bg-surface-card;
+}
+
+.install-btn {
+  @apply inline-flex items-center justify-center rounded-md border border-hairline-strong px-3.5 py-1.5 text-button-md text-on-dark;
+}
+
+.link-inline {
+  @apply text-link-md text-on-dark underline-offset-4 hover:underline;
 }
 
 .link-footer {
-  @apply text-caption text-mute underline-offset-4 hover:text-ink hover:underline;
+  @apply text-body-sm text-mute underline-offset-4 hover:text-body hover:underline;
+}
+
+.keycap {
+  @apply inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded-xs bg-gradient-to-b from-key-bg-start to-key-bg-end px-1.5 text-caption-md text-body;
 }
