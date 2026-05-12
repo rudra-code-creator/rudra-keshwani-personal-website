@@ -20,6 +20,7 @@ const navItems = [
   ["experience", "Experience"],
   ["education", "Education"],
   ["skills", "Skills"],
+  ["resume", "Resume"],
   ["connect", "Contact"],
 ] as const;
 
@@ -225,6 +226,29 @@ export default function Home() {
               </a>
               .
             </p>
+          </div>
+        </section>
+
+        <section id="resume" aria-labelledby="resume-heading" className="bg-canvas px-6 py-12 md:py-16 lg:px-12 lg:py-section">
+          <div className="mx-auto max-w-content rounded-lg border border-hairline bg-surface p-6 lg:p-8">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <SectionTitle id="resume-heading">
+                Resume
+              </SectionTitle>
+              <a href="/resume/download" className="focus-ring btn-primary" download>
+                Download PDF
+              </a>
+            </div>
+            <p className="mt-3 text-body-sm text-mute">
+              Inline preview below. If it does not load in your browser, use the download button.
+            </p>
+            <div className="mt-6 overflow-hidden rounded-md border border-hairline">
+              <iframe
+                src="/resume"
+                title="Rudra Keshwani resume"
+                className="h-[70vh] w-full bg-canvas"
+              />
+            </div>
           </div>
         </section>
 
