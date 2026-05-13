@@ -235,7 +235,7 @@ export default function Home() {
               <SectionTitle id="resume-heading">
                 Resume
               </SectionTitle>
-              <a href="/resume/download" className="focus-ring btn-primary" download>
+              <a href="/resume.pdf" className="focus-ring btn-primary" download>
                 Download PDF
               </a>
             </div>
@@ -244,7 +244,7 @@ export default function Home() {
             </p>
             <div className="mt-6 overflow-hidden rounded-md border border-hairline">
               <iframe
-                src="/resume"
+                src="/resume.pdf"
                 title="Rudra Keshwani resume"
                 className="h-[70vh] w-full bg-canvas"
               />
