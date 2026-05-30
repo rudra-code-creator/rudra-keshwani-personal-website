@@ -80,7 +80,6 @@ export const experience = [
       "Key roles: helping students solve complex mathematical and literature problems, marking students work, recording students progress, technical support and implementation related to the Kumon CONNECT platform",
     skills: "Network Services, …",
   },
-  
 ] as const;
 
 export const education = [
@@ -132,3 +131,5 @@ export const contact = {
 
 export const volunteerNote =
   "Open to volunteering across many cause areas — arts, education, environment, health, equity, community, and more. Full list on LinkedIn profile.";
+
+export const NEAL_FUN_LIFE_CHECKLIST_URL = "https://neal.fun/life-checklist/";
