@@ -12,6 +12,11 @@ import {
   topSkills,
   volunteerNote,
 } from "./content";
+import {
+  lifeChecklistDoneCount,
+  lifeChecklistRemainingCount,
+  lifeChecklistTotalCount,
+} from "./life-checklist-data";
 
 const navItems = [
   ["profile", "Profile"],
@@ -21,6 +26,7 @@ const navItems = [
   ["education", "Education"],
   ["skills", "Skills"],
   ["resume", "Resume"],
+  ["life-checklist", "Life"],
   ["connect", "Contact"],
 ] as const;
 
@@ -249,6 +255,38 @@ export default function Home() {
                 className="h-[70vh] w-full bg-canvas"
               />
             </div>
+          </div>
+        </section>
+
+        <section
+          id="life-checklist"
+          aria-labelledby="life-heading"
+          className="bg-canvas px-6 py-12 md:py-16 lg:px-12 lg:py-section"
+        >
+          <div className="mx-auto max-w-content rounded-lg border border-hairline bg-surface p-6 lg:p-8">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <SectionTitle id="life-heading">Life Checklist</SectionTitle>
+              <Link href="/life-checklist" className="focus-ring btn-primary">
+                See full checklist
+              </Link>
+            </div>
+            <p className="mt-4 text-body-md text-body">
+              What I&apos;ve checked off so far — school, building, and the early founder path. On
+              the full page you can browse my list and complete your own on{" "}
+              <a
+                href="https://neal.fun/life-checklist/"
+                className="link-inline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Neal.fun
+              </a>
+              .
+            </p>
+            <p className="mt-6 text-caption-md text-mute">
+              {lifeChecklistDoneCount} of {lifeChecklistTotalCount} checked · {lifeChecklistRemainingCount}{" "}
+              still to go · full list + Neal.fun embed on the dedicated page.
+            </p>
           </div>
         </section>
 
