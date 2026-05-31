@@ -55,3 +55,65 @@ body {
 .keycap {
   @apply inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded-xs bg-gradient-to-b from-key-bg-start to-key-bg-end px-1.5 text-caption-md text-body;
 }
+
+/* Markdown blog body */
+.blog-prose {
+  @apply text-body-md text-body;
+}
+
+.blog-prose h2 {
+  @apply mt-10 mb-4 text-heading-md text-ink;
+}
+
+.blog-prose h3 {
+  @apply mt-8 mb-3 text-heading-sm text-ink;
+}
+
+.blog-prose p {
+  @apply mb-4 leading-relaxed;
+}
+
+.blog-prose a {
+  @apply text-on-dark underline underline-offset-4 hover:text-ink;
+}
+
+.blog-prose ul,
+.blog-prose ol {
+  @apply mb-4 ml-6 space-y-2;
+}
+
+.blog-prose ul {
+  @apply list-disc;
+}
+
+.blog-prose ol {
+  @apply list-decimal;
+}
+
+.blog-prose li {
+  @apply leading-relaxed;
+}
+
+.blog-prose blockquote {
+  @apply my-6 border-l-2 border-hairline-strong pl-4 text-on-dark-mute italic;
+}
+
+.blog-prose code {
+  @apply rounded-xs bg-surface-card px-1.5 py-0.5 font-mono text-caption-md text-on-dark;
+}
+
+.blog-prose pre {
+  @apply my-6 overflow-x-auto rounded-md border border-hairline bg-surface p-4;
+}
+
+.blog-prose pre code {
+  @apply bg-transparent p-0 text-body-sm;
+}
+
+.blog-prose hr {
+  @apply my-10 border-hairline;
+}
+
+.blog-prose strong {
+  @apply font-medium text-on-dark;
+}
