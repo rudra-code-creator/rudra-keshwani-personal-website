@@ -17,17 +17,21 @@ import {
   lifeChecklistRemainingCount,
   lifeChecklistTotalCount,
 } from "./life-checklist-data";
+import { popQuizQuestionCount } from "./pop-quiz-data";
+import { formatPostDate, getAllPosts } from "@/lib/blog";
 
 const navItems = [
-  ["profile", "Profile"],
-  ["about", "About"],
-  ["tiber", "TIBER"],
-  ["experience", "Experience"],
-  ["education", "Education"],
-  ["skills", "Skills"],
-  ["resume", "Resume"],
-  ["life-checklist", "Life"],
-  ["connect", "Contact"],
+  { label: "Profile", href: "#profile" },
+  { label: "About", href: "#about" },
+  { label: "TIBER", href: "#tiber" },
+  { label: "Experience", href: "#experience" },
+  { label: "Education", href: "#education" },
+  { label: "Skills", href: "#skills" },
+  { label: "Resume", href: "#resume" },
+  { label: "Life", href: "#life-checklist" },
+  { label: "Quiz", href: "#pop-quiz" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "#connect" },
 ] as const;
 
 function SectionTitle({ id, children }: { id?: string; children: ReactNode }) {
@@ -39,6 +43,8 @@ function SectionTitle({ id, children }: { id?: string; children: ReactNode }) {
 }
 
 export default function Home() {
+  const latestPosts = getAllPosts().slice(0, 3);
+
   return (
     <div className="min-h-dvh bg-canvas">
       <header className="sticky top-0 z-40 border-b border-hairline bg-canvas/95 backdrop-blur-sm">
@@ -50,10 +56,10 @@ export default function Home() {
             className="flex max-w-[min(100%,520px)] flex-1 flex-wrap items-center justify-center gap-x-4 gap-y-1 text-caption-sm md:max-w-none md:gap-x-6 md:text-body-sm-strong"
             aria-label="Primary"
           >
-            {navItems.map(([id, label]) => (
+            {navItems.map(({ href, label }) => (
               <Link
-                key={id}
-                href={`#${id}`}
+                key={href}
+                href={href}
                 className="focus-ring rounded-md text-on-dark-mute hover:text-on-dark"
               >
                 {label}
@@ -287,6 +293,68 @@ export default function Home() {
               {lifeChecklistDoneCount} of {lifeChecklistTotalCount} checked · {lifeChecklistRemainingCount}{" "}
               still to go · full list + Neal.fun embed on the dedicated page.
             </p>
+          </div>
+        </section>
+
+        <section
+          id="pop-quiz"
+          aria-labelledby="quiz-heading"
+          className="bg-canvas px-6 py-12 md:py-16 lg:px-12 lg:py-section"
+        >
+          <div className="mx-auto max-w-content rounded-lg border border-hairline bg-surface-elevated p-6 lg:p-8">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <SectionTitle id="quiz-heading">Pop Quiz</SectionTitle>
+              <Link href="/pop-quiz" className="focus-ring btn-primary">
+                Take the quiz →
+              </Link>
+            </div>
+            <p className="mt-4 max-w-2xl text-body-md text-body">
+              Think you know the TIBER guy? {popQuizQuestionCount} questions, streak bonuses, light
+              roasts for wrong answers, and a tier ranking at the end — from &ldquo;Who even are
+              you?&rdquo; to &ldquo;Honorary cofounder.&rdquo;
+            </p>
+            <p className="mt-6 text-caption-md text-mute">
+              No timer. No account. Just vibes.
+            </p>
+          </div>
+        </section>
+
+        <section
+          id="blog"
+          aria-labelledby="blog-heading"
+          className="bg-canvas px-6 py-12 md:py-16 lg:px-12 lg:py-section"
+        >
+          <div className="mx-auto max-w-content rounded-lg border border-hairline bg-surface p-6 lg:p-8">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <SectionTitle id="blog-heading">Blog</SectionTitle>
+              <Link href="/blog" className="focus-ring btn-primary">
+                All posts →
+              </Link>
+            </div>
+            <p className="mt-4 max-w-2xl text-body-md text-body">
+              Blog posts about my journey and learnings. These are some of my recent posts:
+            </p>
+            {latestPosts.length > 0 ? (
+              <ul className="mt-8 space-y-3">
+                {latestPosts.map((post) => (
+                  <li key={post.slug}>
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      className="focus-ring group flex flex-wrap items-baseline justify-between gap-2 rounded-md border border-hairline bg-surface-elevated px-4 py-3 transition hover:border-hairline-strong"
+                    >
+                      <span className="text-body-md text-on-dark group-hover:text-ink">
+                        {post.title}
+                      </span>
+                      <time dateTime={post.date} className="text-caption-md text-mute">
+                        {formatPostDate(post.date)}
+                      </time>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="mt-6 text-caption-md text-mute">No posts yet — check back soon.</p>
+            )}
           </div>
         </section>
 
