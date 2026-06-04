@@ -175,7 +175,7 @@ export const lifeChecklist: LifeChecklistItem[] = [
   { id: "short-film", emoji: "🎬", label: "Make a short film", done: false },
   { id: "tedx", emoji: "🔴", label: "Give a TEDx talk", done: false },
   { id: "forbes-30", emoji: "📰", label: "Make a 30-under-30 list", done: false },
-  { id: "time-magazine", emoji: "⏰", label: "Get featured in a major publication", done: true },
+  { id: "time-magazine", emoji: "⏰", label: "Get featured in a major publication", done: false },
   { id: "aws-cert", emoji: "☁️", label: "Earn a cloud certification", done: true },
   { id: "hundred", emoji: "🎂", label: "Turn 100", done: false },
 ];
