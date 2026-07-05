@@ -1,6 +1,8 @@
 /** Site copy derived from public LinkedIn profile — keep in sync manually. */
 
 export const profile = {
+  headshotSrc: "/images/headshot.png",
+  heroCoverSrc: "/images/hero-cover.png",
   displayName: "Rudra Keshwani",
   tagline: "(The TIBER guy)",
   pronouns: "He/Him",
@@ -9,7 +11,7 @@ export const profile = {
   connections: "500+",
   scrollHook: "Did u stop scrolling?",
   headline:
-    "Cofounder @ unpaste.ai | VC research @ SH1P | Intern @ Chatstat | Secretary @ QUT TECH | Creator of uni-corn and the TIBER framework (Technology, Innovation, Business, Entrepreneurship, Research). 18yo",
+    "|founder of intelliGIS| community lead @ SH1P Australia |intern @ Chatstat| secretary @ QUT TECH| Creator of the TIBER framework (Technology, Innovation, Business, Entrepreneurship, Research). 18yo",
   openToWork: "Brisbane, QLD | On-site · Hybrid",
   verificationNote: "Verification badge shown on LinkedIn profile",
 } as const;
@@ -126,6 +128,7 @@ export const contact = {
   github: "https://github.com/rudra-code-creator",
   twitter: "https://x.com/rudrakesh123",
   linkedin: "https://www.linkedin.com/in/rudra-keshwani-the-tiber-guy-31272b1aa/",
+  instagram: "https://www.instagram.com/ruu.kes.3/",
   closing: "DM is open, feel free to reach out.",
 } as const;
 

@@ -27,6 +27,17 @@ body {
   @apply ring-white/40;
 }
 
+@layer utilities {
+  .px-gutter {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .section-y {
+    @apply py-3 md:py-4 lg:py-section;
+  }
+}
+
 /* Raycast button-primary: white pill, black label */
 .btn-primary {
   @apply inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 text-button-md text-on-primary active:bg-primary-pressed;

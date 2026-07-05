@@ -43,7 +43,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     <div className="min-h-dvh bg-canvas">
       <SiteHeader title="Blog" />
 
-      <main className="mx-auto max-w-content px-6 py-12 lg:px-12 lg:py-section">
+      <main className="mx-auto max-w-content px-gutter section-y">
         <article className="mx-auto max-w-2xl">
           <Link
             href="/blog"

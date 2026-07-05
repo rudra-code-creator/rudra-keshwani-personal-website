@@ -14,7 +14,7 @@ export default function BlogPage() {
     <div className="min-h-dvh bg-canvas">
       <SiteHeader title="Blog" />
 
-      <main className="mx-auto max-w-content px-6 py-12 lg:px-12 lg:py-section">
+      <main className="mx-auto max-w-content px-gutter section-y">
         <h1 className="text-[36px] font-semibold leading-[1.1] text-ink sm:text-display-lg">Blog</h1>
         <p className="mt-4 max-w-2xl text-body-lg text-body">
           Thoughts on building, systems, and the early founder path. New posts land here when I push

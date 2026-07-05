@@ -18,7 +18,7 @@ export default function LifeChecklistPage() {
   return (
     <div className="min-h-dvh bg-canvas">
       <header className="border-b border-hairline bg-canvas/95 backdrop-blur-sm">
-        <div className="mx-auto flex h-14 max-w-content items-center justify-between gap-4 px-6 lg:px-12">
+        <div className="mx-auto flex h-14 max-w-content items-center justify-between gap-4 px-gutter">
           <Link href="/" className="focus-ring rounded-md text-heading-sm text-on-dark">
             ← Home
           </Link>
@@ -26,7 +26,7 @@ export default function LifeChecklistPage() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-content px-6 py-12 lg:px-12 lg:py-section">
+      <main className="mx-auto max-w-content px-gutter section-y">
         <figure className="overflow-hidden rounded-lg border border-hairline bg-white">
           <Image
             src="/images/life-paths-wait-but-why.png"
