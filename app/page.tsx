@@ -4,6 +4,21 @@ import Link from "next/link";
 import { ProfileIdentity } from "@/components/ProfileIdentity";
 import { FeaturedLinkedInPostsCarousel } from "@/components/FeaturedLinkedInPostsCarousel";
 import {
+  BriefcaseIcon,
+  ChecklistIcon,
+  CompassIcon,
+  DocumentIcon,
+  GraduationIcon,
+  LinkedInIcon,
+  MailIcon,
+  PenIcon,
+  QuizIcon,
+  RocketIcon,
+  SparklesIcon,
+  UserIcon,
+  UsersIcon,
+} from "@/components/SectionIcons";
+import {
   aboutParagraphs,
   contact,
   education,
@@ -37,17 +52,41 @@ const navItems = [
   { label: "Contact", href: "#connect" },
 ] as const;
 
-function SectionTitle({ id, children }: { id?: string; children: ReactNode }) {
+function SectionTitle({
+  id,
+  icon,
+  children,
+}: {
+  id?: string;
+  icon?: ReactNode;
+  children: ReactNode;
+}) {
   return (
-    <h2 id={id} className="text-heading-lg text-ink">
-      {children}
+    <h2 id={id} className="flex items-center gap-2.5 text-heading-lg text-ink">
+      {icon ? (
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-hairline bg-surface-card text-accent-blue">
+          {icon}
+        </span>
+      ) : null}
+      <span>{children}</span>
     </h2>
+  );
+}
+
+function SubHeading({ icon, children }: { icon: ReactNode; children: ReactNode }) {
+  return (
+    <h3 className="flex items-center gap-2 text-heading-sm text-on-dark">
+      <span className="text-accent-blue">{icon}</span>
+      <span>{children}</span>
+    </h3>
   );
 }
 
 export default function Home() {
   const latestPosts = getAllPosts().slice(0, 3);
   const featuredPosts = getFeaturedLinkedInPosts();
+  const founderExperience = experience.filter((job) => job.org === "intelliGIS" || job.org === "unpaste.ai");
+  const otherExperience = experience.filter((job) => job.org !== "intelliGIS" && job.org !== "unpaste.ai");
 
   return (
     <div className="min-h-dvh bg-canvas">
@@ -165,7 +204,9 @@ export default function Home() {
               aria-labelledby="about-heading"
               className="min-w-0 rounded-lg border border-hairline bg-surface p-6 lg:p-8"
             >
-              <SectionTitle id="about-heading">About</SectionTitle>
+              <SectionTitle id="about-heading" icon={<UserIcon width={18} height={18} />}>
+                About
+              </SectionTitle>
               <div className="mt-8 space-y-6 text-body-md text-body">
                 {aboutParagraphs.map((p, i) => (
                   <p key={i}>{p}</p>
@@ -177,7 +218,7 @@ export default function Home() {
 
         <section id="tiber" aria-labelledby="tiber-heading" className="bg-canvas section-y">
           <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline bg-surface-elevated p-6 lg:p-8">
-            <SectionTitle id="tiber-heading">
+            <SectionTitle id="tiber-heading" icon={<CompassIcon width={18} height={18} />}>
               TIBER framework
             </SectionTitle>
             <ul className="mt-8 space-y-4">
@@ -197,11 +238,14 @@ export default function Home() {
 
         <section id="experience" aria-labelledby="exp-heading" className="bg-canvas section-y">
           <div className="mx-auto max-w-content px-gutter">
-            <SectionTitle id="exp-heading">
+            <SectionTitle id="exp-heading" icon={<BriefcaseIcon width={18} height={18} />}>
               Experience
             </SectionTitle>
-            <div className="mt-10 grid gap-4 md:grid-cols-2">
-              {experience.map((job) => (
+            <div className="mt-8">
+              <SubHeading icon={<RocketIcon width={16} height={16} />}>Founder roles</SubHeading>
+            </div>
+            <div className="mt-4 grid gap-4 md:grid-cols-2">
+              {founderExperience.map((job) => (
                 <article
                   key={`${job.org}-${job.title}`}
                   className="flex gap-4 rounded-md border border-hairline bg-surface p-4"
@@ -210,7 +254,57 @@ export default function Home() {
                     className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-surface-card text-caption-sm text-mute"
                     aria-hidden
                   >
-                    ◆
+                    {job.logoSrc ? (
+                      <Image
+                        src={job.logoSrc}
+                        alt={`${job.org} logo`}
+                        width={36}
+                        height={36}
+                        className="h-9 w-9 rounded-sm object-contain"
+                      />
+                    ) : (
+                      "◆"
+                    )}
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="text-heading-sm text-on-dark">{job.title}</h3>
+                    <p className="text-body-sm-strong text-body">{job.org}</p>
+                    <p className="mt-1 text-caption-md text-mute">
+                      {job.type} · {job.date} · {job.place}
+                    </p>
+                    <p className="mt-3 text-body-sm text-body">{job.summary}</p>
+                    {job.skills ? (
+                      <p className="mt-2 text-caption-sm text-stone">{job.skills}</p>
+                    ) : null}
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <div className="mt-10">
+              <SubHeading icon={<UsersIcon width={16} height={16} />}>Other roles</SubHeading>
+            </div>
+            <div className="mt-4 grid gap-4 md:grid-cols-2">
+              {otherExperience.map((job) => (
+                <article
+                  key={`${job.org}-${job.title}`}
+                  className="flex gap-4 rounded-md border border-hairline bg-surface p-4"
+                >
+                  <div
+                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-surface-card text-caption-sm text-mute"
+                    aria-hidden
+                  >
+                    {job.logoSrc ? (
+                      <Image
+                        src={job.logoSrc}
+                        alt={`${job.org} logo`}
+                        width={36}
+                        height={36}
+                        className="h-9 w-9 rounded-sm object-contain"
+                      />
+                    ) : (
+                      "◆"
+                    )}
                   </div>
                   <div className="min-w-0">
                     <h3 className="text-heading-sm text-on-dark">{job.title}</h3>
@@ -231,16 +325,36 @@ export default function Home() {
 
         <section id="education" aria-labelledby="edu-heading" className="bg-canvas section-y">
           <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline bg-surface p-6 lg:p-8">
-            <SectionTitle id="edu-heading">
+            <SectionTitle id="edu-heading" icon={<GraduationIcon width={18} height={18} />}>
               Education & certifications
             </SectionTitle>
             <ul className="mt-8 space-y-6">
               {education.map((ed) => (
                 <li key={ed.school + ed.date} className="border-t border-hairline pt-6 first:border-t-0 first:pt-0">
-                  <p className="text-heading-sm text-on-dark">{ed.school}</p>
-                  <p className="mt-2 text-body-md text-body">{ed.detail}</p>
-                  <p className="mt-1 text-caption-md text-mute">{ed.date}</p>
-                  {ed.extra ? <p className="mt-2 text-caption-sm text-stone">{ed.extra}</p> : null}
+                  <div className="flex gap-4">
+                    <div
+                      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-surface-card text-caption-sm text-mute"
+                      aria-hidden
+                    >
+                      {ed.logoSrc ? (
+                        <Image
+                          src={ed.logoSrc}
+                          alt={`${ed.school} logo`}
+                          width={36}
+                          height={36}
+                          className="h-9 w-9 rounded-sm object-contain"
+                        />
+                      ) : (
+                        "◆"
+                      )}
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-heading-sm text-on-dark">{ed.school}</p>
+                      <p className="mt-2 text-body-md text-body">{ed.detail}</p>
+                      <p className="mt-1 text-caption-md text-mute">{ed.date}</p>
+                      {ed.extra ? <p className="mt-2 text-caption-sm text-stone">{ed.extra}</p> : null}
+                    </div>
+                  </div>
                 </li>
               ))}
             </ul>
@@ -249,7 +363,7 @@ export default function Home() {
 
         <section id="skills" aria-labelledby="skills-heading" className="bg-canvas section-y">
           <div className="mx-auto max-w-content px-gutter">
-            <SectionTitle id="skills-heading">
+            <SectionTitle id="skills-heading" icon={<SparklesIcon width={18} height={18} />}>
               Top skills
             </SectionTitle>
             <p className="mt-8 max-w-3xl text-body-lg text-body">{topSkills}</p>
@@ -271,7 +385,7 @@ export default function Home() {
         <section id="resume" aria-labelledby="resume-heading" className="bg-canvas section-y">
           <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline bg-surface p-6 lg:p-8">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <SectionTitle id="resume-heading">
+              <SectionTitle id="resume-heading" icon={<DocumentIcon width={18} height={18} />}>
                 Resume
               </SectionTitle>
               <a href="/resume.pdf" className="focus-ring btn-primary" download>
@@ -299,7 +413,9 @@ export default function Home() {
           <div className="w-full px-gutter">
             <div className="rounded-lg border border-hairline bg-surface-elevated py-6 lg:py-8">
               <div className="flex flex-wrap items-center justify-between gap-3">
-                <SectionTitle id="featured-posts-heading">Featured LinkedIn posts</SectionTitle>
+                <SectionTitle id="featured-posts-heading" icon={<LinkedInIcon width={18} height={18} />}>
+                  Featured LinkedIn posts
+                </SectionTitle>
                 <a
                   href={contact.linkedin}
                   target="_blank"
@@ -331,7 +447,9 @@ export default function Home() {
         >
           <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline bg-surface p-6 lg:p-8">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <SectionTitle id="life-heading">Life Checklist</SectionTitle>
+              <SectionTitle id="life-heading" icon={<ChecklistIcon width={18} height={18} />}>
+                Life Checklist
+              </SectionTitle>
               <Link href="/life-checklist" className="focus-ring btn-primary">
                 See full checklist
               </Link>
@@ -363,7 +481,9 @@ export default function Home() {
         >
           <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline bg-surface-elevated p-6 lg:p-8">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <SectionTitle id="quiz-heading">Pop Quiz</SectionTitle>
+              <SectionTitle id="quiz-heading" icon={<QuizIcon width={18} height={18} />}>
+                Pop Quiz
+              </SectionTitle>
               <Link href="/pop-quiz" className="focus-ring btn-primary">
                 Take the quiz →
               </Link>
@@ -386,7 +506,9 @@ export default function Home() {
         >
           <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline bg-surface p-6 lg:p-8">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <SectionTitle id="blog-heading">Blog</SectionTitle>
+              <SectionTitle id="blog-heading" icon={<PenIcon width={18} height={18} />}>
+                Blog
+              </SectionTitle>
               <Link href="/blog" className="focus-ring btn-primary">
                 All posts →
               </Link>
@@ -420,7 +542,7 @@ export default function Home() {
 
         <section id="connect" aria-labelledby="connect-heading" className="bg-canvas section-y">
           <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline-strong bg-surface-elevated p-8 lg:p-10">
-            <SectionTitle id="connect-heading">
+            <SectionTitle id="connect-heading" icon={<MailIcon width={18} height={18} />}>
               Contact
             </SectionTitle>
             <p className="mt-6 text-body-lg text-body">{contact.closing}</p>
