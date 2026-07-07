@@ -1,6 +1,8 @@
 /** Site copy derived from public LinkedIn profile — keep in sync manually. */
 
 export const profile = {
+  headshotSrc: "/images/headshot.png",
+  heroCoverSrc: "/images/hero-cover.png",
   displayName: "Rudra Keshwani",
   tagline: "(The TIBER guy)",
   pronouns: "He/Him",
@@ -9,7 +11,7 @@ export const profile = {
   connections: "500+",
   scrollHook: "Did u stop scrolling?",
   headline:
-    "Cofounder @ unpaste.ai | VC research @ SH1P | Intern @ Chatstat | Secretary @ QUT TECH | Creator of uni-corn and the TIBER framework (Technology, Innovation, Business, Entrepreneurship, Research). 18yo",
+    "|founder of intelliGIS| community lead @ SH1P Australia |intern @ Chatstat| secretary @ QUT TECH| Creator of the TIBER framework (Technology, Innovation, Business, Entrepreneurship, Research). 18yo",
   openToWork: "Brisbane, QLD | On-site · Hybrid",
   verificationNote: "Verification badge shown on LinkedIn profile",
 } as const;
@@ -35,25 +37,40 @@ export const experience = [
   {
     title: "Agentic AI Systems Engineer",
     org: "Chatstat",
+    logoSrc: "/images/logos/chatstat.png",
     type: "Internship",
     date: "Apr 2026 – Present",
     place: "Brisbane, Queensland, Australia · Hybrid",
     summary:
-      "Contributing to agentic AI systems for online safety and intelligent automation — autonomous workflows, reliability, and emerging AI architectures.",
-    skills: "Artificial Intelligence (AI), Agentic AI Development, …",
+      "Contributing to real-world agentic AI systems for online safety and intelligent automation, focused on autonomous workflows, reliability, and emerging architectures.",
+    skills: "Artificial Intelligence (AI), Agentic AI Development, +3 skills",
   },
   {
-    title: "UGC growth and venture research",
+    title: "Founder",
+    org: "intelliGIS",
+    logoSrc: "/images/logos/intelligis.png",
+    type: "Self-employed",
+    date: "Jun 2026 – Present",
+    place: "Brisbane, Queensland, Australia · Hybrid",
+    summary:
+      "Founded intelliGIS to make AI-powered geospatial analysis more accessible and actionable. Leading product strategy, architecture, customer discovery, partnerships, and early go-to-market execution. HKUST x SINO competition entry: https://hkust.startuptree.co/venture/intelligis/",
+    skills: "Founder, Geospatial AI, Product Strategy",
+  },
+  {
+    title: "Community Lead @ SH1P Australia",
     org: "SH1P",
+    logoSrc: "/images/logos/sh1p.png",
     type: "Internship",
     date: "Mar 2026 – Present",
     place: "Australia · Remote",
-    summary: "Venture and growth research (details on LinkedIn).",
-    skills: "",
+    summary:
+      "Progressed from UGC content growth to venture research and now community leadership for SH1P Australia.",
+    skills: "Community Building, Venture Research, Content Growth",
   },
   {
     title: "Secretary",
     org: "QUT The Emerging Coders Hub (TECH)",
+    logoSrc: "/images/logos/qut-tech.png",
     type: "Full-time",
     date: "Mar 2026 – Present",
     place: "Brisbane, Queensland, Australia · Hybrid",
@@ -61,10 +78,33 @@ export const experience = [
     skills: "Administration, Executive Support, …",
   },
   {
+    title: "Community Representative",
+    org: "Triple F",
+    logoSrc: "/images/logos/triplef.png",
+    type: "Internship",
+    date: "May 2026 – Present",
+    place: "Brisbane, Queensland, Australia · Remote",
+    summary:
+      "Representing the community and supporting ecosystem engagement with the Triple F team.",
+    skills: "Community Engagement, Representation, Partnerships",
+  },
+  {
+    title: "LinkedIn Growth Team",
+    org: "Prettiflow",
+    logoSrc: "/images/logos/prettiflow.png",
+    type: "Internship",
+    date: "May 2026 – Jun 2026",
+    place: "APAC · Remote",
+    summary:
+      "Worked on the LinkedIn Growth team during a remote internship; contributed to audience and growth initiatives before resigning on June 1.",
+    skills: "LinkedIn Growth, Audience Development, Remote Collaboration",
+  },
+  {
     title: "Technical Cofounder",
     org: "unpaste.ai",
+    logoSrc: "/images/logos/unpaste.png",
     type: "Self-employed",
-    date: "Jan 2026 – Present",
+    date: "Feb 2026 – Jun 2026",
     place: "Brisbane, Queensland, Australia · Hybrid",
     summary:
       "Technical vision and product development for AI-driven automation — embedding scalable AI into client workflows (architecture through implementation). Stack references include OpenClaw, n8n, Claude, and custom integrations.",
@@ -73,6 +113,7 @@ export const experience = [
   {
     title: "Educator",
     org: "Kumon",
+    logoSrc: "/images/logos/kumon.png",
     type: "Casual employment",
     date: "Jan 2023 – Dec 2025",
     place: "Australia · On-site",
@@ -84,7 +125,16 @@ export const experience = [
 
 export const education = [
   {
+    school: "HKUST + Sino Group One Million Dollar Entrepreneurship Competition",
+    logoSrc: "/images/logos/hkust.png",
+    detail:
+      "Competing in the Hong Kong University of Science and Technology (HKUST) + Sino Group 1M entrepreneurship competition with intelliGIS.",
+    date: "Jun 2026 – Oct 2026",
+    extra: "https://hkust.startuptree.co/venture/intelligis/",
+  },
+  {
     school: "QUT (Queensland University of Technology)",
+    logoSrc: "/images/logos/qut-tech.png",
     detail:
       "Double Bachelor: Business (Entrepreneurship) and Information Technology (AI). Bachelor of Business / Bachelor of Information Technology (IX22).",
     date: "Feb 2026 – Dec 2029",
@@ -93,24 +143,28 @@ export const education = [
   },
   {
     school: "Y Combinator — Startup School",
+    logoSrc: "/images/logos/yc.png",
     detail: "Enrolled in Startup School — YC’s free online program for founders (curriculum, advice, and community).",
     date: "Apr 2026 – Present",
     extra: "",
   },
   {
     school: "BOP Industries — Young Entrepreneurs Hub",
+    logoSrc: "/images/logos/bop-industries.png",
     detail: "Youth accelerator — workshops, mentoring, and dedicated build time (Brisbane WeWork).",
     date: "Apr 2026 – Sep 2026",
     extra: "",
   },
   {
     school: "Get Set Education",
+    logoSrc: "/images/logos/get-set-education.png",
     detail: "BSB50120 Diploma Of Business",
     date: "Issued May 2025 · Credential ID 11907942-7747750",
     extra: "CRM, Accounting, …",
   },
   {
     school: "Mansfield State High School",
+    logoSrc: "/images/logos/mansfield-shs.png",
     detail:
       "Queensland Certificate of Education (QCE), Queensland Curriculum & Assessment Authority (QCAA) — Queensland curriculum pathway.",
     date: "Jan 2020 – Nov 2025",
@@ -126,6 +180,7 @@ export const contact = {
   github: "https://github.com/rudra-code-creator",
   twitter: "https://x.com/rudrakesh123",
   linkedin: "https://www.linkedin.com/in/rudra-keshwani-the-tiber-guy-31272b1aa/",
+  instagram: "https://www.instagram.com/ruu.kes.3/",
   closing: "DM is open, feel free to reach out.",
 } as const;
 

@@ -1,7 +1,23 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { CommandPaletteMockup } from "@/components/CommandPaletteMockup";
-import { HeroStripes } from "@/components/HeroStripes";
+import { ProfileIdentity } from "@/components/ProfileIdentity";
+import { FeaturedLinkedInPostsCarousel } from "@/components/FeaturedLinkedInPostsCarousel";
+import {
+  BriefcaseIcon,
+  ChecklistIcon,
+  CompassIcon,
+  DocumentIcon,
+  GraduationIcon,
+  LinkedInIcon,
+  MailIcon,
+  PenIcon,
+  QuizIcon,
+  RocketIcon,
+  SparklesIcon,
+  UserIcon,
+  UsersIcon,
+} from "@/components/SectionIcons";
 import {
   aboutParagraphs,
   contact,
@@ -17,6 +33,7 @@ import {
   lifeChecklistRemainingCount,
   lifeChecklistTotalCount,
 } from "./life-checklist-data";
+import { getFeaturedLinkedInPosts } from "./featured-linkedin-posts-data";
 import { popQuizQuestionCount } from "./pop-quiz-data";
 import { formatPostDate, getAllPosts } from "@/lib/blog";
 
@@ -28,27 +45,53 @@ const navItems = [
   { label: "Education", href: "#education" },
   { label: "Skills", href: "#skills" },
   { label: "Resume", href: "#resume" },
+  { label: "Posts", href: "#featured-posts" },
   { label: "Life", href: "#life-checklist" },
   { label: "Quiz", href: "#pop-quiz" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "#connect" },
 ] as const;
 
-function SectionTitle({ id, children }: { id?: string; children: ReactNode }) {
+function SectionTitle({
+  id,
+  icon,
+  children,
+}: {
+  id?: string;
+  icon?: ReactNode;
+  children: ReactNode;
+}) {
   return (
-    <h2 id={id} className="text-heading-lg text-ink">
-      {children}
+    <h2 id={id} className="flex items-center gap-2.5 text-heading-lg text-ink">
+      {icon ? (
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-hairline bg-surface-card text-accent-blue">
+          {icon}
+        </span>
+      ) : null}
+      <span>{children}</span>
     </h2>
+  );
+}
+
+function SubHeading({ icon, children }: { icon: ReactNode; children: ReactNode }) {
+  return (
+    <h3 className="flex items-center gap-2 text-heading-sm text-on-dark">
+      <span className="text-accent-blue">{icon}</span>
+      <span>{children}</span>
+    </h3>
   );
 }
 
 export default function Home() {
   const latestPosts = getAllPosts().slice(0, 3);
+  const featuredPosts = getFeaturedLinkedInPosts();
+  const founderExperience = experience.filter((job) => job.org === "intelliGIS" || job.org === "unpaste.ai");
+  const otherExperience = experience.filter((job) => job.org !== "intelliGIS" && job.org !== "unpaste.ai");
 
   return (
     <div className="min-h-dvh bg-canvas">
       <header className="sticky top-0 z-40 border-b border-hairline bg-canvas/95 backdrop-blur-sm">
-        <div className="mx-auto flex h-14 max-w-content items-center justify-between gap-4 px-6 lg:px-12">
+        <div className="mx-auto flex h-14 max-w-content items-center justify-between gap-4 px-gutter">
           <Link href="#profile" className="focus-ring rounded-md text-heading-sm text-on-dark">
             Rudra
           </Link>
@@ -83,42 +126,69 @@ export default function Home() {
       </header>
 
       <main>
-        {/* Hero band: stripe + two-column (Raycast home layout) */}
+        {/* Hero cover + profile / about split */}
         <section id="profile" className="relative overflow-hidden bg-canvas">
-          <HeroStripes />
-          <div className="relative z-10 mx-auto grid max-w-content gap-12 px-6 pb-16 pt-10 lg:grid-cols-[1fr_minmax(320px,480px)] lg:gap-16 lg:px-12 lg:pb-section lg:pt-section">
+          <div className="relative h-52 w-full sm:h-64 md:h-72 lg:h-80 xl:h-96">
+            <Image
+              src={profile.heroCoverSrc}
+              alt="Panoramic aerial view of a planned city along a winding river"
+              fill
+              className="object-cover object-center"
+              priority
+              sizes="100vw"
+            />
+          </div>
+
+          <div className="relative z-10 mx-auto grid max-w-content gap-12 px-gutter pb-4 pt-1.5 lg:grid-cols-2 lg:gap-16 lg:pb-section lg:pt-2">
             <div className="min-w-0">
-              <div className="flex flex-wrap gap-2">
-                <span className="rounded-xs bg-surface-elevated px-1.5 py-0.5 text-caption-sm text-on-dark-mute">
-                  LinkedIn verified
-                </span>
-                <span className="rounded-xs bg-accent-blue-soft px-2 py-0.5 text-caption-sm text-accent-blue">
-                  Open to work
-                </span>
-              </div>
-
-              <h1 className="mt-8 text-[36px] font-semibold leading-[1.1] tracking-tight text-ink sm:text-[44px] md:text-[56px] lg:text-display-xl">
-                {profile.displayName}
-              </h1>
-              <p className="mt-3 text-heading-md text-on-dark">{profile.tagline}</p>
-              <p className="mt-3 text-body-sm text-on-dark-mute">
-                {profile.pronouns} · {profile.age} · {profile.location} · {profile.connections}{" "}
-                connections
-              </p>
-
-              <p className="mt-8 text-body-lg text-body">{profile.scrollHook}</p>
+              <ProfileIdentity
+                headshotSrc={profile.headshotSrc}
+                displayName={profile.displayName}
+                tagline={profile.tagline}
+                metaLine={`${profile.pronouns} · ${profile.age} · ${profile.location} · ${profile.connections} connections`}
+                scrollHook={profile.scrollHook}
+              />
 
               <div className="mt-6 rounded-lg border border-hairline bg-surface p-6">
                 <p className="text-body-md text-body">{profile.headline}</p>
               </div>
 
               <div className="mt-8 flex flex-wrap gap-3">
-                <Link href="#connect" className="focus-ring btn-primary">
-                  Get in touch
-                </Link>
-                <Link href="#about" className="focus-ring btn-tertiary">
-                  About
-                </Link>
+                <a href={`mailto:${contact.email}`} className="focus-ring btn-primary">
+                  Email
+                </a>
+                <a
+                  href={contact.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="focus-ring install-btn"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  href={contact.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="focus-ring install-btn"
+                >
+                  GitHub
+                </a>
+                <a
+                  href={contact.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="focus-ring install-btn"
+                >
+                  X
+                </a>
+                <a
+                  href={contact.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="focus-ring install-btn"
+                >
+                  Instagram
+                </a>
               </div>
 
               <div className="mt-10 rounded-lg border border-hairline bg-surface-elevated p-5">
@@ -129,28 +199,26 @@ export default function Home() {
               <p className="mt-8 text-caption-md text-mute">{volunteerNote}</p>
             </div>
 
-            <div className="lg:pt-4">
-              <CommandPaletteMockup />
+            <div
+              id="about"
+              aria-labelledby="about-heading"
+              className="min-w-0 rounded-lg border border-hairline bg-surface p-6 lg:p-8"
+            >
+              <SectionTitle id="about-heading" icon={<UserIcon width={18} height={18} />}>
+                About
+              </SectionTitle>
+              <div className="mt-8 space-y-6 text-body-md text-body">
+                {aboutParagraphs.map((p, i) => (
+                  <p key={i}>{p}</p>
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
-        <section id="about" aria-labelledby="about-heading" className="bg-canvas px-6 py-12 md:py-16 lg:px-12 lg:py-section">
-          <div className="mx-auto max-w-content rounded-lg border border-hairline bg-surface p-6 lg:p-8">
-            <SectionTitle id="about-heading">
-              About
-            </SectionTitle>
-            <div className="mt-8 space-y-6 text-body-md text-body">
-              {aboutParagraphs.map((p, i) => (
-                <p key={i}>{p}</p>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="tiber" aria-labelledby="tiber-heading" className="bg-canvas px-6 py-12 md:py-16 lg:px-12 lg:py-section">
-          <div className="mx-auto max-w-content rounded-lg border border-hairline bg-surface-elevated p-6 lg:p-8">
-            <SectionTitle id="tiber-heading">
+        <section id="tiber" aria-labelledby="tiber-heading" className="bg-canvas section-y">
+          <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline bg-surface-elevated p-6 lg:p-8">
+            <SectionTitle id="tiber-heading" icon={<CompassIcon width={18} height={18} />}>
               TIBER framework
             </SectionTitle>
             <ul className="mt-8 space-y-4">
@@ -168,13 +236,16 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="experience" aria-labelledby="exp-heading" className="bg-canvas px-6 py-12 md:py-16 lg:px-12 lg:py-section">
-          <div className="mx-auto max-w-content">
-            <SectionTitle id="exp-heading">
+        <section id="experience" aria-labelledby="exp-heading" className="bg-canvas section-y">
+          <div className="mx-auto max-w-content px-gutter">
+            <SectionTitle id="exp-heading" icon={<BriefcaseIcon width={18} height={18} />}>
               Experience
             </SectionTitle>
-            <div className="mt-10 grid gap-4 md:grid-cols-2">
-              {experience.map((job) => (
+            <div className="mt-8">
+              <SubHeading icon={<RocketIcon width={16} height={16} />}>Founder roles</SubHeading>
+            </div>
+            <div className="mt-4 grid gap-4 md:grid-cols-2">
+              {founderExperience.map((job) => (
                 <article
                   key={`${job.org}-${job.title}`}
                   className="flex gap-4 rounded-md border border-hairline bg-surface p-4"
@@ -183,7 +254,57 @@ export default function Home() {
                     className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-surface-card text-caption-sm text-mute"
                     aria-hidden
                   >
-                    ◆
+                    {job.logoSrc ? (
+                      <Image
+                        src={job.logoSrc}
+                        alt={`${job.org} logo`}
+                        width={36}
+                        height={36}
+                        className="h-9 w-9 rounded-sm object-contain"
+                      />
+                    ) : (
+                      "◆"
+                    )}
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="text-heading-sm text-on-dark">{job.title}</h3>
+                    <p className="text-body-sm-strong text-body">{job.org}</p>
+                    <p className="mt-1 text-caption-md text-mute">
+                      {job.type} · {job.date} · {job.place}
+                    </p>
+                    <p className="mt-3 text-body-sm text-body">{job.summary}</p>
+                    {job.skills ? (
+                      <p className="mt-2 text-caption-sm text-stone">{job.skills}</p>
+                    ) : null}
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <div className="mt-10">
+              <SubHeading icon={<UsersIcon width={16} height={16} />}>Other roles</SubHeading>
+            </div>
+            <div className="mt-4 grid gap-4 md:grid-cols-2">
+              {otherExperience.map((job) => (
+                <article
+                  key={`${job.org}-${job.title}`}
+                  className="flex gap-4 rounded-md border border-hairline bg-surface p-4"
+                >
+                  <div
+                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-surface-card text-caption-sm text-mute"
+                    aria-hidden
+                  >
+                    {job.logoSrc ? (
+                      <Image
+                        src={job.logoSrc}
+                        alt={`${job.org} logo`}
+                        width={36}
+                        height={36}
+                        className="h-9 w-9 rounded-sm object-contain"
+                      />
+                    ) : (
+                      "◆"
+                    )}
                   </div>
                   <div className="min-w-0">
                     <h3 className="text-heading-sm text-on-dark">{job.title}</h3>
@@ -202,27 +323,47 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="education" aria-labelledby="edu-heading" className="bg-canvas px-6 py-12 md:py-16 lg:px-12 lg:py-section">
-          <div className="mx-auto max-w-content rounded-lg border border-hairline bg-surface p-6 lg:p-8">
-            <SectionTitle id="edu-heading">
+        <section id="education" aria-labelledby="edu-heading" className="bg-canvas section-y">
+          <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline bg-surface p-6 lg:p-8">
+            <SectionTitle id="edu-heading" icon={<GraduationIcon width={18} height={18} />}>
               Education & certifications
             </SectionTitle>
             <ul className="mt-8 space-y-6">
               {education.map((ed) => (
                 <li key={ed.school + ed.date} className="border-t border-hairline pt-6 first:border-t-0 first:pt-0">
-                  <p className="text-heading-sm text-on-dark">{ed.school}</p>
-                  <p className="mt-2 text-body-md text-body">{ed.detail}</p>
-                  <p className="mt-1 text-caption-md text-mute">{ed.date}</p>
-                  {ed.extra ? <p className="mt-2 text-caption-sm text-stone">{ed.extra}</p> : null}
+                  <div className="flex gap-4">
+                    <div
+                      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-surface-card text-caption-sm text-mute"
+                      aria-hidden
+                    >
+                      {ed.logoSrc ? (
+                        <Image
+                          src={ed.logoSrc}
+                          alt={`${ed.school} logo`}
+                          width={36}
+                          height={36}
+                          className="h-9 w-9 rounded-sm object-contain"
+                        />
+                      ) : (
+                        "◆"
+                      )}
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-heading-sm text-on-dark">{ed.school}</p>
+                      <p className="mt-2 text-body-md text-body">{ed.detail}</p>
+                      <p className="mt-1 text-caption-md text-mute">{ed.date}</p>
+                      {ed.extra ? <p className="mt-2 text-caption-sm text-stone">{ed.extra}</p> : null}
+                    </div>
+                  </div>
                 </li>
               ))}
             </ul>
           </div>
         </section>
 
-        <section id="skills" aria-labelledby="skills-heading" className="bg-canvas px-6 py-12 md:py-16 lg:px-12 lg:py-section">
-          <div className="mx-auto max-w-content">
-            <SectionTitle id="skills-heading">
+        <section id="skills" aria-labelledby="skills-heading" className="bg-canvas section-y">
+          <div className="mx-auto max-w-content px-gutter">
+            <SectionTitle id="skills-heading" icon={<SparklesIcon width={18} height={18} />}>
               Top skills
             </SectionTitle>
             <p className="mt-8 max-w-3xl text-body-lg text-body">{topSkills}</p>
@@ -241,10 +382,10 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="resume" aria-labelledby="resume-heading" className="bg-canvas px-6 py-12 md:py-16 lg:px-12 lg:py-section">
-          <div className="mx-auto max-w-content rounded-lg border border-hairline bg-surface p-6 lg:p-8">
+        <section id="resume" aria-labelledby="resume-heading" className="bg-canvas section-y">
+          <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline bg-surface p-6 lg:p-8">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <SectionTitle id="resume-heading">
+              <SectionTitle id="resume-heading" icon={<DocumentIcon width={18} height={18} />}>
                 Resume
               </SectionTitle>
               <a href="/resume.pdf" className="focus-ring btn-primary" download>
@@ -265,13 +406,50 @@ export default function Home() {
         </section>
 
         <section
+          id="featured-posts"
+          aria-labelledby="featured-posts-heading"
+          className="bg-canvas section-y"
+        >
+          <div className="w-full px-gutter">
+            <div className="rounded-lg border border-hairline bg-surface-elevated py-6 lg:py-8">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <SectionTitle id="featured-posts-heading" icon={<LinkedInIcon width={18} height={18} />}>
+                  Featured LinkedIn posts
+                </SectionTitle>
+                <a
+                  href={contact.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="focus-ring btn-tertiary"
+                >
+                  View profile
+                </a>
+              </div>
+              <p className="mt-4 max-w-2xl text-body-md text-body">
+                A few posts I&apos;m proud of — building, TIBER, and the founder path.
+              </p>
+
+              {featuredPosts.length > 0 ? (
+                <FeaturedLinkedInPostsCarousel posts={featuredPosts} />
+              ) : (
+                <p className="mt-8 rounded-md border border-dashed border-hairline bg-surface px-4 py-8 text-center text-body-sm text-mute">
+                  Featured posts will appear here once embed links are added.
+                </p>
+              )}
+            </div>
+          </div>
+        </section>
+
+        <section
           id="life-checklist"
           aria-labelledby="life-heading"
-          className="bg-canvas px-6 py-12 md:py-16 lg:px-12 lg:py-section"
+          className="bg-canvas section-y"
         >
-          <div className="mx-auto max-w-content rounded-lg border border-hairline bg-surface p-6 lg:p-8">
+          <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline bg-surface p-6 lg:p-8">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <SectionTitle id="life-heading">Life Checklist</SectionTitle>
+              <SectionTitle id="life-heading" icon={<ChecklistIcon width={18} height={18} />}>
+                Life Checklist
+              </SectionTitle>
               <Link href="/life-checklist" className="focus-ring btn-primary">
                 See full checklist
               </Link>
@@ -299,11 +477,13 @@ export default function Home() {
         <section
           id="pop-quiz"
           aria-labelledby="quiz-heading"
-          className="bg-canvas px-6 py-12 md:py-16 lg:px-12 lg:py-section"
+          className="bg-canvas section-y"
         >
-          <div className="mx-auto max-w-content rounded-lg border border-hairline bg-surface-elevated p-6 lg:p-8">
+          <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline bg-surface-elevated p-6 lg:p-8">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <SectionTitle id="quiz-heading">Pop Quiz</SectionTitle>
+              <SectionTitle id="quiz-heading" icon={<QuizIcon width={18} height={18} />}>
+                Pop Quiz
+              </SectionTitle>
               <Link href="/pop-quiz" className="focus-ring btn-primary">
                 Take the quiz →
               </Link>
@@ -322,11 +502,13 @@ export default function Home() {
         <section
           id="blog"
           aria-labelledby="blog-heading"
-          className="bg-canvas px-6 py-12 md:py-16 lg:px-12 lg:py-section"
+          className="bg-canvas section-y"
         >
-          <div className="mx-auto max-w-content rounded-lg border border-hairline bg-surface p-6 lg:p-8">
+          <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline bg-surface p-6 lg:p-8">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <SectionTitle id="blog-heading">Blog</SectionTitle>
+              <SectionTitle id="blog-heading" icon={<PenIcon width={18} height={18} />}>
+                Blog
+              </SectionTitle>
               <Link href="/blog" className="focus-ring btn-primary">
                 All posts →
               </Link>
@@ -358,21 +540,21 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="connect" aria-labelledby="connect-heading" className="bg-canvas px-6 pb-section pt-12 md:pb-section md:pt-16 lg:px-12">
-          <div className="mx-auto max-w-content rounded-lg border border-hairline-strong bg-surface-elevated p-8 lg:p-10">
-            <SectionTitle id="connect-heading">
+        <section id="connect" aria-labelledby="connect-heading" className="bg-canvas section-y">
+          <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline-strong bg-surface-elevated p-8 lg:p-10">
+            <SectionTitle id="connect-heading" icon={<MailIcon width={18} height={18} />}>
               Contact
             </SectionTitle>
             <p className="mt-6 text-body-lg text-body">{contact.closing}</p>
-            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <a href={`mailto:${contact.email}`} className="focus-ring btn-primary justify-center">
+            <div className="mt-10 flex flex-wrap gap-3">
+              <a href={`mailto:${contact.email}`} className="focus-ring btn-primary">
                 Email
               </a>
               <a
                 href={contact.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="focus-ring install-btn justify-center"
+                className="focus-ring install-btn"
               >
                 LinkedIn
               </a>
@@ -380,7 +562,7 @@ export default function Home() {
                 href={contact.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="focus-ring install-btn justify-center"
+                className="focus-ring install-btn"
               >
                 GitHub
               </a>
@@ -388,9 +570,17 @@ export default function Home() {
                 href={contact.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="focus-ring install-btn justify-center"
+                className="focus-ring install-btn"
               >
                 X
+              </a>
+              <a
+                href={contact.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus-ring install-btn"
+              >
+                Instagram
               </a>
             </div>
             <p className="mt-8 text-caption-md text-mute">{contact.email}</p>
@@ -403,7 +593,7 @@ export default function Home() {
           className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-hero-stripe-start/50 to-transparent"
           aria-hidden
         />
-        <div className="mx-auto max-w-content px-6 py-16 lg:px-12">
+        <div className="mx-auto max-w-content px-gutter py-4">
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             <div>
               <p className="text-body-sm-strong text-on-dark">Links</p>
@@ -421,6 +611,11 @@ export default function Home() {
                 <li>
                   <a href={contact.twitter} className="link-footer" target="_blank" rel="noopener noreferrer">
                     X (Twitter)
+                  </a>
+                </li>
+                <li>
+                  <a href={contact.instagram} className="link-footer" target="_blank" rel="noopener noreferrer">
+                    Instagram
                   </a>
                 </li>
                 <li>

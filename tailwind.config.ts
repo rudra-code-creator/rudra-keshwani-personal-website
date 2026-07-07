@@ -69,11 +69,11 @@ const config: Config = {
         xl: "16px",
       },
       maxWidth: {
-        content: "1240px",
+        content: "100%",
         palette: "1080px",
       },
       spacing: {
-        section: "96px",
+        section: "24px",
       },
     },
   },
