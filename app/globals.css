@@ -2,8 +2,101 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+  --color-canvas: 244 244 245;
+  --color-surface: 255 255 255;
+  --color-surface-elevated: 250 250 250;
+  --color-surface-card: 255 255 255;
+  --color-button-fg: 244 244 245;
+  --color-ink: 24 25 26;
+  --color-body: 63 64 66;
+  --color-charcoal: 46 47 49;
+  --color-mute: 106 107 108;
+  --color-ash: 138 139 140;
+  --color-stone: 180 181 182;
+  --color-on-dark: 24 25 26;
+  --color-on-dark-mute: 24 25 26;
+  --color-on-dark-mute-alpha: 0.72;
+  --color-primary: 24 25 26;
+  --color-primary-pressed: 46 47 49;
+  --color-on-primary: 255 255 255;
+  --color-hairline: 226 227 228;
+  --color-hairline-soft: 24 25 26;
+  --color-hairline-soft-alpha: 0.06;
+  --color-hairline-strong: 24 25 26;
+  --color-hairline-strong-alpha: 0.14;
+  --color-accent-blue: 26 143 212;
+  --color-accent-blue-soft: 26 143 212;
+  --color-accent-blue-soft-alpha: 0.12;
+  --color-accent-red: 224 69 69;
+  --color-accent-red-soft: 224 69 69;
+  --color-accent-red-soft-alpha: 0.12;
+  --color-accent-green: 42 170 110;
+  --color-accent-green-soft: 42 170 110;
+  --color-accent-green-soft-alpha: 0.12;
+  --color-accent-yellow: 201 146 0;
+  --color-accent-yellow-soft: 201 146 0;
+  --color-accent-yellow-soft-alpha: 0.12;
+  --color-hero-stripe-start: 255 87 87;
+  --color-hero-stripe-end: 161 19 26;
+  --color-key-bg-start: 232 232 233;
+  --color-key-bg-end: 222 222 223;
+  --color-selection: 24 25 26;
+  --color-selection-alpha: 0.1;
+  --color-focus-ring: 24 25 26;
+  --color-focus-ring-alpha: 0.35;
+  --color-press: 24 25 26;
+  --color-press-alpha: 0.05;
+}
+
+[data-theme="dark"] {
   color-scheme: dark;
+  --color-canvas: 7 8 10;
+  --color-surface: 13 13 13;
+  --color-surface-elevated: 16 17 17;
+  --color-surface-card: 18 18 18;
+  --color-button-fg: 24 25 26;
+  --color-ink: 244 244 246;
+  --color-body: 205 205 205;
+  --color-charcoal: 211 211 212;
+  --color-mute: 156 156 157;
+  --color-ash: 106 107 108;
+  --color-stone: 67 67 69;
+  --color-on-dark: 255 255 255;
+  --color-on-dark-mute: 255 255 255;
+  --color-on-dark-mute-alpha: 0.72;
+  --color-primary: 255 255 255;
+  --color-primary-pressed: 232 232 232;
+  --color-on-primary: 0 0 0;
+  --color-hairline: 36 39 40;
+  --color-hairline-soft: 255 255 255;
+  --color-hairline-soft-alpha: 0.08;
+  --color-hairline-strong: 255 255 255;
+  --color-hairline-strong-alpha: 0.16;
+  --color-accent-blue: 87 193 255;
+  --color-accent-blue-soft: 87 193 255;
+  --color-accent-blue-soft-alpha: 0.15;
+  --color-accent-red: 255 97 97;
+  --color-accent-red-soft: 255 97 97;
+  --color-accent-red-soft-alpha: 0.15;
+  --color-accent-green: 89 212 153;
+  --color-accent-green-soft: 89 212 153;
+  --color-accent-green-soft-alpha: 0.15;
+  --color-accent-yellow: 255 197 51;
+  --color-accent-yellow-soft: 255 197 51;
+  --color-accent-yellow-soft-alpha: 0.15;
+  --color-hero-stripe-start: 255 87 87;
+  --color-hero-stripe-end: 161 19 26;
+  --color-key-bg-start: 18 18 18;
+  --color-key-bg-end: 13 13 13;
+  --color-selection: 255 255 255;
+  --color-selection-alpha: 0.1;
+  --color-focus-ring: 255 255 255;
+  --color-focus-ring-alpha: 0.4;
+  --color-press: 255 255 255;
+  --color-press-alpha: 0.05;
 }
 
 html {
@@ -16,7 +109,8 @@ body {
 }
 
 ::selection {
-  @apply bg-white/10 text-ink;
+  background-color: rgb(var(--color-selection) / var(--color-selection-alpha));
+  @apply text-ink;
 }
 
 .focus-ring {
@@ -24,7 +118,7 @@ body {
 }
 
 .focus-ring:focus-visible {
-  @apply ring-white/40;
+  --tw-ring-color: rgb(var(--color-focus-ring) / var(--color-focus-ring-alpha));
 }
 
 @layer utilities {
@@ -38,13 +132,17 @@ body {
   }
 }
 
-/* Raycast button-primary: white pill, black label */
+/* Primary CTA: white pill on dark, ink pill on light */
 .btn-primary {
   @apply inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 text-button-md text-on-primary active:bg-primary-pressed;
 }
 
 .btn-secondary {
-  @apply inline-flex h-9 items-center justify-center rounded-md bg-transparent px-4 text-button-md text-on-dark active:bg-white/5;
+  @apply inline-flex h-9 items-center justify-center rounded-md bg-transparent px-4 text-button-md text-on-dark;
+}
+
+.btn-secondary:active {
+  background-color: rgb(var(--color-press) / var(--color-press-alpha));
 }
 
 .btn-tertiary {

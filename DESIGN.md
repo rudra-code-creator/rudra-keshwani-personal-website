@@ -3,7 +3,7 @@ version: alpha
 name: Raycast
 属于: A dark-canvas developer-tools system that treats the marketing page like an extended product screenshot — pure-near-black background, command-palette mockups as the hero, Inter typography with the ss03 stylistic set turned on, and a single white CTA pill that doesn't break the inky atmosphere. The chrome reads like Raycast's own command-palette UI scaled up to a marketing page: monochrome dark surfaces with a faint surface ladder (#07080a → #0d0d0d → #101111), tight 6–10px radius on cards, hairline 1px borders in #242728, and rare splashes of saturated accent (Hacker News yellow, Slack red, Mac green, info blue) reserved for product-tile category illustrations. The signature visual moment is a red gradient hero wordmark — three diagonal red stripes laid across the very top of the home page like a launch-banner — paired with full-bleed product UI screenshots that show Raycast's actual command palette, store, and AI chat surfaces.
 description: |
-  Raycast's marketing system reads like an extended product screenshot. The chrome IS the in-product chrome at marketing scale: pure-near-black canvas, hairline 1px borders, command-palette-style cards, Inter typography with the ss03 stylistic set enabled site-wide, white CTA pill, and a small set of saturated category accent colors (yellow / red / green / blue) reserved for extension and feature illustrations. Section rhythm is generous (~96px) but the page never breaks tonal continuity — the whole site sits in one continuous dark mode.
+  Raycast's marketing system reads like an extended product screenshot. The chrome IS the in-product chrome at marketing scale: light-first canvas with an optional dark variant, sidebar navigation, hairline 1px borders, command-palette-style cards, Inter typography with the ss03 stylistic set enabled site-wide, high-contrast CTA pill, and a small set of saturated category accent colors (yellow / red / green / blue) reserved for extension and feature illustrations. Section rhythm is generous (~96px) but the page never breaks tonal continuity — light is the default theme; dark mode inverts the surface ladder while keeping the same chrome language.
 
 colors:
   primary: "#ffffff"
@@ -333,7 +333,7 @@ Raycast's marketing site reads like an extended product screenshot. The chrome I
 
 The system has effectively one surface mode — dark — with a faint three-step surface ladder (`{colors.canvas}` → `{colors.surface}` → `{colors.surface-elevated}` → `{colors.surface-card}`) carrying cards, in-card panels, and key-cap glyph backgrounds. The signature decorative moment is a **red diagonal-stripe gradient band** across the very top of the home page hero, used as a launch-banner motif behind the headline (the only time saturated red appears on chrome). Beyond that single moment, color in the chrome is reserved for category accents inside extension and feature illustrations: Hacker News yellow, Slack red, Linear green, info blue.
 
-The design philosophy is "the marketing page is the product." Section rhythm is generous (`{spacing.section}` 96px) but the page never breaks tonal continuity — the whole site sits in one continuous dark mode, full-bleed product UI screenshots show Raycast's actual command palette / store / AI chat surfaces, and the typography ligature settings (`ss03`) are inherited from the in-product app's text rendering.
+The design philosophy is "the marketing page is the product." Section rhythm is generous (`{spacing.section}` 96px) but the page never breaks tonal continuity — light is the default theme with an optional dark variant that inverts the surface ladder, full-bleed product UI screenshots show Raycast's actual command palette / store / AI chat surfaces, and the typography ligature settings (`ss03`) are inherited from the in-product app's text rendering.
 
 **Key Characteristics:**
 - Single dark surface mode with a 4-step surface ladder: `{colors.canvas}` (#07080a) → `{colors.surface}` (#0d0d0d) → `{colors.surface-elevated}` (#101111) → `{colors.surface-card}` (#121212)
@@ -575,12 +575,11 @@ There is no traditional photography. Visual elements are limited to:
 
 ### Navigation
 
-**`primary-nav`**
-- Background `{colors.canvas}`, text `{colors.on-dark}`, height ~56px, type `{typography.body-sm-strong}`, rounded `{rounded.none}`, with a 1px `{colors.hairline}` bottom rule.
-- Layout (desktop): Raycast wordmark at left, centered nav cluster ("Pro · AI · Store · Manual · Changelog · Blog · Pricing"), right cluster (Sign in link + the always-white `{component.button-primary}` "Download" CTA pill).
-
-**Top Nav (Mobile)**
-- Hamburger menu icon at left, Raycast wordmark at center, "Download" white CTA pill at right. Primary nav collapses into a full-screen drawer that slides from the left.
+**`primary-nav` (sidebar)**
+- Fixed left rail on desktop (`~224px`), background `{colors.canvas}`, 1px `{colors.hairline}` right rule, full viewport height.
+- Layout: brand wordmark + theme toggle at top, vertical nav stack (body-sm-strong), LinkedIn + Email CTAs pinned at the bottom.
+- Active item uses `{colors.surface-card}` background; inactive items use `{colors.on-dark-mute}` and brighten on hover.
+- Mobile: compact top bar (menu · brand · theme) opens a left drawer overlay; Esc / backdrop / route change dismisses it.
 
 ### Footer
 
@@ -598,8 +597,8 @@ There is no traditional photography. Visual elements are limited to:
 ## Do's and Don'ts
 
 ### Do
-- Render the entire site in one continuous dark mode. There is no light variant in the system.
-- Use `{colors.primary}` (white pill) for every primary CTA. There is no second primary color — white IS the brand action.
+- Default to light mode; offer a dark variant via `data-theme` that inverts the surface ladder while keeping the same chrome language (sidebar nav, hairlines, Inter + ss03, high-contrast primary CTA).
+- Use `{colors.primary}` for every primary CTA. On light it is an ink pill; on dark it is a white pill — never a tinted accent.
 - Build elevation from the surface-color ladder (`{colors.canvas}` → `{colors.surface}` → `{colors.surface-elevated}` → `{colors.surface-card}`), never from drop shadows.
 - Enable `font-feature-settings: "calt", "kern", "liga", "ss03"` on the body element. The ss03 alternate `g` is part of the brand identity.
 - Anchor a `{component.command-palette-card}` mockup as the hero's load-bearing visual. Real Raycast UI is the brand.
@@ -608,9 +607,9 @@ There is no traditional photography. Visual elements are limited to:
 - Use saturated category accents (`{colors.accent-yellow}`, `{colors.accent-red}`, `{colors.accent-green}`, `{colors.accent-blue}`) only inside extension and feature illustrations — never on chrome buttons or text.
 
 ### Don't
-- Don't introduce a light mode. The system is dark-only by design.
+- Don't invent a second visual language for light mode — reuse semantic tokens (`canvas`, `ink`, `primary`) so both themes stay Raycast-chrome.
 - Don't add drop shadows on cards. Elevation is built from the surface ladder, not from shadows.
-- Don't replace `{colors.primary}` (white) with a tinted accent for the primary CTA. Pure white is the brand action color.
+- Don't replace `{colors.primary}` with a tinted accent for the primary CTA. High-contrast monochrome is the brand action color.
 - Don't use the saturated accent colors (`{colors.accent-yellow}`, `{colors.accent-red}`, `{colors.accent-green}`, `{colors.accent-blue}`) on text, buttons, or chrome surfaces. They belong inside extension illustrations.
 - Don't repeat the hero stripe gradient outside the top hero band. The one-band rule is the system's restraint.
 - Don't use Inter without the `ss03` feature flag enabled. The chrome will lose its signature voice.
@@ -664,6 +663,6 @@ The only "imagery" in the system is in-product Raycast UI screenshots and small 
 - **Mobile screenshots not captured** — responsive behavior synthesizes Raycast's mobile pattern (hamburger drawer, single-column grid, hero downscale) from desktop evidence and the breakpoint stack.
 - **Hover states not documented** by system policy. Raycast's in-product app has rich hover behavior on command-palette rows that this document doesn't capture.
 - **In-product app chrome** (the actual Raycast launcher running on macOS) is referenced in marketing screenshots but not documented as a separate UI system here. The marketing site is documented; the in-product app surface is its own design system.
-- **Dark mode is the only mode** — no light variant exists in the captured surfaces.
+- **Light mode is the default** — dark mode is an optional inverted surface ladder via `data-theme="dark"`.
 - **Form validation states** beyond the focused-input border treatment are not present in the captured surfaces.
 - **Authenticated chrome** (account dashboard, billing settings, team management) not in the captured pages.

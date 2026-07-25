@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { SiteHeader } from "@/components/SiteHeader";
 import { formatPostDate, getAllPosts, getPostBySlug, getPostSlugs } from "@/lib/blog";
-
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
@@ -40,9 +38,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   const older = postIndex >= 0 && postIndex < allPosts.length - 1 ? allPosts[postIndex + 1] : null;
 
   return (
-    <div className="min-h-dvh bg-canvas">
-      <SiteHeader title="Blog" />
-
+    <div className="bg-canvas">
       <main className="mx-auto max-w-content px-gutter section-y">
         <article className="mx-auto max-w-2xl">
           <Link

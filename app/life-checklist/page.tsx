@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { RudraLifeChecklist } from "@/components/RudraLifeChecklist";
 import {
   lifeChecklistDoneCount,
@@ -16,16 +15,7 @@ export const metadata = {
 
 export default function LifeChecklistPage() {
   return (
-    <div className="min-h-dvh bg-canvas">
-      <header className="border-b border-hairline bg-canvas/95 backdrop-blur-sm">
-        <div className="mx-auto flex h-14 max-w-content items-center justify-between gap-4 px-gutter">
-          <Link href="/" className="focus-ring rounded-md text-heading-sm text-on-dark">
-            ← Home
-          </Link>
-          <p className="text-body-sm-strong text-on-dark">Life Checklist</p>
-        </div>
-      </header>
-
+    <div className="bg-canvas">
       <main className="mx-auto max-w-content px-gutter section-y">
         <figure className="overflow-hidden rounded-lg border border-hairline bg-white">
           <Image
