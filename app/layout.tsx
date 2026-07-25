@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { CommandPaletteProvider } from "@/components/CommandPalette";
+import { SiteShell } from "@/components/SiteShell";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { getAllPosts } from "@/lib/blog";
 import "./globals.css";
 
 const inter = Inter({
@@ -51,11 +55,21 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const blogPosts = getAllPosts().map((post) => ({
+    slug: post.slug,
+    title: post.title,
+    description: post.description,
+  }));
+
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
       <body className="font-sans">
-        {children}
-        <SpeedInsights />
+        <ThemeProvider>
+          <CommandPaletteProvider blogPosts={blogPosts}>
+            <SiteShell>{children}</SiteShell>
+          </CommandPaletteProvider>
+          <SpeedInsights />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -1,13 +1,13 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ProfileIdentity } from "@/components/ProfileIdentity";
 import { FeaturedLinkedInPostsCarousel } from "@/components/FeaturedLinkedInPostsCarousel";
 import {
   BriefcaseIcon,
   ChecklistIcon,
   CompassIcon,
   DocumentIcon,
+  GlobeIcon,
   GraduationIcon,
   LinkedInIcon,
   MailIcon,
@@ -18,6 +18,7 @@ import {
   UserIcon,
   UsersIcon,
 } from "@/components/SectionIcons";
+import { VisitedCountriesMap } from "@/components/VisitedCountriesMap";
 import {
   aboutParagraphs,
   contact,
@@ -35,22 +36,8 @@ import {
 } from "./life-checklist-data";
 import { getFeaturedLinkedInPosts } from "./featured-linkedin-posts-data";
 import { popQuizQuestionCount } from "./pop-quiz-data";
+import { visitedCountryCount } from "./travel-data";
 import { formatPostDate, getAllPosts } from "@/lib/blog";
-
-const navItems = [
-  { label: "Profile", href: "#profile" },
-  { label: "About", href: "#about" },
-  { label: "TIBER", href: "#tiber" },
-  { label: "Experience", href: "#experience" },
-  { label: "Education", href: "#education" },
-  { label: "Skills", href: "#skills" },
-  { label: "Resume", href: "#resume" },
-  { label: "Posts", href: "#featured-posts" },
-  { label: "Life", href: "#life-checklist" },
-  { label: "Quiz", href: "#pop-quiz" },
-  { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "#connect" },
-] as const;
 
 function SectionTitle({
   id,
@@ -89,42 +76,7 @@ export default function Home() {
   const otherExperience = experience.filter((job) => job.org !== "intelliGIS" && job.org !== "unpaste.ai");
 
   return (
-    <div className="min-h-dvh bg-canvas">
-      <header className="sticky top-0 z-40 border-b border-hairline bg-canvas/95 backdrop-blur-sm">
-        <div className="mx-auto flex h-14 max-w-content items-center justify-between gap-4 px-gutter">
-          <Link href="#profile" className="focus-ring rounded-md text-heading-sm text-on-dark">
-            Rudra
-          </Link>
-          <nav
-            className="flex max-w-[min(100%,520px)] flex-1 flex-wrap items-center justify-center gap-x-4 gap-y-1 text-caption-sm md:max-w-none md:gap-x-6 md:text-body-sm-strong"
-            aria-label="Primary"
-          >
-            {navItems.map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
-                className="focus-ring rounded-md text-on-dark-mute hover:text-on-dark"
-              >
-                {label}
-              </Link>
-            ))}
-          </nav>
-          <div className="flex items-center gap-2">
-            <Link
-              href={contact.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="focus-ring btn-secondary hidden sm:inline-flex"
-            >
-              LinkedIn
-            </Link>
-            <Link href={`mailto:${contact.email}`} className="focus-ring btn-primary shrink-0">
-              Email
-            </Link>
-          </div>
-        </div>
-      </header>
-
+    <div className="bg-canvas">
       <main>
         {/* Hero cover + profile / about split */}
         <section id="profile" className="relative overflow-hidden bg-canvas">
@@ -140,65 +92,6 @@ export default function Home() {
           </div>
 
           <div className="relative z-10 mx-auto grid max-w-content gap-12 px-gutter pb-4 pt-1.5 lg:grid-cols-2 lg:gap-16 lg:pb-section lg:pt-2">
-            <div className="min-w-0">
-              <ProfileIdentity
-                headshotSrc={profile.headshotSrc}
-                displayName={profile.displayName}
-                tagline={profile.tagline}
-                metaLine={`${profile.pronouns} · ${profile.age} · ${profile.location} · ${profile.connections} connections`}
-                scrollHook={profile.scrollHook}
-              />
-
-              <div className="mt-6 rounded-lg border border-hairline bg-surface p-6">
-                <p className="text-body-md text-body">{profile.headline}</p>
-              </div>
-
-              <div className="mt-8 flex flex-wrap gap-3">
-                <a href={`mailto:${contact.email}`} className="focus-ring btn-primary">
-                  Email
-                </a>
-                <a
-                  href={contact.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="focus-ring install-btn"
-                >
-                  LinkedIn
-                </a>
-                <a
-                  href={contact.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="focus-ring install-btn"
-                >
-                  GitHub
-                </a>
-                <a
-                  href={contact.twitter}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="focus-ring install-btn"
-                >
-                  X
-                </a>
-                <a
-                  href={contact.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="focus-ring install-btn"
-                >
-                  Instagram
-                </a>
-              </div>
-
-              <div className="mt-10 rounded-lg border border-hairline bg-surface-elevated p-5">
-                <p className="text-body-sm-strong text-on-dark">Work arrangement</p>
-                <p className="mt-1 text-body-sm text-on-dark-mute">{profile.openToWork}</p>
-              </div>
-
-              <p className="mt-8 text-caption-md text-mute">{volunteerNote}</p>
-            </div>
-
             <div
               id="about"
               aria-labelledby="about-heading"
@@ -213,26 +106,79 @@ export default function Home() {
                 ))}
               </div>
             </div>
-          </div>
-        </section>
 
-        <section id="tiber" aria-labelledby="tiber-heading" className="bg-canvas section-y">
-          <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline bg-surface-elevated p-6 lg:p-8">
-            <SectionTitle id="tiber-heading" icon={<CompassIcon width={18} height={18} />}>
-              TIBER framework
-            </SectionTitle>
-            <ul className="mt-8 space-y-4">
-              {tiberPillars.map((item) => (
-                <li
-                  key={item.key}
-                  className="rounded-md border border-hairline bg-surface px-4 py-4 text-body-md text-body"
-                >
-                  <span className="font-medium text-on-dark">{item.label}</span>
-                  <span className="text-on-dark-mute"> — </span>
-                  {item.desc}
-                </li>
-              ))}
-            </ul>
+            <div
+              id="tiber"
+              aria-labelledby="tiber-heading"
+              className="min-w-0 rounded-lg border border-hairline bg-surface-elevated p-6 lg:p-8"
+            >
+              <SectionTitle id="tiber-heading" icon={<CompassIcon width={18} height={18} />}>
+                TIBER framework
+              </SectionTitle>
+              <ul className="mt-8 space-y-4">
+                {tiberPillars.map((item) => (
+                  <li
+                    key={item.key}
+                    className="rounded-md border border-hairline bg-surface px-4 py-4 text-body-md text-body"
+                  >
+                    <span className="font-medium text-on-dark">{item.label}</span>
+                    <span className="text-on-dark-mute"> — </span>
+                    {item.desc}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="mx-auto max-w-content px-gutter pb-4 lg:pb-section">
+            <div className="rounded-lg border border-hairline bg-surface p-6">
+              <p className="text-body-md text-body">{profile.headline}</p>
+            </div>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a href={`mailto:${contact.email}`} className="focus-ring btn-primary">
+                Email
+              </a>
+              <a
+                href={contact.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus-ring install-btn"
+              >
+                LinkedIn
+              </a>
+              <a
+                href={contact.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus-ring install-btn"
+              >
+                GitHub
+              </a>
+              <a
+                href={contact.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus-ring install-btn"
+              >
+                X
+              </a>
+              <a
+                href={contact.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus-ring install-btn"
+              >
+                Instagram
+              </a>
+            </div>
+
+            <div className="mt-10 rounded-lg border border-hairline bg-surface-elevated p-5">
+              <p className="text-body-sm-strong text-on-dark">Work arrangement</p>
+              <p className="mt-1 text-body-sm text-on-dark-mute">{profile.openToWork}</p>
+            </div>
+
+            <p className="mt-8 text-caption-md text-mute">{volunteerNote}</p>
           </div>
         </section>
 
@@ -440,6 +386,21 @@ export default function Home() {
           </div>
         </section>
 
+        <section id="travel" aria-labelledby="travel-heading" className="bg-canvas section-y">
+          <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline bg-surface-elevated p-6 lg:p-8">
+            <SectionTitle id="travel-heading" icon={<GlobeIcon width={18} height={18} />}>
+              Places I&apos;ve been
+            </SectionTitle>
+            <p className="mt-4 max-w-2xl text-body-md text-body">
+              {visitedCountryCount} countries so far — dark blue where I&apos;ve lived, blue where
+              I&apos;ve explored, light blue for airport layovers.
+            </p>
+            <div className="mt-8">
+              <VisitedCountriesMap />
+            </div>
+          </div>
+        </section>
+
         <section
           id="life-checklist"
           aria-labelledby="life-heading"
@@ -628,8 +589,9 @@ export default function Home() {
             <div className="lg:col-span-3">
               <p className="text-body-sm-strong text-on-dark">Colophon</p>
               <p className="mt-4 text-body-sm text-mute">
-                personal site of Rudra Keshwani styled after the Raycast design language: continuous dark canvas,
-                Inter + ss03, hairline borders, white primary actions, command-palette metaphor.
+                personal site of Rudra Keshwani styled after the Raycast design language: light-first canvas with
+                dark mode, sidebar navigation, Inter + ss03, hairline borders, high-contrast primary actions,
+                command-palette metaphor.
               </p>
             </div>
           </div>

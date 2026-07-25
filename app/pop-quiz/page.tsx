@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { PopQuiz } from "@/components/PopQuiz";
 import { popQuizQuestionCount } from "../pop-quiz-data";
 
@@ -9,16 +8,7 @@ export const metadata = {
 
 export default function PopQuizPage() {
   return (
-    <div className="min-h-dvh bg-canvas">
-      <header className="border-b border-hairline bg-canvas/95 backdrop-blur-sm">
-        <div className="mx-auto flex h-14 max-w-content items-center justify-between gap-4 px-gutter">
-          <Link href="/" className="focus-ring rounded-md text-heading-sm text-on-dark">
-            ← Home
-          </Link>
-          <p className="text-body-sm-strong text-on-dark">Pop Quiz</p>
-        </div>
-      </header>
-
+    <div className="bg-canvas">
       <main className="mx-auto max-w-content px-gutter section-y">
         <div className="mx-auto max-w-xl">
           <PopQuiz />

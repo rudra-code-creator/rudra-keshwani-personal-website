@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { SiteHeader } from "@/components/SiteHeader";
 import { formatPostDate, getAllPosts } from "@/lib/blog";
 
 export const metadata = {
@@ -11,9 +10,7 @@ export default function BlogPage() {
   const posts = getAllPosts();
 
   return (
-    <div className="min-h-dvh bg-canvas">
-      <SiteHeader title="Blog" />
-
+    <div className="bg-canvas">
       <main className="mx-auto max-w-content px-gutter section-y">
         <h1 className="text-[36px] font-semibold leading-[1.1] text-ink sm:text-display-lg">Blog</h1>
         <p className="mt-4 max-w-2xl text-body-lg text-body">
