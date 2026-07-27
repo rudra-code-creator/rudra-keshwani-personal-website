@@ -5,6 +5,7 @@ export const siteNavItems = [
   { label: "Experience", href: "/#experience" },
   { label: "Education", href: "/#education" },
   { label: "Skills", href: "/#skills" },
+  { label: "Projects", href: "/#projects" },
   { label: "Resume", href: "/#resume" },
   { label: "Posts", href: "/#featured-posts" },
   { label: "Travel", href: "/#travel" },

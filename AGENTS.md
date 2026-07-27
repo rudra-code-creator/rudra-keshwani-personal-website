@@ -5,16 +5,20 @@
 - Keeps GitHub profile README content separate from the personal-website repository.
 - Expects the resume on the site to be viewable inline and downloadable as a PDF.
 - Prefers adding blog posts as markdown files in repo-root `blog-posts/` via git, including from mobile while on the move.
+- Prefers light mode as the default theme, with dark mode available via toggle.
+- Prefers sidebar navigation over a top navigation bar.
+- Prefers supplying featured project details manually rather than having agents explore GitHub for them.
 
 ## Learned Workspace Facts
 - This workspace is Rudra Keshwani's personal website, built with Next.js 15 App Router, TypeScript, and Tailwind CSS.
 - The live website URL is `https://rudra-keshwani-personal-website-ft8czuvap.vercel.app`.
 - The GitHub remote is `https://github.com/rudra-code-creator/rudra-keshwani-personal-website.git` on `main`.
-- Site content is centralized in `app/content.ts` and includes Rudra's LinkedIn-derived profile, TIBER framework, education, experience, skills, and contact info.
+- Site content is centralized in `app/content.ts` (profile, TIBER, education, experience split into founder vs other roles, skills, and contact including Instagram).
 - The website intentionally does not include an "Insights" section.
-- `DESIGN.md` currently defines a Raycast-inspired light-first design system (with a dark theme variant and sidebar navigation) used by the Tailwind tokens and page components.
-- Resume is served as a static asset at `public/resume.pdf` and linked from the site as `/resume.pdf` for inline viewing and download.
-- Life checklist lives at `/life-checklist`: 150 read-only personal milestones (checked and unchecked) from `app/life-checklist-data.ts`, a Neal.fun iframe embed, and a Wait But Why illustration at the page top.
-- Blog lives at `/blog`; posts are markdown files in repo-root `blog-posts/` loaded at build time via `lib/blog.ts`.
-- Pop quiz lives at `/pop-quiz`; questions and answers live in `app/pop-quiz-data.ts`.
-- Repository `README.md` documents the live site URL and local development commands.
+- `DESIGN.md` defines a Raycast-inspired light-first design system (dark theme variant, sidebar with headshot) used by the Tailwind tokens and page components.
+- Resume is at `public/resume.pdf`; Featured LinkedIn posts carousel (after resume) uses `app/featured-linkedin-posts-data.ts` with a position field for ordering.
+- Featured projects are a 2×3 bento under Featured LinkedIn posts; data lives in `app/projects-data.ts`.
+- Travel map (`components/VisitedCountriesMap.tsx`, `app/travel-data.ts`) uses Mercator projection with lived / explored / layover blue tiers between projects and the life checklist.
+- Life checklist lives at `/life-checklist`; blog at `/blog` from `blog-posts/` via `lib/blog.ts`; pop quiz at `/pop-quiz` from `app/pop-quiz-data.ts`.
+- Command palette (`components/CommandPalette.tsx`) auto-shows on first visit in a session and reopens with the Space key.
+- Hero cover is theme-aware (light/dark); About and TIBER sections truncate to the first three paragraphs with a read-more control.

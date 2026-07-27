@@ -2,6 +2,9 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FeaturedLinkedInPostsCarousel } from "@/components/FeaturedLinkedInPostsCarousel";
+import { FeaturedProjectsBento } from "@/components/FeaturedProjectsBento";
+import { ExpandableList } from "@/components/ExpandableList";
+import { HeroCover } from "@/components/HeroCover";
 import {
   BriefcaseIcon,
   ChecklistIcon,
@@ -12,6 +15,7 @@ import {
   LinkedInIcon,
   MailIcon,
   PenIcon,
+  ProjectsIcon,
   QuizIcon,
   RocketIcon,
   SparklesIcon,
@@ -80,16 +84,11 @@ export default function Home() {
       <main>
         {/* Hero cover + profile / about split */}
         <section id="profile" className="relative overflow-hidden bg-canvas">
-          <div className="relative h-52 w-full sm:h-64 md:h-72 lg:h-80 xl:h-96">
-            <Image
-              src={profile.heroCoverSrc}
-              alt="Panoramic aerial view of a planned city along a winding river"
-              fill
-              className="object-cover object-center"
-              priority
-              sizes="100vw"
-            />
-          </div>
+          <HeroCover
+            lightSrc={profile.heroCoverSrc}
+            darkSrc={profile.heroCoverDarkSrc}
+            alt="Rudra Keshwani — The TIBER guy personal brand banner"
+          />
 
           <div className="relative z-10 mx-auto grid max-w-content gap-12 px-gutter pb-4 pt-1.5 lg:grid-cols-2 lg:gap-16 lg:pb-section lg:pt-2">
             <div
@@ -100,11 +99,12 @@ export default function Home() {
               <SectionTitle id="about-heading" icon={<UserIcon width={18} height={18} />}>
                 About
               </SectionTitle>
-              <div className="mt-8 space-y-6 text-body-md text-body">
-                {aboutParagraphs.map((p, i) => (
-                  <p key={i}>{p}</p>
+              <ExpandableList
+                className="mt-8 space-y-6 text-body-md text-body"
+                items={aboutParagraphs.map((paragraph) => (
+                  <p key={paragraph.slice(0, 24)}>{paragraph}</p>
                 ))}
-              </div>
+              />
             </div>
 
             <div
@@ -115,18 +115,18 @@ export default function Home() {
               <SectionTitle id="tiber-heading" icon={<CompassIcon width={18} height={18} />}>
                 TIBER framework
               </SectionTitle>
-              <ul className="mt-8 space-y-4">
-                {tiberPillars.map((item) => (
-                  <li
-                    key={item.key}
-                    className="rounded-md border border-hairline bg-surface px-4 py-4 text-body-md text-body"
-                  >
+              <ExpandableList
+                as="ul"
+                className="mt-8 space-y-4"
+                itemClassName="rounded-md border border-hairline bg-surface px-4 py-4 text-body-md text-body"
+                items={tiberPillars.map((item) => (
+                  <span key={item.key}>
                     <span className="font-medium text-on-dark">{item.label}</span>
                     <span className="text-on-dark-mute"> — </span>
                     {item.desc}
-                  </li>
+                  </span>
                 ))}
-              </ul>
+              />
             </div>
           </div>
 
@@ -325,6 +325,18 @@ export default function Home() {
               </a>
               .
             </p>
+          </div>
+        </section>
+
+        <section id="projects" aria-labelledby="projects-heading" className="bg-canvas section-y">
+          <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline bg-surface-elevated p-6 lg:p-8">
+            <SectionTitle id="projects-heading" icon={<ProjectsIcon width={18} height={18} />}>
+              Projects I&apos;ve built
+            </SectionTitle>
+            <p className="mt-4 max-w-2xl text-body-md text-body">
+              Selected builds — open the live site or dig into the code.
+            </p>
+            <FeaturedProjectsBento />
           </div>
         </section>
 
