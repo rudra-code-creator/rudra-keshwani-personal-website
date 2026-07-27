@@ -3,6 +3,7 @@
 export const profile = {
   headshotSrc: "/images/headshot.png",
   heroCoverSrc: "/images/hero-cover.png",
+  heroCoverDarkSrc: "/images/hero-cover-dark.png",
   displayName: "Rudra Keshwani",
   tagline: "(The TIBER guy)",
   pronouns: "He/Him",
@@ -20,9 +21,9 @@ export const aboutParagraphs = [
   "I'm a student technologist who builds systems while thinking deeply about why they should exist and how they create value.",
   "My work sits at the intersection of DevOps, cloud, and infrastructure, where I enjoy turning ideas into deployable, scalable systems. I care about reliability and execution, but also about speed and iteration.",
   "I operate within a TIBER framework: Technology, Innovation, Business, Entrepreneurship, and R&D. That means experimenting, learning from first principles, and connecting technical decisions to user needs, markets, and long-term outcomes.",
-  "I'm drawn to early-stage environments where engineers think like founders — owning problems end-to-end, questioning assumptions, and building toward something meaningful.",
+  "I'm drawn to early-stage environments where engineers think like founders by owning problems end-to-end, questioning assumptions, and building toward something meaningful.",
   "Currently focused on growing through building, experimenting, and shipping across both technical and entrepreneurial domains.",
-  "Long-term, I want to build companies grounded in strong systems thinking — technical, economic, and human.",
+  "Long-term, I want to build companies grounded in strong systems thinking (technical, economic, and human).",
 ] as const;
 
 export const tiberPillars = [
@@ -53,7 +54,7 @@ export const experience = [
     date: "Jun 2026 – Present",
     place: "Brisbane, Queensland, Australia · Hybrid",
     summary:
-      "Founded intelliGIS to make AI-powered geospatial analysis more accessible and actionable. Leading product strategy, architecture, customer discovery, partnerships, and early go-to-market execution. HKUST x SINO competition entry: https://hkust.startuptree.co/venture/intelligis/",
+      "Founded intelliGIS to make AI-powered geospatial analysis more accessible and actionable. Leading product strategy, architecture, customer discovery, partnerships, and early go-to-market execution. Check it out here: https://intelligis-mvp.netlify.app",
     skills: "Founder, Geospatial AI, Product Strategy",
   },
   {
