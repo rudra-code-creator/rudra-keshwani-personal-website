@@ -33,6 +33,16 @@ export const featuredProjects: FeaturedProject[] = [
     githubUrl: "https://github.com/rudra-code-creator/intelliGIS-MVP",
   },
   {
+    id: "flightradar67",
+    name: "FlightRadar67",
+    description:
+      "FlightRadar67 is a real-time aviation radar built around a full CesiumJS globe. Live ADS-B traffic loads in viewport chunks, aircraft are colour-coded by altitude, and selecting a flight reveals its flown trail with route context — more like a radar screen than a dashboard.",
+    imageSrc: "/images/projects/flightradar67.png",
+    imageAlt: "FlightRadar67 Cesium globe with live ADS-B traffic, altitude colouring, and selected flight trail",
+    websiteUrl: "https://flightradar67.netlify.app",
+    githubUrl: "https://github.com/rudra-code-creator/flightradar67",
+  },
+  {
     id: "world-metro-visualiser",
     name: "World Metro Visualiser",
     description:

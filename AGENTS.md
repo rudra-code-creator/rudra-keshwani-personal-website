@@ -16,9 +16,8 @@
 - Site content is centralized in `app/content.ts` (profile, TIBER, education, experience split into founder vs other roles, skills, and contact including Instagram).
 - The website intentionally does not include an "Insights" section.
 - `DESIGN.md` defines a Raycast-inspired light-first design system (dark theme variant, sidebar with headshot) used by the Tailwind tokens and page components.
-- Resume is at `public/resume.pdf`; Featured LinkedIn posts carousel (after resume) uses `app/featured-linkedin-posts-data.ts` with a position field for ordering.
-- Featured projects are a 2×3 bento under Featured LinkedIn posts; data lives in `app/projects-data.ts`.
-- Travel map (`components/VisitedCountriesMap.tsx`, `app/travel-data.ts`) uses Mercator projection with lived / explored / layover blue tiers between projects and the life checklist.
+- Homepage section order: featured projects (2×3 bento from `app/projects-data.ts`), then resume (`public/resume.pdf`), then Featured LinkedIn posts (`app/featured-linkedin-posts-data.ts` with position ordering), then travel map, then life checklist.
+- Travel map (`components/VisitedCountriesMap.tsx`, `app/travel-data.ts`) uses Mercator projection with lived / explored / layover blue tiers between Featured LinkedIn posts and the life checklist.
 - Life checklist lives at `/life-checklist`; blog at `/blog` from `blog-posts/` via `lib/blog.ts`; pop quiz at `/pop-quiz` from `app/pop-quiz-data.ts`.
 - Command palette (`components/CommandPalette.tsx`) auto-shows on first visit in a session and reopens with the Space key.
-- Hero cover is theme-aware (light/dark); About and TIBER sections truncate to the first three paragraphs with a read-more control.
+- Hero cover is theme-aware (light/dark); favicon uses the headshot (`app/icon.png` / `app/apple-icon.png`); About and TIBER sections truncate to the first three paragraphs with a read-more control.
