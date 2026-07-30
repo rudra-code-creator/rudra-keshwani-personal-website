@@ -12,7 +12,7 @@ export type FeaturedProject = {
   imageSrc?: string;
   imageAlt: string;
   websiteUrl?: string;
-  githubUrl: string;
+  githubUrl?: string;
   setup?: {
     title?: string;
     steps: ProjectSetupStep[];
@@ -20,7 +20,7 @@ export type FeaturedProject = {
   };
 };
 
-/** Featured builds for the homepage projects bento (2×3). */
+/** Featured builds for the homepage projects carousel. */
 export const featuredProjects: FeaturedProject[] = [
   {
     id: "intelligis",
@@ -94,5 +94,26 @@ export const featuredProjects: FeaturedProject[] = [
       ],
       footerNote: "On first run, the app may take longer while it downloads/builds data caches.",
     },
+  },
+  {
+    id: "flightradar67",
+    name: "FlightRadar67",
+    description:
+      "FlightRadar67 is a real-time aviation radar built around a full CesiumJS globe. Live ADS-B traffic loads in viewport chunks, aircraft are colour-coded by altitude, and selecting a flight reveals its flown trail with route context — more like a radar screen than a dashboard.",
+    imageSrc: "/images/projects/flightradar67.png",
+    imageAlt:
+      "FlightRadar67 Cesium globe with live ADS-B traffic, altitude colouring, and selected flight trail",
+    websiteUrl: "https://flightradar67.netlify.app",
+    githubUrl: "https://github.com/rudra-code-creator/flightradar67",
+  },
+  {
+    id: "arya-clark",
+    name: "Arya Clark Luxury Real Estate",
+    description:
+      "A dark, gold-accented marketing site for luxury real estate agent Arya Clark — hero storytelling, featured estates, property browse, map, and appraisal booking built for high-end buyers and sellers.",
+    imageSrc: "/images/projects/arya-clark.png",
+    imageAlt:
+      "Arya Clark luxury real estate site with twilight mansion hero and gold Book an Appraisal CTA",
+    websiteUrl: "https://arya-clark-website.vercel.app",
   },
 ];
