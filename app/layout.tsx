@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { CommandPaletteProvider } from "@/components/CommandPalette";
 import { SiteShell } from "@/components/SiteShell";
@@ -68,6 +69,7 @@ export default function RootLayout({
           <CommandPaletteProvider blogPosts={blogPosts}>
             <SiteShell>{children}</SiteShell>
           </CommandPaletteProvider>
+          <Analytics />
           <SpeedInsights />
         </ThemeProvider>
       </body>

@@ -334,7 +334,7 @@ export default function Home() {
               Projects I&apos;ve built
             </SectionTitle>
             <p className="mt-4 max-w-2xl text-body-md text-body">
-              Selected builds — open the live site or dig into the code.
+              Selected builds — browse the carousel, open a live site, or dig into the code.
             </p>
             <FeaturedProjectsBento />
           </div>
