@@ -40,7 +40,7 @@ import {
 } from "./life-checklist-data";
 import { getFeaturedLinkedInPosts } from "./featured-linkedin-posts-data";
 import { popQuizQuestionCount } from "./pop-quiz-data";
-import { visitedCountryCount } from "./travel-data";
+import { visitedCityCount, visitedCountryCount } from "./travel-data";
 import { formatPostDate, getAllPosts } from "@/lib/blog";
 
 function SectionTitle({
@@ -404,8 +404,9 @@ export default function Home() {
               Places I&apos;ve been
             </SectionTitle>
             <p className="mt-4 max-w-2xl text-body-md text-body">
-              {visitedCountryCount} countries so far — dark blue where I&apos;ve lived, blue where
-              I&apos;ve explored, light blue for airport layovers.
+              {visitedCountryCount} countries and {visitedCityCount} cities so far — dark blue where
+              I&apos;ve lived, blue where I&apos;ve explored, light blue for airport layovers, white
+              dots for cities.
             </p>
             <div className="mt-8">
               <VisitedCountriesMap />

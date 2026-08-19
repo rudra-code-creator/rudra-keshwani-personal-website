@@ -11,6 +11,7 @@ export const siteNavItems = [
   { label: "Travel", href: "/#travel" },
   { label: "Life", href: "/life-checklist" },
   { label: "Quiz", href: "/pop-quiz" },
+  { label: "Guestbook", href: "/guestbook" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/#connect" },
 ] as const;
@@ -21,7 +22,7 @@ export function isNavItemActive(pathname: string, href: string): boolean {
   if (href === "/blog") {
     return pathname === "/blog" || pathname.startsWith("/blog/");
   }
-  if (href === "/life-checklist" || href === "/pop-quiz") {
+  if (href === "/life-checklist" || href === "/pop-quiz" || href === "/guestbook") {
     return pathname === href;
   }
   // Home section links: only highlight Profile while on the home page
