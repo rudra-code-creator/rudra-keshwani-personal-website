@@ -20,7 +20,7 @@ export type FeaturedProject = {
   };
 };
 
-/** Featured builds for the homepage projects carousel. */
+/** Featured builds for the homepage projects bento grid (display order). */
 export const featuredProjects: FeaturedProject[] = [
   {
     id: "intelligis",
@@ -43,14 +43,15 @@ export const featuredProjects: FeaturedProject[] = [
     githubUrl: "https://github.com/rudra-code-creator/world-metro-visualiser",
   },
   {
-    id: "leap-ahead",
-    name: "Leap Ahead",
+    id: "global-startups-bubble-maps",
+    name: "Global startups bubble maps",
     description:
-      "AI career guidance from the UQIES × January Capital × Lovable Hackathon 2026 — personalized pathways, skill gaps, and opportunities for students and early-career builders.",
-    imageSrc: "/images/projects/leap-ahead.png",
-    imageAlt: "Leap Ahead student hub dashboard with progress stages and weekly to-dos",
-    websiteUrl: "https://leap-uqies-hackathon-sandy.vercel.app/",
-    githubUrl: "https://github.com/rudra-code-creator/leap-UQIES-hackathon",
+      "Find the offices, hubs, and co-location energy. A curated, map-first view of where notable startups sit across Australia, New Zealand, the Pacific, Indonesia, Malaysia, Singapore, India, and the Greater Bay Area.",
+    imageSrc: "/images/projects/global-startups-bubble-maps.jpg",
+    imageAlt:
+      "Startup Map landing page with Brisbane and Sydney bubble-map previews on a dark teal grid",
+    websiteUrl: "https://global-startup-bubble-maps.netlify.app",
+    githubUrl: "https://github.com/rudra-code-creator/australian-startups-mapped",
   },
   {
     id: "airline-data-explorer",
@@ -96,6 +97,16 @@ export const featuredProjects: FeaturedProject[] = [
     },
   },
   {
+    id: "leap-ahead",
+    name: "Leap Ahead",
+    description:
+      "AI career guidance from the UQIES × January Capital × Lovable Hackathon 2026 — personalized pathways, skill gaps, and opportunities for students and early-career builders.",
+    imageSrc: "/images/projects/leap-ahead.png",
+    imageAlt: "Leap Ahead student hub dashboard with progress stages and weekly to-dos",
+    websiteUrl: "https://leap-uqies-hackathon-sandy.vercel.app/",
+    githubUrl: "https://github.com/rudra-code-creator/leap-UQIES-hackathon",
+  },
+  {
     id: "flightradar67",
     name: "FlightRadar67",
     description:
@@ -116,4 +127,19 @@ export const featuredProjects: FeaturedProject[] = [
       "Arya Clark luxury real estate site with twilight mansion hero and gold Book an Appraisal CTA",
     websiteUrl: "https://arya-clark-website.vercel.app",
   },
+  {
+    id: "personal-website",
+    name: "Personal Website",
+    description:
+      "My Raycast-inspired personal site — TIBER branding, featured projects bento, resume, travel map, life checklist, pop quiz, blog, and guestbook. Built with Next.js, TypeScript, and Tailwind.",
+    imageSrc: "/images/projects/personal-website.png",
+    imageAlt:
+      "Rudra Keshwani personal website in dark mode with sidebar nav, hero headshot, and About / TIBER cards",
+    websiteUrl: "https://rudra-keshwani-personal-website.vercel.app",
+    githubUrl: "https://github.com/rudra-code-creator/rudra-keshwani-personal-website",
+  },
 ];
+
+/** Fully visible cards before the fade; the next 2 peek underneath the show-more control. */
+export const featuredProjectsPreviewCount = 4;
+export const featuredProjectsPeekCount = 2;
