@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { EducationGraphic } from "@/components/EducationGraphic";
+import { EducationStockImage } from "@/components/EducationStockImage";
 import { FeaturedLinkedInPostsCarousel } from "@/components/FeaturedLinkedInPostsCarousel";
 import { FeaturedProjectsBento } from "@/components/FeaturedProjectsBento";
 import { ExpandableList } from "@/components/ExpandableList";
@@ -270,40 +272,50 @@ export default function Home() {
         </section>
 
         <section id="education" aria-labelledby="edu-heading" className="bg-canvas section-y">
-          <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline bg-surface p-6 lg:p-8">
-            <SectionTitle id="edu-heading" icon={<GraduationIcon width={18} height={18} />}>
-              Education & certifications
-            </SectionTitle>
-            <ul className="mt-8 space-y-6">
-              {education.map((ed) => (
-                <li key={ed.school + ed.date} className="border-t border-hairline pt-6 first:border-t-0 first:pt-0">
-                  <div className="flex gap-4">
-                    <div
-                      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-surface-card text-caption-sm text-mute"
-                      aria-hidden
-                    >
-                      {ed.logoSrc ? (
-                        <Image
-                          src={ed.logoSrc}
-                          alt={`${ed.school} logo`}
-                          width={36}
-                          height={36}
-                          className="h-9 w-9 rounded-sm object-contain"
-                        />
-                      ) : (
-                        "◆"
-                      )}
-                    </div>
-                    <div className="min-w-0">
-                      <p className="text-heading-sm text-on-dark">{ed.school}</p>
-                      <p className="mt-2 text-body-md text-body">{ed.detail}</p>
-                      <p className="mt-1 text-caption-md text-mute">{ed.date}</p>
-                      {ed.extra ? <p className="mt-2 text-caption-sm text-stone">{ed.extra}</p> : null}
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
+          <div className="mx-auto max-w-content px-gutter">
+            <div className="grid gap-8 lg:grid-cols-[20%_minmax(0,1fr)_30%] lg:items-stretch lg:gap-[5px]">
+              <div className="relative z-0 hidden h-full overflow-hidden lg:block">
+                <EducationGraphic />
+              </div>
+              <div className="relative z-10 min-w-0 rounded-lg border border-hairline bg-surface p-6 lg:p-8">
+                <SectionTitle id="edu-heading" icon={<GraduationIcon width={18} height={18} />}>
+                  Education & certifications
+                </SectionTitle>
+                <ul className="mt-8 space-y-6">
+                  {education.map((ed) => (
+                    <li key={ed.school + ed.date} className="border-t border-hairline pt-6 first:border-t-0 first:pt-0">
+                      <div className="flex gap-4">
+                        <div
+                          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-surface-card text-caption-sm text-mute"
+                          aria-hidden
+                        >
+                          {ed.logoSrc ? (
+                            <Image
+                              src={ed.logoSrc}
+                              alt={`${ed.school} logo`}
+                              width={36}
+                              height={36}
+                              className="h-9 w-9 rounded-sm object-contain"
+                            />
+                          ) : (
+                            "◆"
+                          )}
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-heading-sm text-on-dark">{ed.school}</p>
+                          <p className="mt-2 text-body-md text-body">{ed.detail}</p>
+                          <p className="mt-1 text-caption-md text-mute">{ed.date}</p>
+                          {ed.extra ? <p className="mt-2 text-caption-sm text-stone">{ed.extra}</p> : null}
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="relative z-0 hidden h-full min-w-0 overflow-hidden lg:block">
+                <EducationStockImage />
+              </div>
+            </div>
           </div>
         </section>
 
