@@ -182,6 +182,7 @@ export const contact = {
   twitter: "https://x.com/rudrakesh123",
   linkedin: "https://www.linkedin.com/in/rudra-keshwani-the-tiber-guy-31272b1aa/",
   instagram: "https://www.instagram.com/ruu.kes.3/",
+  egoist: "https://ego.ist/i/rudra_keshwani",
   closing: "DM is open, feel free to reach out.",
 } as const;
 

@@ -15,8 +15,7 @@ export const metadata = {
 
 export default function LifeChecklistPage() {
   return (
-    <div className="bg-canvas">
-      <main className="mx-auto max-w-content px-gutter section-y">
+    <main className="mx-auto max-w-content px-gutter section-y">
         <figure className="overflow-hidden rounded-lg border border-hairline bg-white">
           <Image
             src="/images/life-paths-wait-but-why.png"
@@ -107,6 +106,5 @@ export default function LifeChecklistPage() {
           </div>
         </section>
       </main>
-    </div>
   );
 }

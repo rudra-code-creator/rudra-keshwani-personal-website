@@ -6,7 +6,7 @@ import { EducationStockImage } from "@/components/EducationStockImage";
 import { FeaturedLinkedInPostsCarousel } from "@/components/FeaturedLinkedInPostsCarousel";
 import { FeaturedProjectsBento } from "@/components/FeaturedProjectsBento";
 import { ExpandableList } from "@/components/ExpandableList";
-import { HeroCover } from "@/components/HeroCover";
+import { HeroBanner } from "@/components/HeroBanner";
 import {
   BriefcaseIcon,
   ChecklistIcon,
@@ -82,17 +82,13 @@ export default function Home() {
   const otherExperience = experience.filter((job) => job.org !== "intelliGIS" && job.org !== "unpaste.ai");
 
   return (
-    <div className="bg-canvas">
+    <>
       <main>
         {/* Hero cover + profile / about split */}
-        <section id="profile" className="relative overflow-hidden bg-canvas">
-          <HeroCover
-            lightSrc={profile.heroCoverSrc}
-            darkSrc={profile.heroCoverDarkSrc}
-            alt="Rudra Keshwani — The TIBER guy personal brand banner"
-          />
+        <section id="profile" className="relative">
+          <HeroBanner />
 
-          <div className="relative z-10 mx-auto grid max-w-content gap-12 px-gutter pb-4 pt-1.5 lg:grid-cols-2 lg:gap-16 lg:pb-section lg:pt-2">
+          <div className="relative z-10 mx-auto grid max-w-content gap-12 px-gutter pb-4 pt-8 lg:grid-cols-2 lg:gap-16 lg:pb-section lg:pt-10">
             <div
               id="about"
               aria-labelledby="about-heading"
@@ -173,6 +169,14 @@ export default function Home() {
               >
                 Instagram
               </a>
+              <a
+                href={contact.egoist}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus-ring install-btn"
+              >
+                Egoist Machines
+              </a>
             </div>
 
             <div className="mt-10 rounded-lg border border-hairline bg-surface-elevated p-5">
@@ -184,7 +188,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="experience" aria-labelledby="exp-heading" className="bg-canvas section-y">
+        <section id="experience" aria-labelledby="exp-heading" className="section-y">
           <div className="mx-auto max-w-content px-gutter">
             <SectionTitle id="exp-heading" icon={<BriefcaseIcon width={18} height={18} />}>
               Experience
@@ -271,7 +275,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="education" aria-labelledby="edu-heading" className="bg-canvas section-y">
+        <section id="education" aria-labelledby="edu-heading" className="section-y">
           <div className="mx-auto max-w-content px-gutter">
             <div className="grid gap-8 lg:grid-cols-[20%_minmax(0,1fr)_30%] lg:items-stretch lg:gap-[5px]">
               <div className="relative z-0 hidden h-full overflow-hidden lg:block">
@@ -319,7 +323,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="skills" aria-labelledby="skills-heading" className="bg-canvas section-y">
+        <section id="skills" aria-labelledby="skills-heading" className="section-y">
           <div className="mx-auto max-w-content px-gutter">
             <SectionTitle id="skills-heading" icon={<SparklesIcon width={18} height={18} />}>
               Top skills
@@ -340,7 +344,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="projects" aria-labelledby="projects-heading" className="bg-canvas section-y">
+        <section id="projects" aria-labelledby="projects-heading" className="section-y">
           <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline bg-surface-elevated p-6 lg:p-8">
             <SectionTitle id="projects-heading" icon={<ProjectsIcon width={18} height={18} />}>
               Projects I&apos;ve built
@@ -352,7 +356,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="resume" aria-labelledby="resume-heading" className="bg-canvas section-y">
+        <section id="resume" aria-labelledby="resume-heading" className="section-y">
           <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline bg-surface p-6 lg:p-8">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <SectionTitle id="resume-heading" icon={<DocumentIcon width={18} height={18} />}>
@@ -378,7 +382,7 @@ export default function Home() {
         <section
           id="featured-posts"
           aria-labelledby="featured-posts-heading"
-          className="bg-canvas section-y"
+          className="section-y"
         >
           <div className="w-full px-gutter">
             <div className="rounded-lg border border-hairline bg-surface-elevated py-6 lg:py-8">
@@ -410,7 +414,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="travel" aria-labelledby="travel-heading" className="bg-canvas section-y">
+        <section id="travel" aria-labelledby="travel-heading" className="section-y">
           <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline bg-surface-elevated p-6 lg:p-8">
             <SectionTitle id="travel-heading" icon={<GlobeIcon width={18} height={18} />}>
               Places I&apos;ve been
@@ -429,7 +433,7 @@ export default function Home() {
         <section
           id="life-checklist"
           aria-labelledby="life-heading"
-          className="bg-canvas section-y"
+          className="section-y"
         >
           <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline bg-surface p-6 lg:p-8">
             <div className="flex flex-wrap items-center justify-between gap-3">
@@ -463,7 +467,7 @@ export default function Home() {
         <section
           id="pop-quiz"
           aria-labelledby="quiz-heading"
-          className="bg-canvas section-y"
+          className="section-y"
         >
           <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline bg-surface-elevated p-6 lg:p-8">
             <div className="flex flex-wrap items-center justify-between gap-3">
@@ -488,7 +492,7 @@ export default function Home() {
         <section
           id="blog"
           aria-labelledby="blog-heading"
-          className="bg-canvas section-y"
+          className="section-y"
         >
           <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline bg-surface p-6 lg:p-8">
             <div className="flex flex-wrap items-center justify-between gap-3">
@@ -526,7 +530,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="connect" aria-labelledby="connect-heading" className="bg-canvas section-y">
+        <section id="connect" aria-labelledby="connect-heading" className="section-y">
           <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline-strong bg-surface-elevated p-8 lg:p-10">
             <SectionTitle id="connect-heading" icon={<MailIcon width={18} height={18} />}>
               Contact
@@ -568,13 +572,21 @@ export default function Home() {
               >
                 Instagram
               </a>
+              <a
+                href={contact.egoist}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus-ring install-btn"
+              >
+                Egoist Machines
+              </a>
             </div>
             <p className="mt-8 text-caption-md text-mute">{contact.email}</p>
           </div>
         </section>
       </main>
 
-      <footer className="relative border-t border-hairline bg-canvas">
+      <footer className="relative border-t border-hairline bg-surface">
         <div
           className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-hero-stripe-start/50 to-transparent"
           aria-hidden
@@ -605,6 +617,11 @@ export default function Home() {
                   </a>
                 </li>
                 <li>
+                  <a href={contact.egoist} className="link-footer" target="_blank" rel="noopener noreferrer">
+                    Egoist Machines
+                  </a>
+                </li>
+                <li>
                   <a href={`mailto:${contact.email}`} className="link-footer">
                     Email
                   </a>
@@ -614,9 +631,9 @@ export default function Home() {
             <div className="lg:col-span-3">
               <p className="text-body-sm-strong text-on-dark">Colophon</p>
               <p className="mt-4 text-body-sm text-mute">
-                personal site of Rudra Keshwani styled after the Raycast design language: light-first canvas with
-                dark mode, sidebar navigation, Inter + ss03, hairline borders, high-contrast primary actions,
-                command-palette metaphor.
+                personal site of Rudra Keshwani with Omarchy-matched themes (Nord default): JetBrains Mono,
+                frost brand CTAs, stippled field, sidebar navigation, command palette, and a theme picker with
+                preview thumbnails.
               </p>
             </div>
           </div>
@@ -631,6 +648,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-    </div>
+    </>
   );
 }

@@ -1,4 +1,4 @@
-/** Raycast-style hero diagonal stripe band — chromatic chrome used once at top of hero. */
+/** Omarchy Nord frost diagonal stripe band — chromatic chrome used once at top of hero. */
 export function HeroStripes() {
   return (
     <div
@@ -12,16 +12,16 @@ export function HeroStripes() {
             -16deg,
             transparent 0px,
             transparent 72px,
-            rgba(255, 87, 87, 0.35) 72px,
-            rgba(255, 87, 87, 0.35) 80px,
+            rgba(136, 192, 208, 0.28) 72px,
+            rgba(136, 192, 208, 0.28) 80px,
             transparent 80px,
             transparent 160px,
-            rgba(161, 19, 26, 0.4) 160px,
-            rgba(161, 19, 26, 0.4) 168px,
+            rgba(94, 129, 172, 0.35) 160px,
+            rgba(94, 129, 172, 0.35) 168px,
             transparent 168px,
             transparent 240px,
-            rgba(255, 87, 87, 0.2) 240px,
-            rgba(255, 87, 87, 0.2) 248px
+            rgba(129, 161, 193, 0.2) 240px,
+            rgba(129, 161, 193, 0.2) 248px
           )`,
         }}
       />

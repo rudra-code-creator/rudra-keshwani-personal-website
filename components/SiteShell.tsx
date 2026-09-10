@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CommandPaletteTrigger } from "@/components/CommandPalette";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { ThemeSwitcher, ThemeSwitcherProvider } from "@/components/ThemeSwitcher";
 import { contact, profile } from "@/app/content";
 import { isNavItemActive, siteNavItems } from "@/lib/nav";
 
@@ -46,7 +46,7 @@ function SidebarIdentity({ onNavigate }: { onNavigate?: () => void }) {
         >
           Rudra
         </Link>
-        <ThemeToggle />
+        <ThemeSwitcher />
       </div>
     </div>
   );
@@ -125,8 +125,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   }, [open, close]);
 
   return (
-    <div className="min-h-dvh bg-canvas">
-      <aside className="fixed inset-y-0 left-0 z-40 hidden w-56 flex-col border-r border-hairline bg-canvas lg:flex">
+    <ThemeSwitcherProvider>
+    <div className="min-h-dvh">
+      <aside className="fixed inset-y-0 left-0 z-40 hidden w-56 flex-col border-r border-hairline bg-surface lg:flex">
         <SidebarIdentity />
         <div className="shrink-0 border-b border-hairline px-3 py-3">
           <CommandPaletteTrigger />
@@ -135,7 +136,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         <SidebarActions />
       </aside>
 
-      <header className="sticky top-0 z-40 flex h-14 items-center justify-between gap-3 border-b border-hairline bg-canvas/95 px-gutter backdrop-blur-sm lg:hidden">
+      <header className="sticky top-0 z-40 flex h-14 items-center justify-between gap-3 border-b border-hairline bg-surface/95 px-gutter backdrop-blur-sm lg:hidden">
         <button
           type="button"
           className="focus-ring inline-flex h-9 w-9 items-center justify-center rounded-md text-on-dark hover:bg-surface-card"
@@ -158,7 +159,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         </Link>
         <div className="flex items-center gap-1">
           <CommandPaletteTrigger compact />
-          <ThemeToggle />
+          <ThemeSwitcher />
         </div>
       </header>
 
@@ -172,7 +173,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           />
           <aside
             id={panelId}
-            className="absolute inset-y-0 left-0 flex w-[min(100%,16rem)] flex-col border-r border-hairline bg-canvas"
+            className="absolute inset-y-0 left-0 flex w-[min(100%,16rem)] flex-col border-r border-hairline bg-surface"
           >
             <div className="flex h-14 shrink-0 items-center justify-between border-b border-hairline px-4">
               <p className="text-heading-sm text-on-dark">Menu</p>
@@ -197,5 +198,6 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
       <div className="lg:pl-56">{children}</div>
     </div>
+    </ThemeSwitcherProvider>
   );
 }

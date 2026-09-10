@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { CommandPaletteProvider } from "@/components/CommandPalette";
 import { SiteShell } from "@/components/SiteShell";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { getAllPosts } from "@/lib/blog";
+import "./themes.css";
 import "./globals.css";
 
-const inter = Inter({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-jetbrains-mono",
   display: "swap",
   weight: ["400", "500", "600"],
 });
@@ -63,7 +64,7 @@ export default function RootLayout({
   }));
 
   return (
-    <html lang="en" className={inter.variable} suppressHydrationWarning>
+    <html lang="en" className={jetbrainsMono.variable} suppressHydrationWarning>
       <body className="font-sans">
         <ThemeProvider>
           <CommandPaletteProvider blogPosts={blogPosts}>

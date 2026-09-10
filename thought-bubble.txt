@@ -1,0 +1,3 @@
+# Hero Instagram-style note. Edit freely, then commit/push.
+# Links use markdown: [label](https://example.com)
+building [intelligis](https://intelligis-mvp.netlify.app) into a generational Y-combinator backed startup 🚀🚀🚀

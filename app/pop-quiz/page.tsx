@@ -8,8 +8,7 @@ export const metadata = {
 
 export default function PopQuizPage() {
   return (
-    <div className="bg-canvas">
-      <main className="mx-auto max-w-content px-gutter section-y">
+    <main className="mx-auto max-w-content px-gutter section-y">
         <div className="mx-auto max-w-xl">
           <PopQuiz />
         </div>
@@ -18,6 +17,5 @@ export default function PopQuizPage() {
           About section is for.
         </p>
       </main>
-    </div>
   );
 }

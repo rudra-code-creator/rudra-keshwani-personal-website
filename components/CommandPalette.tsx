@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { contact } from "@/app/content";
 import { siteNavItems } from "@/lib/nav";
+import { cycleTheme, getTheme } from "@/lib/themes";
 
 export type CommandBlogPost = {
   slug: string;
@@ -144,6 +145,14 @@ function CommandPaletteDialog({
         run: () => go(contact.instagram),
       },
       {
+        id: "link-egoist",
+        label: "Egoist Machines",
+        sub: "AI Passport",
+        group: "Links",
+        keywords: "egoist passport ego.ist",
+        run: () => go(contact.egoist),
+      },
+      {
         id: "link-resume",
         label: "Resume PDF",
         sub: "View or download",
@@ -155,14 +164,36 @@ function CommandPaletteDialog({
 
     const actions: CommandItem[] = [
       {
-        id: "action-theme",
-        label: resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode",
+        id: "action-theme-next",
+        label: "Next theme",
+        sub: `Current: ${getTheme(resolvedTheme).name}`,
+        group: "Actions",
+        keywords: "theme appearance cycle next omarchy nord catppuccin",
+        run: () => {
+          setTheme(cycleTheme(resolvedTheme, 1));
+          onClose();
+        },
+      },
+      {
+        id: "action-theme-prev",
+        label: "Previous theme",
         sub: "Appearance",
         group: "Actions",
-        keywords: "theme dark light toggle",
+        keywords: "theme appearance cycle previous",
         run: () => {
-          setTheme(resolvedTheme === "dark" ? "light" : "dark");
+          setTheme(cycleTheme(resolvedTheme, -1));
           onClose();
+        },
+      },
+      {
+        id: "action-theme-picker",
+        label: "Open theme picker",
+        sub: "Browse all themes",
+        group: "Actions",
+        keywords: "theme picker palette switcher",
+        run: () => {
+          onClose();
+          window.dispatchEvent(new Event("open-theme-switcher"));
         },
       },
     ];

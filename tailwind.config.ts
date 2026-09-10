@@ -14,7 +14,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+        sans: ["var(--font-jetbrains-mono)", "ui-monospace", "monospace"],
+        mono: ["var(--font-jetbrains-mono)", "ui-monospace", "monospace"],
       },
       fontSize: {
         "display-xl": ["64px", { lineHeight: "1.1", fontWeight: "600", letterSpacing: "0" }],
@@ -70,11 +71,11 @@ const config: Config = {
         "key-bg-end": withAlpha("--color-key-bg-end"),
       },
       borderRadius: {
-        xs: "4px",
-        sm: "6px",
-        md: "8px",
-        lg: "10px",
-        xl: "16px",
+        xs: "2px",
+        sm: "4px",
+        md: "6px",
+        lg: "8px",
+        xl: "12px",
       },
       maxWidth: {
         content: "100%",
