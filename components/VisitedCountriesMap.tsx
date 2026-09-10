@@ -15,9 +15,9 @@ import {
 const GEO_URL = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json";
 
 const FILL: Record<VisitKind, string> = {
-  layover: "#93c5fd",
-  explored: "#3b82f6",
-  lived: "#1e3a8a",
+  layover: "#88c0d0", /* nord8 */
+  explored: "#81a1c1", /* nord9 */
+  lived: "#5e81ac", /* nord10 */
 };
 
 const LEGEND: { kind: VisitKind; swatch: string }[] = [
@@ -375,8 +375,8 @@ export function VisitedCountriesMap() {
                       <g key={key} transform={`translate(${city.x} ${city.y}) scale(${1 / view.k})`}>
                         <circle
                           r={DOT_R}
-                          fill="#ffffff"
-                          stroke="#0f172a"
+                          fill="#eceff4"
+                          stroke="#2e3440"
                           strokeWidth={0.7}
                           className="cursor-pointer"
                           onMouseEnter={() =>
@@ -474,7 +474,7 @@ export function VisitedCountriesMap() {
             <p className="flex items-center gap-2 text-body-sm-strong text-on-dark">
               <span
                 className="inline-block h-2.5 w-2.5 shrink-0 rounded-full"
-                style={{ backgroundColor: "#ffffff", border: "1px solid #0f172a" }}
+                style={{ backgroundColor: "#eceff4", border: "1px solid #2e3440" }}
                 aria-hidden
               />
               Cities

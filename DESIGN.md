@@ -1,144 +1,144 @@
 ---
 version: alpha
-name: Raycast
-属于: A dark-canvas developer-tools system that treats the marketing page like an extended product screenshot — pure-near-black background, command-palette mockups as the hero, Inter typography with the ss03 stylistic set turned on, and a single white CTA pill that doesn't break the inky atmosphere. The chrome reads like Raycast's own command-palette UI scaled up to a marketing page: monochrome dark surfaces with a faint surface ladder (#07080a → #0d0d0d → #101111), tight 6–10px radius on cards, hairline 1px borders in #242728, and rare splashes of saturated accent (Hacker News yellow, Slack red, Mac green, info blue) reserved for product-tile category illustrations. The signature visual moment is a red gradient hero wordmark — three diagonal red stripes laid across the very top of the home page like a launch-banner — paired with full-bleed product UI screenshots that show Raycast's actual command palette, store, and AI chat surfaces.
+name: Omarchy Nord
+belongs: A Polar Night developer aesthetic borrowed from Omarchy's Nord theme — JetBrains Mono site-wide, frost-blue brand CTAs (#81a1c1), soft stippled canvas (#2e3440), tight 2–8px radii, and hairline borders in Nord's snow/frost ladder. Light mode inverts to Snow Storm; dark mode matches Omarchy's nord tokens exactly.
 description: |
-  Raycast's marketing system reads like an extended product screenshot. The chrome IS the in-product chrome at marketing scale: light-first canvas with an optional dark variant, sidebar navigation, hairline 1px borders, command-palette-style cards, Inter typography with the ss03 stylistic set enabled site-wide, high-contrast CTA pill, and a small set of saturated category accent colors (yellow / red / green / blue) reserved for extension and feature illustrations. Section rhythm is generous (~96px) but the page never breaks tonal continuity — light is the default theme; dark mode inverts the surface ladder while keeping the same chrome language.
+  Omarchy Nord chrome for a personal site: dark-first Polar Night canvas with an optional Snow Storm light variant, sidebar navigation with headshot, JetBrains Mono typography, frost brand CTA (#81a1c1 on near-black ink), hairline borders (#3b4252 / #4c566a), and aurora accents reserved for illustrations and status. Section rhythm stays generous; cards sit on the stippled canvas as solid surface panels.
 
 colors:
-  primary: "#ffffff"
-  primary-pressed: "#e8e8e8"
-  on-primary: "#000000"
-  ink: "#f4f4f6"
-  body: "#cdcdcd"
-  charcoal: "#d3d3d4"
-  mute: "#9c9c9d"
-  ash: "#6a6b6c"
-  stone: "#434345"
-  on-dark: "#ffffff"
-  on-dark-mute: "rgba(255,255,255,0.72)"
-  canvas: "#07080a"
-  surface: "#0d0d0d"
-  surface-elevated: "#101111"
-  surface-card: "#121212"
-  button-fg: "#18191a"
-  hairline: "#242728"
-  hairline-soft: "rgba(255,255,255,0.08)"
-  hairline-strong: "rgba(255,255,255,0.16)"
-  accent-blue: "#57c1ff"
-  accent-blue-soft: "rgba(87,193,255,0.15)"
-  accent-red: "#ff6161"
-  accent-red-soft: "rgba(255,97,97,0.15)"
-  accent-green: "#59d499"
-  accent-green-soft: "rgba(89,212,153,0.15)"
-  accent-yellow: "#ffc533"
-  accent-yellow-soft: "rgba(255,197,51,0.15)"
-  hero-stripe-start: "#ff5757"
-  hero-stripe-end: "#a1131a"
-  key-bg-start: "#121212"
-  key-bg-end: "#0d0d0d"
+  primary: "#81a1c1"
+  primary-pressed: "#88c0d0"
+  on-primary: "#0c0e10"
+  ink: "#d8dee9"
+  body: "#d8dee9"
+  charcoal: "#e5e9f0"
+  mute: "#9fa7b4"
+  ash: "#6e7686"
+  stone: "#4c566a"
+  on-dark: "#eceff4"
+  on-dark-mute: "rgba(216,222,233,0.78)"
+  canvas: "#2e3440"
+  surface: "#343b49"
+  surface-elevated: "#3b4252"
+  surface-card: "#3b4252"
+  button-fg: "#191c23"
+  hairline: "#3b4252"
+  hairline-soft: "rgba(255,255,255,0.07)"
+  hairline-strong: "#4c566a"
+  accent-blue: "#88c0d0"
+  accent-blue-soft: "rgba(129,161,193,0.12)"
+  accent-red: "#bf616a"
+  accent-red-soft: "rgba(191,97,106,0.15)"
+  accent-green: "#a3be8c"
+  accent-green-soft: "rgba(163,190,140,0.15)"
+  accent-yellow: "#ebcb8b"
+  accent-yellow-soft: "rgba(235,203,139,0.15)"
+  hero-stripe-start: "#88c0d0"
+  hero-stripe-end: "#5e81ac"
+  key-bg-start: "#3b4252"
+  key-bg-end: "#343b49"
 
 typography:
   display-xl:
-    fontFamily: Inter
+    fontFamily: JetBrains Mono
     fontSize: 64px
     fontWeight: 600
     lineHeight: 1.1
     letterSpacing: 0
     fontFeature: '"calt", "kern", "liga", "ss03"'
   display-lg:
-    fontFamily: Inter
+    fontFamily: JetBrains Mono
     fontSize: 56px
     fontWeight: 500
     lineHeight: 1.17
     letterSpacing: 0.2px
     fontFeature: '"calt", "kern", "liga", "ss03"'
   heading-xl:
-    fontFamily: Inter
+    fontFamily: JetBrains Mono
     fontSize: 24px
     fontWeight: 500
     lineHeight: 1.6
     letterSpacing: 0.2px
     fontFeature: '"calt", "kern", "liga", "ss03"'
   heading-lg:
-    fontFamily: Inter
+    fontFamily: JetBrains Mono
     fontSize: 22px
     fontWeight: 500
     lineHeight: 1.15
     letterSpacing: 0
     fontFeature: '"calt", "kern", "liga", "ss03"'
   heading-md:
-    fontFamily: Inter
+    fontFamily: JetBrains Mono
     fontSize: 20px
     fontWeight: 500
     lineHeight: 1.4
     letterSpacing: 0.2px
     fontFeature: '"calt", "kern", "liga", "ss03"'
   heading-sm:
-    fontFamily: Inter
+    fontFamily: JetBrains Mono
     fontSize: 18px
     fontWeight: 500
     lineHeight: 1.4
     letterSpacing: 0.2px
     fontFeature: '"calt", "kern", "liga", "ss03"'
   body-lg:
-    fontFamily: Inter
+    fontFamily: JetBrains Mono
     fontSize: 18px
     fontWeight: 400
     lineHeight: 1.6
     letterSpacing: 0
     fontFeature: '"calt", "kern", "liga", "ss03"'
   body-md:
-    fontFamily: Inter
+    fontFamily: JetBrains Mono
     fontSize: 16px
     fontWeight: 400
     lineHeight: 1.6
     letterSpacing: 0
     fontFeature: '"calt", "kern", "liga", "ss03"'
   body-strong:
-    fontFamily: Inter
+    fontFamily: JetBrains Mono
     fontSize: 16px
     fontWeight: 500
     lineHeight: 1.4
     letterSpacing: 0.2px
     fontFeature: '"calt", "kern", "liga", "ss03"'
   body-sm:
-    fontFamily: Inter
+    fontFamily: JetBrains Mono
     fontSize: 14px
     fontWeight: 400
     lineHeight: 1.6
     letterSpacing: 0
     fontFeature: '"calt", "kern", "liga", "ss03"'
   body-sm-strong:
-    fontFamily: Inter
+    fontFamily: JetBrains Mono
     fontSize: 14px
     fontWeight: 500
     lineHeight: 1.6
     letterSpacing: 0.2px
     fontFeature: '"calt", "kern", "liga", "ss03"'
   caption-md:
-    fontFamily: Inter
+    fontFamily: JetBrains Mono
     fontSize: 13px
     fontWeight: 400
     lineHeight: 1.4
     letterSpacing: 0.1px
     fontFeature: '"calt", "kern", "liga", "ss03"'
   caption-sm:
-    fontFamily: Inter
+    fontFamily: JetBrains Mono
     fontSize: 12px
     fontWeight: 400
     lineHeight: 1.5
     letterSpacing: 0.4px
     fontFeature: '"calt", "kern", "liga", "ss03"'
   link-md:
-    fontFamily: Inter
+    fontFamily: JetBrains Mono
     fontSize: 16px
     fontWeight: 500
     lineHeight: 1.4
     letterSpacing: 0.3px
     fontFeature: '"calt", "kern", "liga", "ss03"'
   button-md:
-    fontFamily: Inter
+    fontFamily: JetBrains Mono
     fontSize: 14px
     fontWeight: 500
     lineHeight: 1.6
@@ -147,16 +147,16 @@ typography:
 
 rounded:
   none: 0px
-  xs: 4px
-  sm: 6px
-  md: 8px
-  lg: 10px
-  xl: 16px
+  xs: 2px
+  sm: 4px
+  md: 6px
+  lg: 8px
+  xl: 12px
   full: 9999px
 
 spacing:
   xxs: 2px
-  xs: 4px
+  xs: 2px
   sm: 8px
   md: 12px
   lg: 16px
@@ -329,20 +329,16 @@ components:
 
 ## Overview
 
-Raycast's marketing site reads like an extended product screenshot. The chrome IS the in-product command palette at marketing scale: pure near-black canvas (`{colors.canvas}` — `#07080a`), hairline 1px borders (`{colors.hairline}` — `#242728`), command-palette-style cards with rounded corners between 6 and 16px, Inter typography with the **ss03 stylistic set enabled site-wide** (a single character — the alternate `g` — that gives Raycast's typography its signature subtle distinction), a single white CTA pill that anchors every primary action, and small splashes of saturated accent reserved for category illustrations.
-
-The system has effectively one surface mode — dark — with a faint three-step surface ladder (`{colors.canvas}` → `{colors.surface}` → `{colors.surface-elevated}` → `{colors.surface-card}`) carrying cards, in-card panels, and key-cap glyph backgrounds. The signature decorative moment is a **red diagonal-stripe gradient band** across the very top of the home page hero, used as a launch-banner motif behind the headline (the only time saturated red appears on chrome). Beyond that single moment, color in the chrome is reserved for category accents inside extension and feature illustrations: Hacker News yellow, Slack red, Linear green, info blue.
-
-The design philosophy is "the marketing page is the product." Section rhythm is generous (`{spacing.section}` 96px) but the page never breaks tonal continuity — light is the default theme with an optional dark variant that inverts the surface ladder, full-bleed product UI screenshots show Raycast's actual command palette / store / AI chat surfaces, and the typography ligature settings (`ss03`) are inherited from the in-product app's text rendering.
+Omarchy Nord personal chrome is a Polar Night developer aesthetic: canvas `{colors.canvas}` (`#2e3440`), surface ladder through `{colors.surface}` / `{colors.surface-elevated}`, hairline borders (`{colors.hairline}` / `{colors.hairline-strong}`), JetBrains Mono site-wide, and a frost brand CTA (`{colors.primary}` — `#81a1c1` on `{colors.on-primary}`). Cards sit on a soft stippled field; aurora accents stay in illustrations and status, not chrome. Dark (Nord) is the default; light mode is Snow Storm via `data-theme="light"`. Sidebar navigation, command-palette metaphor, and section rhythm are unchanged — only the paint job moved from Raycast monochrome to Omarchy Nord.
 
 **Key Characteristics:**
-- Single dark surface mode with a 4-step surface ladder: `{colors.canvas}` (#07080a) → `{colors.surface}` (#0d0d0d) → `{colors.surface-elevated}` (#101111) → `{colors.surface-card}` (#121212)
-- White CTA pill (`{colors.primary}` — #ffffff) is the universal primary action; everything else is monochrome dark
-- Inter typography with `font-feature-settings: "calt", "kern", "liga", "ss03"` enabled site-wide — the ss03 alternate `g` is part of the brand voice
-- Hairline 1px borders (`{colors.hairline}` — #242728) carry every card edge; there are no drop shadows in the system
-- Multi-radius card vocabulary: `{rounded.sm}` (6px) for keycaps, `{rounded.md}` (8px) for buttons and small cards, `{rounded.lg}` (10px) for feature cards, `{rounded.xl}` (16px) for hero command-palette mockup containers
-- Saturated category accents (`{colors.accent-yellow}` for Hacker News, `{colors.accent-red}` for Slack/Apple, `{colors.accent-green}` for productivity tools, `{colors.accent-blue}` for info) appear only inside extension tile imagery — never on chrome
-- Signature red diagonal-stripe gradient band at the very top of the hero — three angled stripes in `{colors.hero-stripe-start}` → `{colors.hero-stripe-end}`, used once per page maximum
+- Polar Night surface ladder matching Omarchy `[data-theme="nord"]`: `{colors.canvas}` (#2e3440) → `{colors.surface}` (#343b49) → `{colors.surface-elevated}` (#3b4252)
+- Frost CTA pill (`{colors.primary}` — #81a1c1) is the universal primary action
+- JetBrains Mono for all UI chrome — the Omarchy signature face
+- Hairline borders (`{colors.hairline}` — #3b4252) and soft 1px elevation; no drop shadows
+- Tight radius vocabulary: `{rounded.xs}`–`{rounded.lg}` (2–8px)
+- Aurora accents only inside illustrations / status chips
+- Optional frost diagonal stripe band at the hero — once per page maximum
 
 ## Colors
 
@@ -597,7 +593,7 @@ There is no traditional photography. Visual elements are limited to:
 ## Do's and Don'ts
 
 ### Do
-- Default to light mode; offer a dark variant via `data-theme` that inverts the surface ladder while keeping the same chrome language (sidebar nav, hairlines, Inter + ss03, high-contrast primary CTA).
+- Default to dark (Omarchy Nord); offer a Snow Storm light variant via `data-theme` that inverts the surface ladder while keeping the same chrome language (sidebar nav, hairlines, Inter + ss03, high-contrast primary CTA).
 - Use `{colors.primary}` for every primary CTA. On light it is an ink pill; on dark it is a white pill — never a tinted accent.
 - Build elevation from the surface-color ladder (`{colors.canvas}` → `{colors.surface}` → `{colors.surface-elevated}` → `{colors.surface-card}`), never from drop shadows.
 - Enable `font-feature-settings: "calt", "kern", "liga", "ss03"` on the body element. The ss03 alternate `g` is part of the brand identity.
@@ -663,6 +659,6 @@ The only "imagery" in the system is in-product Raycast UI screenshots and small 
 - **Mobile screenshots not captured** — responsive behavior synthesizes Raycast's mobile pattern (hamburger drawer, single-column grid, hero downscale) from desktop evidence and the breakpoint stack.
 - **Hover states not documented** by system policy. Raycast's in-product app has rich hover behavior on command-palette rows that this document doesn't capture.
 - **In-product app chrome** (the actual Raycast launcher running on macOS) is referenced in marketing screenshots but not documented as a separate UI system here. The marketing site is documented; the in-product app surface is its own design system.
-- **Light mode is the default** — dark mode is an optional inverted surface ladder via `data-theme="dark"`.
+- **Dark mode (Nord Polar Night) is the default** — light mode is an optional Snow Storm ladder via `data-theme="light"`.
 - **Form validation states** beyond the focused-input border treatment are not present in the captured surfaces.
 - **Authenticated chrome** (account dashboard, billing settings, team management) not in the captured pages.
