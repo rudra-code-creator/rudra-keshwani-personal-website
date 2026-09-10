@@ -105,15 +105,10 @@ export function HeroPortraitWithNote({ segments, headshotSrc, alt }: Props) {
 
   const placeDefaultNote = useCallback(() => {
     const stage = stageRef.current;
-    const avatar = avatarRef.current;
-    if (!stage || !avatar) return;
+    if (!stage) return;
 
-    const s = stage.getBoundingClientRect();
-    const a = avatar.getBoundingClientRect();
-    const mouthY = a.top - s.top + a.height * 0.5;
-    const x = Math.max(8, a.left - s.left - NOTE_WIDTH - 28);
-    const y = Math.max(8, mouthY - 36);
-    setNotePos({ x, y });
+    // Spawn in the upper-left of the movement canvas.
+    setNotePos({ x: 16, y: 16 });
   }, []);
 
   const updateTrail = useCallback(() => {
