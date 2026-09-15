@@ -4,6 +4,7 @@ export const profile = {
   headshotSrc: "/images/headshot.png",
   heroCoverSrc: "/images/hero-cover.png",
   heroCoverDarkSrc: "/images/hero-cover-dark.png",
+  heroBackdropSrc: "/images/brisbane-skyline.png",
   displayName: "Rudra Keshwani",
   tagline: "(The TIBER guy)",
   pronouns: "He/Him",

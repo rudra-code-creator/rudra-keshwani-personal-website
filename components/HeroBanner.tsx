@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 import { contact, profile, tiberPillars } from "@/app/content";
 import { HeroPortraitWithNote } from "@/components/HeroPortraitWithNote";
 import { HeroTypingLine } from "@/components/HeroTypingLine";
@@ -108,10 +109,41 @@ export function HeroBanner() {
   const thoughtBubble = getThoughtBubbleSegments();
 
   return (
-    <div className="relative border-b border-hairline bg-canvas">
+    <div className="relative overflow-hidden border-b border-hairline bg-canvas">
+      {/* Brisbane skyline — faded theme-aware backdrop */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <Image
+          src={profile.heroBackdropSrc}
+          alt=""
+          fill
+          priority
+          className="object-cover object-[center_40%] opacity-[0.72]"
+          sizes="100vw"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `
+              linear-gradient(
+                to bottom,
+                rgb(var(--color-canvas) / 0.28) 0%,
+                rgb(var(--color-canvas) / 0.42) 50%,
+                rgb(var(--color-canvas) / 0.78) 100%
+              ),
+              linear-gradient(
+                to right,
+                rgb(var(--color-canvas) / 0.18) 0%,
+                transparent 45%,
+                rgb(var(--color-canvas) / 0.12) 100%
+              )
+            `,
+          }}
+        />
+      </div>
+
       {/* Soft theme field */}
       <div
-        className="pointer-events-none absolute inset-0 overflow-hidden opacity-70"
+        className="pointer-events-none absolute inset-0 overflow-hidden opacity-35"
         aria-hidden
         style={{
           backgroundImage: `
@@ -125,7 +157,7 @@ export function HeroBanner() {
 
       {/* Accent swooshes — follow brand / accent tokens */}
       <div
-        className="pointer-events-none absolute -left-8 top-6 h-24 w-[55%] -rotate-[8deg] overflow-hidden opacity-80 sm:top-8"
+        className="pointer-events-none absolute -left-8 top-6 h-24 w-[55%] -rotate-[8deg] overflow-hidden opacity-70 sm:top-8"
         aria-hidden
         style={{
           background: `repeating-linear-gradient(
