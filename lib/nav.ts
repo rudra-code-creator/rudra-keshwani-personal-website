@@ -6,14 +6,16 @@ export const siteNavItems = [
   { label: "Education", href: "/#education" },
   { label: "Skills", href: "/#skills" },
   { label: "Projects", href: "/#projects" },
+  { label: "GitHub", href: "/#github" },
   { label: "Resume", href: "/#resume" },
   { label: "Posts", href: "/#featured-posts" },
-  { label: "Travel", href: "/#travel" },
   { label: "Life", href: "/life-checklist" },
   { label: "Quiz", href: "/pop-quiz" },
   { label: "Guestbook", href: "/guestbook" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/#connect" },
+  { label: "Travel", href: "/#travel" },
+  { label: "Infrastructure", href: "/#infrastructure" },
 ] as const;
 
 export type SiteNavItem = (typeof siteNavItems)[number];

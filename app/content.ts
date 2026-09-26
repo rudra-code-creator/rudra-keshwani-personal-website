@@ -14,25 +14,68 @@ export const profile = {
   scrollHook: "Did u stop scrolling?",
   headline:
     "|founder of intelliGIS| community lead @ SH1P Australia |intern @ Chatstat| secretary @ QUT TECH| Creator of the TIBER framework (Technology, Innovation, Business, Entrepreneurship, Research). 18yo",
-  openToWork: "Brisbane, QLD | On-site · Hybrid",
+  openToWork: "Brisbane, QLD | On-site · Hybrid · Remote",
   verificationNote: "Verification badge shown on LinkedIn profile",
 } as const;
 
 export const aboutParagraphs = [
-  "I'm a student technologist who builds systems while thinking deeply about why they should exist and how they create value.",
-  "My work sits at the intersection of DevOps, cloud, and infrastructure, where I enjoy turning ideas into deployable, scalable systems. I care about reliability and execution, but also about speed and iteration.",
-  "I operate within a TIBER framework: Technology, Innovation, Business, Entrepreneurship, and R&D. That means experimenting, learning from first principles, and connecting technical decisions to user needs, markets, and long-term outcomes.",
-  "I'm drawn to early-stage environments where engineers think like founders by owning problems end-to-end, questioning assumptions, and building toward something meaningful.",
-  "Currently focused on growing through building, experimenting, and shipping across both technical and entrepreneurial domains.",
-  "Long-term, I want to build companies grounded in strong systems thinking (technical, economic, and human).",
+  {
+    text: "I'm a student technologist who builds systems while thinking deeply about why they should exist and how they create value.",
+    image: "/images/hover/about/about-1.jpg",
+  },
+  {
+    text: "My work sits at the intersection of DevOps, cloud, and infrastructure, where I enjoy turning ideas into deployable, scalable systems. I care about reliability and execution, but also about speed and iteration.",
+    image: "/images/hover/about/about-2.jpg",
+  },
+  {
+    text: "I operate within a TIBER framework: Technology, Innovation, Business, Entrepreneurship, and R&D. That means experimenting, learning from first principles, and connecting technical decisions to user needs, markets, and long-term outcomes.",
+    image: "/images/hover/about/about-3.jpg",
+  },
+  {
+    text: "I'm drawn to early-stage environments where engineers think like founders by owning problems end-to-end, questioning assumptions, and building toward something meaningful.",
+    image: "/images/hover/about/about-4.jpg",
+  },
+  {
+    text: "Currently focused on growing through building, experimenting, and shipping across both technical and entrepreneurial domains.",
+    image: "/images/hover/about/about-5.jpg",
+  },
+  {
+    text: "Long-term, I want to build companies grounded in strong systems thinking (technical, economic, and human).",
+    image: "/images/hover/about/about-6.jpg",
+  },
 ] as const;
 
 export const tiberPillars = [
-  { key: "T", label: "Technology", desc: "Building, shipping, and hardening systems that work in production." },
-  { key: "I", label: "Innovation", desc: "Experimenting and learning from first principles, not only from playbooks." },
-  { key: "B", label: "Business", desc: "Connecting what you build to users, markets, and sustainable value." },
-  { key: "E", label: "Entrepreneurship", desc: "Operating like a founder: ownership, velocity, and iteration." },
-  { key: "R", label: "Research", desc: "R&D as a loop: question → build → measure → refine." },
+  {
+    key: "T",
+    label: "Technology",
+    desc: "Building, shipping, and hardening systems that work in production.",
+    image: "/images/tiber/technology.jpg",
+  },
+  {
+    key: "I",
+    label: "Innovation",
+    desc: "Experimenting and learning from first principles, not only from playbooks.",
+    image: "/images/tiber/innovation.jpg",
+  },
+  {
+    key: "B",
+    label: "Business",
+    desc: "Connecting what you build to users, markets, and sustainable value.",
+    image: "/images/tiber/business.jpg",
+  },
+  {
+    key: "E",
+    label: "Entrepreneurship",
+    desc: "Operating like a founder: ownership, velocity, and iteration.",
+    image: "/images/tiber/entrepreneurship.jpg",
+  },
+  {
+    key: "R",
+    label: "Research",
+    desc: "R&D as a loop: question → build → measure → refine.",
+    image: "/images/tiber/research.jpg",
+  },
 ] as const;
 
 export const experience = [
@@ -40,6 +83,7 @@ export const experience = [
     title: "Agentic AI Systems Engineer",
     org: "Chatstat",
     logoSrc: "/images/logos/chatstat.png",
+    image: "/images/hover/experience/chatstat.jpg",
     type: "Internship",
     date: "Apr 2026 – Present",
     place: "Brisbane, Queensland, Australia · Hybrid",
@@ -51,6 +95,7 @@ export const experience = [
     title: "Founder",
     org: "intelliGIS",
     logoSrc: "/images/logos/intelligis.png",
+    image: "/images/projects/intelligis.png",
     type: "Self-employed",
     date: "Jun 2026 – Present",
     place: "Brisbane, Queensland, Australia · Hybrid",
@@ -62,6 +107,7 @@ export const experience = [
     title: "Community Lead @ SH1P Australia",
     org: "SH1P",
     logoSrc: "/images/logos/sh1p.png",
+    image: "/images/hover/experience/sh1p.jpg",
     type: "Internship",
     date: "Mar 2026 – Present",
     place: "Australia · Remote",
@@ -73,6 +119,7 @@ export const experience = [
     title: "Secretary",
     org: "QUT The Emerging Coders Hub (TECH)",
     logoSrc: "/images/logos/qut-tech.png",
+    image: "/images/hover/experience/qut-tech.jpg",
     type: "Full-time",
     date: "Mar 2026 – Present",
     place: "Brisbane, Queensland, Australia · Hybrid",
@@ -83,6 +130,7 @@ export const experience = [
     title: "Community Representative",
     org: "Triple F",
     logoSrc: "/images/logos/triplef.png",
+    image: "/images/hover/experience/triplef.jpg",
     type: "Internship",
     date: "May 2026 – Present",
     place: "Brisbane, Queensland, Australia · Remote",
@@ -94,6 +142,7 @@ export const experience = [
     title: "LinkedIn Growth Team",
     org: "Prettiflow",
     logoSrc: "/images/logos/prettiflow.png",
+    image: "/images/hover/experience/prettiflow.jpg",
     type: "Internship",
     date: "May 2026 – Jun 2026",
     place: "APAC · Remote",
@@ -105,6 +154,7 @@ export const experience = [
     title: "Technical Cofounder",
     org: "unpaste.ai",
     logoSrc: "/images/logos/unpaste.png",
+    image: "/images/hover/experience/unpaste.jpg",
     type: "Self-employed",
     date: "Feb 2026 – Jun 2026",
     place: "Brisbane, Queensland, Australia · Hybrid",
@@ -116,6 +166,7 @@ export const experience = [
     title: "Educator",
     org: "Kumon",
     logoSrc: "/images/logos/kumon.png",
+    image: "/images/hover/experience/kumon.jpg",
     type: "Casual employment",
     date: "Jan 2023 – Dec 2025",
     place: "Australia · On-site",
@@ -129,6 +180,7 @@ export const education = [
   {
     school: "HKUST + Sino Group One Million Dollar Entrepreneurship Competition",
     logoSrc: "/images/logos/hkust.png",
+    image: "/images/hover/education/hkust.jpg",
     detail:
       "Competing in the Hong Kong University of Science and Technology (HKUST) + Sino Group 1M entrepreneurship competition with intelliGIS.",
     date: "Jun 2026 – Oct 2026",
@@ -137,6 +189,7 @@ export const education = [
   {
     school: "QUT (Queensland University of Technology)",
     logoSrc: "/images/logos/qut-tech.png",
+    image: "/images/hover/education/qut.jpg",
     detail:
       "Double Bachelor: Business (Entrepreneurship) and Information Technology (AI). Bachelor of Business / Bachelor of Information Technology (IX22).",
     date: "Feb 2026 – Dec 2029",
@@ -146,6 +199,7 @@ export const education = [
   {
     school: "Y Combinator — Startup School",
     logoSrc: "/images/logos/yc.png",
+    image: "/images/hover/education/yc.jpg",
     detail: "Enrolled in Startup School — YC’s free online program for founders (curriculum, advice, and community).",
     date: "Apr 2026 – Present",
     extra: "",
@@ -153,6 +207,7 @@ export const education = [
   {
     school: "BOP Industries — Young Entrepreneurs Hub",
     logoSrc: "/images/logos/bop-industries.png",
+    image: "/images/hover/education/bop.jpg",
     detail: "Youth accelerator — workshops, mentoring, and dedicated build time (Brisbane WeWork).",
     date: "Apr 2026 – Sep 2026",
     extra: "",
@@ -160,6 +215,7 @@ export const education = [
   {
     school: "Get Set Education",
     logoSrc: "/images/logos/get-set-education.png",
+    image: "/images/hover/education/getset.jpg",
     detail: "BSB50120 Diploma Of Business",
     date: "Issued May 2025 · Credential ID 11907942-7747750",
     extra: "CRM, Accounting, …",
@@ -167,6 +223,7 @@ export const education = [
   {
     school: "Mansfield State High School",
     logoSrc: "/images/logos/mansfield-shs.png",
+    image: "/images/hover/education/mansfield.jpg",
     detail:
       "Queensland Certificate of Education (QCE), Queensland Curriculum & Assessment Authority (QCAA) — Queensland curriculum pathway.",
     date: "Jan 2020 – Nov 2025",

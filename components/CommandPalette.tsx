@@ -16,6 +16,7 @@ import { useTheme } from "next-themes";
 import { contact } from "@/app/content";
 import { siteNavItems } from "@/lib/nav";
 import { cycleTheme, getTheme } from "@/lib/themes";
+import { dispatchEasterEgg } from "@/lib/easter-eggs";
 
 export type CommandBlogPost = {
   slug: string;
@@ -27,8 +28,10 @@ type CommandItem = {
   id: string;
   label: string;
   sub?: string;
-  group: "Navigate" | "Blog" | "Links" | "Actions";
+  group: "Navigate" | "Blog" | "Links" | "Actions" | "Secrets";
   keywords?: string;
+  /** Only show when the query matches these exact tokens (easter eggs). */
+  secretTokens?: string[];
   run: () => void;
 };
 
@@ -48,6 +51,10 @@ export function useCommandPalette(): CommandPaletteContextValue {
 
 function matchesQuery(item: CommandItem, query: string): boolean {
   const q = query.trim().toLowerCase();
+  if (item.secretTokens?.length) {
+    if (!q) return false;
+    return item.secretTokens.some((token) => q === token || q.startsWith(`${token} `));
+  }
   if (!q) return true;
   const haystack = `${item.label} ${item.sub ?? ""} ${item.keywords ?? ""} ${item.group}`.toLowerCase();
   return q.split(/\s+/).every((token) => haystack.includes(token));
@@ -198,7 +205,46 @@ function CommandPaletteDialog({
       },
     ];
 
-    return [...navigate, ...blog, ...links, ...actions];
+    const secrets: CommandItem[] = [
+      {
+        id: "egg-konami",
+        label: "konami",
+        sub: "Shake + confetti (also ↑↑↓↓←→←→BA)",
+        group: "Secrets",
+        secretTokens: ["konami"],
+        keywords: "easter egg cheat code",
+        run: () => {
+          onClose();
+          dispatchEasterEgg("konami");
+        },
+      },
+      {
+        id: "egg-tiber",
+        label: "tiber",
+        sub: "Cascade the five letters",
+        group: "Secrets",
+        secretTokens: ["tiber"],
+        keywords: "easter egg framework",
+        run: () => {
+          onClose();
+          dispatchEasterEgg("tiber");
+        },
+      },
+      {
+        id: "egg-yc",
+        label: "yc",
+        sub: "Unlock the secret YC Batch theme",
+        group: "Secrets",
+        secretTokens: ["yc", "ycombinator", "y-combinator"],
+        keywords: "easter egg batch orange",
+        run: () => {
+          onClose();
+          dispatchEasterEgg("yc");
+        },
+      },
+    ];
+
+    return [...navigate, ...blog, ...links, ...actions, ...secrets];
   }, [blogPosts, go, onClose, resolvedTheme, setTheme]);
 
   const filtered = useMemo(

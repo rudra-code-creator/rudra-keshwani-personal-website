@@ -287,7 +287,27 @@ export const SITE_THEME_IDS = SITE_THEMES.map((t) => t.id);
 
 export const DEFAULT_THEME_ID = "nord";
 
-const byId = new Map(SITE_THEMES.map((t) => [t.id, t]));
+/** Hidden until unlocked via the `yc` command-palette easter egg. */
+export const SECRET_THEMES: SiteTheme[] = [
+  {
+    id: "yc-batch",
+    name: "YC Batch",
+    scheme: "dark",
+    preview: {
+      bg: "#111111",
+      surface: "#1c1c1c",
+      text: "#f5f5f5",
+      brand: "#ff6600",
+      border: "#303030",
+    },
+  },
+];
+
+export const SECRET_THEME_IDS = SECRET_THEMES.map((t) => t.id);
+
+const byId = new Map(
+  [...SITE_THEMES, ...SECRET_THEMES].map((t) => [t.id, t] as const),
+);
 
 /** Resolve legacy light/dark aliases used by older localStorage values. */
 export function normalizeThemeId(theme: string | undefined | null): string {

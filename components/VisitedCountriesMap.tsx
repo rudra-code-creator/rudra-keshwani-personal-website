@@ -345,7 +345,7 @@ export function VisitedCountriesMap() {
                 aria-label="Zoomable world map of countries and cities Rudra has visited"
               >
                 <g transform={`translate(${view.x} ${view.y}) scale(${view.k})`}>
-                  {countries.map((geo) => {
+                  {countries.map((geo, i) => {
                     const id = String(geo.id ?? "");
                     const kind = visitKindForNumericId(id);
                     const name = geo.properties?.name ?? "Unknown";
@@ -354,7 +354,7 @@ export function VisitedCountriesMap() {
 
                     return (
                       <path
-                        key={id || name}
+                        key={`${id || name}-${i}`}
                         d={d}
                         fill={kind ? FILL[kind] : "rgb(var(--color-surface-card))"}
                         stroke="rgb(var(--color-hairline))"

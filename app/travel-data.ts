@@ -10,6 +10,8 @@ export type VisitedCountry = {
   isoA3: string;
   /** ISO 3166-1 numeric, zero-padded to 3 digits for world-atlas ids */
   isoNumeric: string;
+  /** Numeric ids of territories drawn as separate map features (e.g. SARs). */
+  regionNumerics?: string[];
   kind: VisitKind;
 };
 
@@ -24,7 +26,13 @@ export const visitedCountries: VisitedCountry[] = [
   { name: "Singapore", isoA3: "SGP", isoNumeric: "702", kind: "explored" },
   { name: "Thailand", isoA3: "THA", isoNumeric: "764", kind: "explored" },
   { name: "Cambodia", isoA3: "KHM", isoNumeric: "116", kind: "explored" },
-  { name: "Hong Kong", isoA3: "HKG", isoNumeric: "344", kind: "explored" },
+  {
+    name: "China (Hong Kong SAR)",
+    isoA3: "CHN",
+    isoNumeric: "156",
+    regionNumerics: ["344"],
+    kind: "explored",
+  },
   { name: "India", isoA3: "IND", isoNumeric: "356", kind: "explored" },
   { name: "United Arab Emirates", isoA3: "ARE", isoNumeric: "784", kind: "explored" },
   { name: "Qatar", isoA3: "QAT", isoNumeric: "634", kind: "explored" },
@@ -91,9 +99,11 @@ export const visitedCities: VisitedCity[] = [
 
   { name: "Ho Chi Minh City", country: "Vietnam", lat: 10.8231, lng: 106.6297 },
 
-  { name: "Hong Kong", country: "Hong Kong", lat: 22.3193, lng: 114.1694 },
+  { name: "Hong Kong", country: "China", lat: 22.3193, lng: 114.1694 },
 
   { name: "Jakarta", country: "Indonesia", lat: -6.2088, lng: 106.8456 },
+
+  { name: "Auckland", country: "New Zealand", lat: -36.8485, lng: 174.7633 },
 
   { name: "Cairns", country: "Australia", lat: -16.9186, lng: 145.7781 },
   { name: "Brisbane", country: "Australia", lat: -27.4698, lng: 153.0251 },
@@ -109,7 +119,9 @@ export const visitKindLabel: Record<VisitKind, string> = {
 
 export function visitKindForNumericId(id: string): VisitKind | null {
   const normalized = id.padStart(3, "0");
-  const match = visitedCountries.find((c) => c.isoNumeric === normalized);
+  const match = visitedCountries.find(
+    (c) => c.isoNumeric === normalized || c.regionNumerics?.includes(normalized),
+  );
   return match?.kind ?? null;
 }
 

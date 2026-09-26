@@ -6,11 +6,15 @@ import { EducationStockImage } from "@/components/EducationStockImage";
 import { FeaturedLinkedInPostsCarousel } from "@/components/FeaturedLinkedInPostsCarousel";
 import { FeaturedProjectsBento } from "@/components/FeaturedProjectsBento";
 import { ExpandableList } from "@/components/ExpandableList";
+import { GithubContributionHeatmap } from "@/components/GithubContributionHeatmap";
 import { HeroBanner } from "@/components/HeroBanner";
+import { HoverImagePreview } from "@/components/HoverImagePreview";
+import { InfrastructureMap } from "@/components/InfrastructureMap";
 import {
   BriefcaseIcon,
   ChecklistIcon,
   CompassIcon,
+  CraneIcon,
   DocumentIcon,
   GlobeIcon,
   GraduationIcon,
@@ -18,6 +22,7 @@ import {
   MailIcon,
   PenIcon,
   ProjectsIcon,
+  GithubIcon,
   QuizIcon,
   RocketIcon,
   SparklesIcon,
@@ -44,6 +49,7 @@ import { getFeaturedLinkedInPosts } from "./featured-linkedin-posts-data";
 import { popQuizQuestionCount } from "./pop-quiz-data";
 import { visitedCityCount, visitedCountryCount } from "./travel-data";
 import { formatPostDate, getAllPosts } from "@/lib/blog";
+import { getGithubContributionCalendar } from "@/lib/github-contributions";
 
 function SectionTitle({
   id,
@@ -75,9 +81,48 @@ function SubHeading({ icon, children }: { icon: ReactNode; children: ReactNode }
   );
 }
 
-export default function Home() {
+const hoverTitleClass =
+  "inline-block transition-[transform,color] duration-500 group-data-[hover-active]:translate-x-1.5 group-data-[hover-active]:text-primary";
+
+const hoverLogoClass =
+  "flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-surface-card text-caption-sm text-mute ring-1 ring-transparent transition-[box-shadow,transform] duration-300 group-data-[hover-active]:scale-105 group-data-[hover-active]:ring-primary";
+
+function JobCard({ job, hoverIndex }: { job: (typeof experience)[number]; hoverIndex: number }) {
+  return (
+    <article
+      data-hover-index={hoverIndex}
+      className="group flex gap-4 rounded-md border border-hairline bg-surface p-4 transition-colors duration-300 data-[hover-active]:border-primary"
+    >
+      <div className={hoverLogoClass} aria-hidden>
+        {job.logoSrc ? (
+          <Image
+            src={job.logoSrc}
+            alt={`${job.org} logo`}
+            width={36}
+            height={36}
+            className="h-9 w-9 rounded-sm object-contain"
+          />
+        ) : (
+          "◆"
+        )}
+      </div>
+      <div className="min-w-0">
+        <h3 className={hoverTitleClass + " text-heading-sm text-on-dark"}>{job.title}</h3>
+        <p className="text-body-sm-strong text-body">{job.org}</p>
+        <p className="mt-1 text-caption-md text-mute">
+          {job.type} · {job.date} · {job.place}
+        </p>
+        <p className="mt-3 text-body-sm text-body">{job.summary}</p>
+        {job.skills ? <p className="mt-2 text-caption-sm text-stone">{job.skills}</p> : null}
+      </div>
+    </article>
+  );
+}
+
+export default async function Home() {
   const latestPosts = getAllPosts().slice(0, 3);
   const featuredPosts = getFeaturedLinkedInPosts();
+  const githubCalendar = await getGithubContributionCalendar();
   const founderExperience = experience.filter((job) => job.org === "intelliGIS" || job.org === "unpaste.ai");
   const otherExperience = experience.filter((job) => job.org !== "intelliGIS" && job.org !== "unpaste.ai");
 
@@ -97,12 +142,20 @@ export default function Home() {
               <SectionTitle id="about-heading" icon={<UserIcon width={18} height={18} />}>
                 About
               </SectionTitle>
-              <ExpandableList
-                className="mt-8 space-y-6 text-body-md text-body"
-                items={aboutParagraphs.map((paragraph) => (
-                  <p key={paragraph.slice(0, 24)}>{paragraph}</p>
-                ))}
-              />
+              <HoverImagePreview images={aboutParagraphs.map((paragraph) => paragraph.image)}>
+                <ExpandableList
+                  className="mt-6 space-y-2 text-body-md text-body"
+                  items={aboutParagraphs.map((paragraph, i) => (
+                    <p
+                      key={paragraph.text.slice(0, 24)}
+                      data-hover-index={i}
+                      className="-mx-3 cursor-default rounded-md border-l-2 border-transparent px-3 py-2 transition-[color,background-color,border-color,transform] duration-300 data-[hover-active]:translate-x-1 data-[hover-active]:border-primary data-[hover-active]:bg-surface-elevated data-[hover-active]:text-on-dark"
+                    >
+                      {paragraph.text}
+                    </p>
+                  ))}
+                />
+              </HoverImagePreview>
             </div>
 
             <div
@@ -113,18 +166,25 @@ export default function Home() {
               <SectionTitle id="tiber-heading" icon={<CompassIcon width={18} height={18} />}>
                 TIBER framework
               </SectionTitle>
-              <ExpandableList
-                as="ul"
-                className="mt-8 space-y-4"
-                itemClassName="rounded-md border border-hairline bg-surface px-4 py-4 text-body-md text-body"
-                items={tiberPillars.map((item) => (
-                  <span key={item.key}>
-                    <span className="font-medium text-on-dark">{item.label}</span>
-                    <span className="text-on-dark-mute"> — </span>
-                    {item.desc}
-                  </span>
-                ))}
-              />
+              <HoverImagePreview images={tiberPillars.map((pillar) => pillar.image)}>
+                <ExpandableList
+                  as="ul"
+                  className="mt-8 space-y-4"
+                  items={tiberPillars.map((item, i) => (
+                    <div
+                      key={item.key}
+                      data-hover-index={i}
+                      className="group cursor-default rounded-md border border-hairline bg-surface px-4 py-4 text-body-md text-body transition-colors duration-300 data-[hover-active]:border-primary"
+                    >
+                      <span className={hoverTitleClass + " font-medium text-on-dark"}>{item.label}</span>
+                      <span className="text-on-dark-mute"> — </span>
+                      <span className="transition-opacity duration-500 group-data-[hover-active]:opacity-70">
+                        {item.desc}
+                      </span>
+                    </div>
+                  ))}
+                />
+              </HoverImagePreview>
             </div>
           </div>
 
@@ -193,85 +253,29 @@ export default function Home() {
             <SectionTitle id="exp-heading" icon={<BriefcaseIcon width={18} height={18} />}>
               Experience
             </SectionTitle>
-            <div className="mt-8">
-              <SubHeading icon={<RocketIcon width={16} height={16} />}>Founder roles</SubHeading>
-            </div>
-            <div className="mt-4 grid gap-4 md:grid-cols-2">
-              {founderExperience.map((job) => (
-                <article
-                  key={`${job.org}-${job.title}`}
-                  className="flex gap-4 rounded-md border border-hairline bg-surface p-4"
-                >
-                  <div
-                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-surface-card text-caption-sm text-mute"
-                    aria-hidden
-                  >
-                    {job.logoSrc ? (
-                      <Image
-                        src={job.logoSrc}
-                        alt={`${job.org} logo`}
-                        width={36}
-                        height={36}
-                        className="h-9 w-9 rounded-sm object-contain"
-                      />
-                    ) : (
-                      "◆"
-                    )}
-                  </div>
-                  <div className="min-w-0">
-                    <h3 className="text-heading-sm text-on-dark">{job.title}</h3>
-                    <p className="text-body-sm-strong text-body">{job.org}</p>
-                    <p className="mt-1 text-caption-md text-mute">
-                      {job.type} · {job.date} · {job.place}
-                    </p>
-                    <p className="mt-3 text-body-sm text-body">{job.summary}</p>
-                    {job.skills ? (
-                      <p className="mt-2 text-caption-sm text-stone">{job.skills}</p>
-                    ) : null}
-                  </div>
-                </article>
-              ))}
-            </div>
+            <HoverImagePreview images={[...founderExperience, ...otherExperience].map((job) => job.image)}>
+              <div className="mt-8">
+                <SubHeading icon={<RocketIcon width={16} height={16} />}>Founder roles</SubHeading>
+              </div>
+              <div className="mt-4 grid gap-4 md:grid-cols-2">
+                {founderExperience.map((job, i) => (
+                  <JobCard key={`${job.org}-${job.title}`} job={job} hoverIndex={i} />
+                ))}
+              </div>
 
-            <div className="mt-10">
-              <SubHeading icon={<UsersIcon width={16} height={16} />}>Other roles</SubHeading>
-            </div>
-            <div className="mt-4 grid gap-4 md:grid-cols-2">
-              {otherExperience.map((job) => (
-                <article
-                  key={`${job.org}-${job.title}`}
-                  className="flex gap-4 rounded-md border border-hairline bg-surface p-4"
-                >
-                  <div
-                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-surface-card text-caption-sm text-mute"
-                    aria-hidden
-                  >
-                    {job.logoSrc ? (
-                      <Image
-                        src={job.logoSrc}
-                        alt={`${job.org} logo`}
-                        width={36}
-                        height={36}
-                        className="h-9 w-9 rounded-sm object-contain"
-                      />
-                    ) : (
-                      "◆"
-                    )}
-                  </div>
-                  <div className="min-w-0">
-                    <h3 className="text-heading-sm text-on-dark">{job.title}</h3>
-                    <p className="text-body-sm-strong text-body">{job.org}</p>
-                    <p className="mt-1 text-caption-md text-mute">
-                      {job.type} · {job.date} · {job.place}
-                    </p>
-                    <p className="mt-3 text-body-sm text-body">{job.summary}</p>
-                    {job.skills ? (
-                      <p className="mt-2 text-caption-sm text-stone">{job.skills}</p>
-                    ) : null}
-                  </div>
-                </article>
-              ))}
-            </div>
+              <div className="mt-10">
+                <SubHeading icon={<UsersIcon width={16} height={16} />}>Other roles</SubHeading>
+              </div>
+              <div className="mt-4 grid gap-4 md:grid-cols-2">
+                {otherExperience.map((job, i) => (
+                  <JobCard
+                    key={`${job.org}-${job.title}`}
+                    job={job}
+                    hoverIndex={founderExperience.length + i}
+                  />
+                ))}
+              </div>
+            </HoverImagePreview>
           </div>
         </section>
 
@@ -285,36 +289,39 @@ export default function Home() {
                 <SectionTitle id="edu-heading" icon={<GraduationIcon width={18} height={18} />}>
                   Education & certifications
                 </SectionTitle>
-                <ul className="mt-8 space-y-6">
-                  {education.map((ed) => (
-                    <li key={ed.school + ed.date} className="border-t border-hairline pt-6 first:border-t-0 first:pt-0">
-                      <div className="flex gap-4">
-                        <div
-                          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-surface-card text-caption-sm text-mute"
-                          aria-hidden
-                        >
-                          {ed.logoSrc ? (
-                            <Image
-                              src={ed.logoSrc}
-                              alt={`${ed.school} logo`}
-                              width={36}
-                              height={36}
-                              className="h-9 w-9 rounded-sm object-contain"
-                            />
-                          ) : (
-                            "◆"
-                          )}
+                <HoverImagePreview images={education.map((ed) => ed.image)}>
+                  <ul className="mt-8 space-y-6">
+                    {education.map((ed, i) => (
+                      <li
+                        key={ed.school + ed.date}
+                        data-hover-index={i}
+                        className="group cursor-default border-t border-hairline pt-6 first:border-t-0 first:pt-0"
+                      >
+                        <div className="flex gap-4">
+                          <div className={hoverLogoClass} aria-hidden>
+                            {ed.logoSrc ? (
+                              <Image
+                                src={ed.logoSrc}
+                                alt={`${ed.school} logo`}
+                                width={36}
+                                height={36}
+                                className="h-9 w-9 rounded-sm object-contain"
+                              />
+                            ) : (
+                              "◆"
+                            )}
+                          </div>
+                          <div className="min-w-0">
+                            <p className={hoverTitleClass + " text-heading-sm text-on-dark"}>{ed.school}</p>
+                            <p className="mt-2 text-body-md text-body">{ed.detail}</p>
+                            <p className="mt-1 text-caption-md text-mute">{ed.date}</p>
+                            {ed.extra ? <p className="mt-2 text-caption-sm text-stone">{ed.extra}</p> : null}
+                          </div>
                         </div>
-                        <div className="min-w-0">
-                          <p className="text-heading-sm text-on-dark">{ed.school}</p>
-                          <p className="mt-2 text-body-md text-body">{ed.detail}</p>
-                          <p className="mt-1 text-caption-md text-mute">{ed.date}</p>
-                          {ed.extra ? <p className="mt-2 text-caption-sm text-stone">{ed.extra}</p> : null}
-                        </div>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                      </li>
+                    ))}
+                  </ul>
+                </HoverImagePreview>
               </div>
               <div className="relative z-0 hidden h-full min-w-0 overflow-hidden lg:block">
                 <EducationStockImage />
@@ -353,6 +360,42 @@ export default function Home() {
               Selected builds — explore the grid, open a live site, or dig into the code.
             </p>
             <FeaturedProjectsBento />
+          </div>
+        </section>
+
+        <section id="github" aria-labelledby="github-heading" className="section-y">
+          <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline bg-surface p-6 lg:p-8">
+            <SectionTitle id="github-heading" icon={<GithubIcon width={18} height={18} />}>
+              GitHub contributions
+            </SectionTitle>
+            <p className="mt-4 max-w-2xl text-body-md text-body">
+              The green tiles — last year of commits, PRs, and reviews on{" "}
+              <a
+                href={contact.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary underline decoration-primary/35 underline-offset-2 hover:decoration-primary"
+              >
+                @rudra-code-creator
+              </a>
+              .
+            </p>
+            {githubCalendar ? (
+              <GithubContributionHeatmap calendar={githubCalendar} />
+            ) : (
+              <p className="mt-6 text-body-sm text-mute">
+                Couldn&apos;t load the contribution graph right now.{" "}
+                <a
+                  href={contact.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary underline decoration-primary/35 underline-offset-2 hover:decoration-primary"
+                >
+                  Open GitHub
+                </a>{" "}
+                instead.
+              </p>
+            )}
           </div>
         </section>
 
@@ -410,22 +453,6 @@ export default function Home() {
                   Featured posts will appear here once embed links are added.
                 </p>
               )}
-            </div>
-          </div>
-        </section>
-
-        <section id="travel" aria-labelledby="travel-heading" className="section-y">
-          <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline bg-surface-elevated p-6 lg:p-8">
-            <SectionTitle id="travel-heading" icon={<GlobeIcon width={18} height={18} />}>
-              Places I&apos;ve been
-            </SectionTitle>
-            <p className="mt-4 max-w-2xl text-body-md text-body">
-              {visitedCountryCount} countries and {visitedCityCount} cities so far — dark blue where
-              I&apos;ve lived, blue where I&apos;ve explored, light blue for airport layovers, white
-              dots for cities.
-            </p>
-            <div className="mt-8">
-              <VisitedCountriesMap />
             </div>
           </div>
         </section>
@@ -582,6 +609,37 @@ export default function Home() {
               </a>
             </div>
             <p className="mt-8 text-caption-md text-mute">{contact.email}</p>
+          </div>
+        </section>
+
+        <section id="travel" aria-labelledby="travel-heading" className="section-y">
+          <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline bg-surface p-6 lg:p-8">
+            <SectionTitle id="travel-heading" icon={<GlobeIcon width={18} height={18} />}>
+              Places I&apos;ve been
+            </SectionTitle>
+            <p className="mt-4 max-w-2xl text-body-md text-body">
+              {visitedCountryCount} countries and {visitedCityCount} cities so far — dark blue where
+              I&apos;ve lived, blue where I&apos;ve explored, light blue for airport layovers, white
+              dots for cities.
+            </p>
+            <div className="mt-8">
+              <VisitedCountriesMap />
+            </div>
+          </div>
+        </section>
+
+        <section id="infrastructure" aria-labelledby="infrastructure-heading" className="section-y">
+          <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline bg-surface-elevated p-6 lg:p-8">
+            <SectionTitle id="infrastructure-heading" icon={<CraneIcon width={18} height={18} />}>
+              Infrastructure I&apos;m excited about
+            </SectionTitle>
+            <p className="mt-4 max-w-2xl text-body-md text-body">
+              Megaprojects reshaping how Asia moves people, goods and power — canals, railways, ports,
+              airports, dams and whole new cities I keep reading about.
+            </p>
+            <div className="mt-8">
+              <InfrastructureMap />
+            </div>
           </div>
         </section>
       </main>
