@@ -14,11 +14,13 @@ import {
 import { useTheme } from "next-themes";
 import {
   DEFAULT_THEME_ID,
+  SECRET_THEMES,
   SITE_THEMES,
   getTheme,
   normalizeThemeId,
   type SiteTheme,
 } from "@/lib/themes";
+import { isSecretThemeUnlocked } from "@/lib/easter-eggs";
 
 type ThemeSwitcherContextValue = {
   openPicker: () => void;
@@ -109,20 +111,29 @@ function ThemePickerDialog({
   const [mounted, setMounted] = useState(false);
   const [filter, setFilter] = useState<"all" | "dark" | "light">("all");
   const [activeIndex, setActiveIndex] = useState(0);
+  const [secretUnlocked, setSecretUnlocked] = useState(false);
   const panelId = useId();
   const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
+    setSecretUnlocked(isSecretThemeUnlocked());
+    const onUnlock = () => setSecretUnlocked(true);
+    window.addEventListener("rudra-secret-theme-unlocked", onUnlock);
+    return () => window.removeEventListener("rudra-secret-theme-unlocked", onUnlock);
   }, []);
 
   const currentId = normalizeThemeId(resolvedTheme ?? theme);
   const current = getTheme(currentId);
 
+  const catalog = useMemo(() => {
+    return secretUnlocked ? [...SITE_THEMES, ...SECRET_THEMES] : SITE_THEMES;
+  }, [secretUnlocked]);
+
   const visibleThemes = useMemo(() => {
-    if (filter === "all") return SITE_THEMES;
-    return SITE_THEMES.filter((t) => t.scheme === filter);
-  }, [filter]);
+    if (filter === "all") return catalog;
+    return catalog.filter((t) => t.scheme === filter);
+  }, [catalog, filter]);
 
   useEffect(() => {
     if (!open) return;
@@ -195,7 +206,7 @@ function ThemePickerDialog({
             <div>
               <p className="text-heading-sm text-ink">Pick a theme</p>
               <p className="mt-1 text-caption-md text-mute">
-                {SITE_THEMES.length} Omarchy themes · press <span className="keycap">j</span> /{" "}
+                {catalog.length} themes · press <span className="keycap">j</span> /{" "}
                 <span className="keycap">k</span> to flip
               </p>
             </div>

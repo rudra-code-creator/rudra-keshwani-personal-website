@@ -3,10 +3,12 @@ import { JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { CommandPaletteProvider } from "@/components/CommandPalette";
+import { EasterEggFX } from "@/components/EasterEggFX";
 import { SiteShell } from "@/components/SiteShell";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { getAllPosts } from "@/lib/blog";
 import "./themes.css";
+import "./secret-themes.css";
 import "./globals.css";
 
 const jetbrainsMono = JetBrains_Mono({
@@ -69,6 +71,7 @@ export default function RootLayout({
         <ThemeProvider>
           <CommandPaletteProvider blogPosts={blogPosts}>
             <SiteShell>{children}</SiteShell>
+            <EasterEggFX />
           </CommandPaletteProvider>
           <Analytics />
           <SpeedInsights />
