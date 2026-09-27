@@ -160,6 +160,14 @@ function CommandPaletteDialog({
         run: () => go(contact.egoist),
       },
       {
+        id: "link-cursor",
+        label: "Cursor",
+        sub: "Public profile",
+        group: "Links",
+        keywords: "cursor profile ai editor",
+        run: () => go(contact.cursor),
+      },
+      {
         id: "link-resume",
         label: "Resume PDF",
         sub: "View or download",

@@ -241,6 +241,7 @@ export const contact = {
   linkedin: "https://www.linkedin.com/in/rudra-keshwani-the-tiber-guy-31272b1aa/",
   instagram: "https://www.instagram.com/ruu.kes.3/",
   egoist: "https://ego.ist/i/rudra_keshwani",
+  cursor: "https://cursor.com/@rudra-code-creator",
   closing: "DM is open, feel free to reach out.",
 } as const;
 

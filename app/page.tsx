@@ -237,6 +237,14 @@ export default async function Home() {
               >
                 Egoist Machines
               </a>
+              <a
+                href={contact.cursor}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus-ring install-btn"
+              >
+                Cursor
+              </a>
             </div>
 
             <div className="mt-10 rounded-lg border border-hairline bg-surface-elevated p-5">
@@ -607,6 +615,14 @@ export default async function Home() {
               >
                 Egoist Machines
               </a>
+              <a
+                href={contact.cursor}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus-ring install-btn"
+              >
+                Cursor
+              </a>
             </div>
             <p className="mt-8 text-caption-md text-mute">{contact.email}</p>
           </div>
@@ -677,6 +693,11 @@ export default async function Home() {
                 <li>
                   <a href={contact.egoist} className="link-footer" target="_blank" rel="noopener noreferrer">
                     Egoist Machines
+                  </a>
+                </li>
+                <li>
+                  <a href={contact.cursor} className="link-footer" target="_blank" rel="noopener noreferrer">
+                    Cursor
                   </a>
                 </li>
                 <li>
