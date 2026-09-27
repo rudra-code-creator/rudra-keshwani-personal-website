@@ -70,6 +70,20 @@ function EgoistGlyph({ className }: { className?: string }) {
   );
 }
 
+function CursorGlyph({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M12 2.75 20.25 7.5v9L12 21.25 3.75 16.5v-9L12 2.75Z"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinejoin="round"
+      />
+      <path d="M3.75 7.5 12 12.25l8.25-4.75M12 12.25v9" stroke="currentColor" strokeWidth="1.75" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 const contactLinks: ContactLink[] = [
   { href: `mailto:${contact.email}`, label: "Email", icon: <MailGlyph className="h-4 w-4" /> },
   {
@@ -101,6 +115,12 @@ const contactLinks: ContactLink[] = [
     label: "Egoist Machines",
     external: true,
     icon: <EgoistGlyph className="h-4 w-4" />,
+  },
+  {
+    href: contact.cursor,
+    label: "Cursor",
+    external: true,
+    icon: <CursorGlyph className="h-4 w-4" />,
   },
 ];
 

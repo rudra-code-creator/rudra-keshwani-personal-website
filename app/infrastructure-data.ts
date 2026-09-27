@@ -17,10 +17,16 @@ export type RouteStation = {
   labelSide: "left" | "right" | "above" | "below";
 };
 
+/** Line colour: the theme accent, or the fixed colours of the Kunming–Singapore corridor maps. */
+export type RouteTone = "theme" | "central" | "eastern" | "western";
+
 export type InfrastructureRoute = {
   /** Polyline drawn on the map as [lng, lat] pairs. */
   path: [number, number][];
   stations: RouteStation[];
+  tone?: RouteTone;
+  /** Drawn dotted — proposed rather than built or under construction. */
+  planned?: boolean;
 };
 
 export type InfrastructureProject = {
@@ -39,8 +45,13 @@ export type InfrastructureProject = {
   alsoCountries?: string[];
   /** Nudges the pin away from its true location (map viewBox px) when neighbouring pins would overlap. */
   pinOffset?: [number, number];
-  route?: InfrastructureRoute;
+  routes?: InfrastructureRoute[];
   links: InfrastructureLink[];
+};
+
+const kunmingSingaporeMap: InfrastructureImage = {
+  src: "/images/infrastructure/kunming-singapore-rail.jpg",
+  alt: "Geopolitical Monitor map of the Kunming–Singapore high-speed rail corridor with its central, eastern and western routes",
 };
 
 export const infrastructureProjects: InfrastructureProject[] = [
@@ -189,6 +200,7 @@ export const infrastructureProjects: InfrastructureProject[] = [
     lat: 11.0,
     lng: 104.75,
     countryNumeric: "116",
+    pinOffset: [0, 12],
     links: [
       { label: "Funan Techo Canal — Wikipedia", href: "https://en.wikipedia.org/wiki/Funan_Techo_Canal" },
       { label: "Construction update (AKP)", href: "https://www.akp.gov.kh/post/detail/371395" },
@@ -407,53 +419,242 @@ export const infrastructureProjects: InfrastructureProject[] = [
   },
   {
     id: "kunming-bangkok-rail",
-    name: "Kunming–Bangkok Railway",
+    name: "Kunming–Bangkok Railway (Central Route)",
     location: "Kunming, China → Vientiane, Laos → Bangkok, Thailand",
     status: "Kunming–Vientiane live · Thai HSR 2030–31",
     description:
-      "A ~1,650 km rail spine tying southwest China to the Gulf of Thailand. The 1,035 km Kunming–Vientiane line has run since Dec 2021; Thailand's 250 km Bangkok–Nakhon Ratchasima high-speed section is ~57% built for a 2030–31 opening, with the 357 km extension to Nong Khai and a new Mekong rail bridge to Vientiane next.",
-    images: [],
+      "The central spine of the Kunming–Singapore corridor: ~1,650 km tying southwest China to the Gulf of Thailand. The 1,035 km Kunming–Vientiane line has run since Dec 2021; Thailand's 250 km Bangkok–Nakhon Ratchasima high-speed section is ~57% built for a 2030–31 opening, with the 357 km extension to Nong Khai and a new Mekong rail bridge to Vientiane next.",
+    images: [kunmingSingaporeMap],
     lat: 19.4,
     lng: 102.3,
     countryNumeric: "418",
     alsoCountries: ["156", "764"],
-    route: {
-      path: [
-        [102.71, 25.04],
-        [102.54, 24.35],
-        [100.97, 22.79],
-        [100.8, 22.01],
-        [101.69, 21.19],
-        [101.4, 20.95],
-        [101.99, 20.69],
-        [102.13, 19.89],
-        [102.45, 18.92],
-        [102.6, 17.97],
-        [102.74, 17.88],
-        [102.79, 17.41],
-        [102.83, 16.43],
-        [102.1, 14.97],
-        [101.41, 14.71],
-        [100.91, 14.53],
-        [100.57, 14.35],
-        [100.5, 13.75],
-      ],
-      stations: [
-        { name: "Kunming", lat: 25.04, lng: 102.71, labelSide: "right" },
-        { name: "Yuxi", lat: 24.35, lng: 102.54, labelSide: "right" },
-        { name: "Mohan", lat: 21.19, lng: 101.69, labelSide: "right" },
-        { name: "Luang Namtha", lat: 20.95, lng: 101.4, labelSide: "left" },
-        { name: "Vientiane", lat: 17.97, lng: 102.6, labelSide: "left" },
-        { name: "Nong Khai", lat: 17.88, lng: 102.74, labelSide: "right" },
-        { name: "Bangkok", lat: 13.75, lng: 100.5, labelSide: "left" },
-      ],
-    },
+    routes: [
+      {
+        tone: "central",
+        path: [
+          [102.71, 25.04],
+          [102.54, 24.35],
+          [100.97, 22.79],
+          [100.8, 22.01],
+          [101.69, 21.19],
+          [101.4, 20.95],
+          [101.99, 20.69],
+          [102.13, 19.89],
+          [102.45, 18.92],
+          [102.6, 17.97],
+        ],
+        stations: [
+          { name: "Kunming", lat: 25.04, lng: 102.71, labelSide: "right" },
+          { name: "Yuxi", lat: 24.35, lng: 102.54, labelSide: "right" },
+          { name: "Mohan", lat: 21.19, lng: 101.69, labelSide: "right" },
+          { name: "Luang Namtha", lat: 20.95, lng: 101.4, labelSide: "left" },
+          { name: "Vientiane", lat: 17.97, lng: 102.6, labelSide: "left" },
+        ],
+      },
+      {
+        tone: "central",
+        planned: true,
+        path: [
+          [102.6, 17.97],
+          [102.74, 17.88],
+          [102.79, 17.41],
+          [102.83, 16.43],
+          [102.1, 14.97],
+        ],
+        stations: [{ name: "Nong Khai", lat: 17.88, lng: 102.74, labelSide: "right" }],
+      },
+      {
+        tone: "central",
+        path: [
+          [102.1, 14.97],
+          [101.41, 14.71],
+          [100.91, 14.53],
+          [100.57, 14.35],
+          [100.5, 13.75],
+        ],
+        stations: [{ name: "Bangkok", lat: 13.75, lng: 100.5, labelSide: "left" }],
+      },
+    ],
     links: [
       { label: "Laos–China Railway — Wikipedia", href: "https://en.wikipedia.org/wiki/Boten%E2%80%93Vientiane_railway" },
       { label: "Thai–Chinese High-Speed Railway (official)", href: "https://www.highspeedrail-thai-china.com/en/" },
       {
         label: "Nong Khai phase tenders (Nation Thailand)",
         href: "https://www.nationthailand.com/news/general/40069210",
+      },
+    ],
+  },
+  {
+    id: "kunming-singapore-western",
+    name: "Kunming–Bangkok Railway (Western Route)",
+    location: "Kunming → Dali → Ruili, China → Mandalay → Yangon, Myanmar → Bangkok",
+    status: "Kunming–Dali live · Dali–Ruili building · Myanmar leg proposed",
+    description:
+      "The Myanmar branch of the Kunming–Singapore corridor. China has already opened Kunming–Dali and is pushing the Dali–Ruili line to the border; from there the China–Myanmar Economic Corridor proposes a Muse–Mandalay railway continuing south to Yangon and across the Three Pagodas Pass to Bangkok.",
+    images: [kunmingSingaporeMap],
+    lat: 19.75,
+    lng: 96.13,
+    countryNumeric: "104",
+    alsoCountries: ["156", "764"],
+    routes: [
+      {
+        tone: "western",
+        path: [
+          [102.71, 25.04],
+          [101.55, 25.03],
+          [100.27, 25.61],
+          [99.16, 25.11],
+          [97.85, 24.01],
+        ],
+        stations: [
+          { name: "Dali", lat: 25.61, lng: 100.27, labelSide: "above" },
+          { name: "Ruili", lat: 24.01, lng: 97.85, labelSide: "right" },
+        ],
+      },
+      {
+        tone: "western",
+        planned: true,
+        path: [
+          [97.85, 24.01],
+          [97.75, 22.93],
+          [96.08, 21.96],
+          [96.13, 19.75],
+          [96.16, 16.87],
+          [97.63, 16.49],
+          [98.4, 15.3],
+          [99.53, 14.02],
+          [100.5, 13.75],
+        ],
+        stations: [
+          { name: "Mandalay", lat: 21.96, lng: 96.08, labelSide: "left" },
+          { name: "Yangon", lat: 16.87, lng: 96.16, labelSide: "left" },
+        ],
+      },
+    ],
+    links: [
+      {
+        label: "Kunming–Singapore railway — Wikipedia",
+        href: "https://en.wikipedia.org/wiki/Kunming%E2%80%93Singapore_railway",
+      },
+      {
+        label: "Muse–Mandalay railway — Wikipedia",
+        href: "https://en.wikipedia.org/wiki/Muse%E2%80%93Mandalay_railway",
+      },
+    ],
+  },
+  {
+    id: "kunming-singapore-eastern",
+    name: "Kunming–Bangkok Railway (Eastern Route)",
+    location: "Kunming → Hanoi → Ho Chi Minh City → Phnom Penh → Bangkok",
+    status: "Proposed",
+    description:
+      "The Vietnam branch of the Kunming–Singapore corridor: down the Red River valley via Hekou to Hanoi, south along the coast to Ho Chi Minh City, then west through Phnom Penh to Bangkok — filling Cambodia's missing link and joining up with Vietnam's own Lao Cai–Hanoi and North–South rail upgrades.",
+    images: [kunmingSingaporeMap],
+    lat: 13.6,
+    lng: 103.4,
+    countryNumeric: "704",
+    alsoCountries: ["156", "116", "764"],
+    routes: [
+      {
+        tone: "eastern",
+        planned: true,
+        path: [
+          [102.71, 25.04],
+          [103.38, 23.37],
+          [103.95, 22.5],
+          [104.87, 21.72],
+          [105.84, 21.03],
+          [105.9, 20.25],
+          [105.5, 18.6],
+          [106.45, 17.4],
+          [107.4, 16.4],
+          [108.0, 15.95],
+          [108.55, 15.05],
+          [108.95, 13.8],
+          [109.0, 12.3],
+          [107.95, 11.0],
+          [106.7, 10.78],
+          [104.92, 11.56],
+          [103.2, 13.1],
+          [102.56, 13.66],
+          [100.5, 13.75],
+        ],
+        stations: [
+          { name: "Hekou", lat: 22.5, lng: 103.95, labelSide: "right" },
+          { name: "Phnom Penh", lat: 11.56, lng: 104.92, labelSide: "left" },
+        ],
+      },
+    ],
+    links: [
+      {
+        label: "Kunming–Singapore railway — Wikipedia",
+        href: "https://en.wikipedia.org/wiki/Kunming%E2%80%93Singapore_railway",
+      },
+      {
+        label: "Lao Cai–Hanoi–Haiphong railway — Wikipedia",
+        href: "https://en.wikipedia.org/wiki/Lao_Cai%E2%80%93Hanoi%E2%80%93Haiphong_railway",
+      },
+    ],
+  },
+  {
+    id: "bangkok-singapore-extension",
+    name: "Central Route Extension to Kuala Lumpur & Singapore",
+    location: "Bangkok, Thailand → Kuala Lumpur, Malaysia → Singapore",
+    status: "KL–Johor Bahru electrified · Bangkok–KL proposed",
+    description:
+      "The southern tail of the Kunming–Singapore corridor. Malaysia's electrified double-track now runs from the Thai border through Kuala Lumpur to Johor Bahru (Gemas–JB finished in 2025), leaving a high-speed upgrade down the Thai peninsula and a revived KL–Singapore HSR as the pieces needed to run trains from Kunming all the way to Singapore.",
+    images: [kunmingSingaporeMap],
+    lat: 10.2,
+    lng: 99.2,
+    countryNumeric: "764",
+    alsoCountries: ["458", "702"],
+    routes: [
+      {
+        tone: "central",
+        planned: true,
+        path: [
+          [100.5, 13.75],
+          [99.96, 12.57],
+          [99.18, 10.5],
+          [99.33, 9.13],
+          [100.47, 7.0],
+          [100.32, 6.66],
+          [100.37, 6.12],
+          [100.36, 5.4],
+          [101.08, 4.6],
+          [101.69, 3.14],
+        ],
+        stations: [],
+      },
+      {
+        tone: "central",
+        path: [
+          [101.69, 3.14],
+          [101.94, 2.72],
+          [102.6, 2.58],
+          [103.32, 2.03],
+          [103.76, 1.46],
+          [103.85, 1.29],
+        ],
+        stations: [
+          { name: "Kuala Lumpur", lat: 3.14, lng: 101.69, labelSide: "left" },
+          { name: "Singapore", lat: 1.29, lng: 103.85, labelSide: "right" },
+        ],
+      },
+    ],
+    links: [
+      {
+        label: "Kunming–Singapore railway — Wikipedia",
+        href: "https://en.wikipedia.org/wiki/Kunming%E2%80%93Singapore_railway",
+      },
+      {
+        label: "Gemas–Johor Bahru electrified double-track — Wikipedia",
+        href: "https://en.wikipedia.org/wiki/Gemas%E2%80%93Johor_Bahru_electrified_double-tracking_project",
+      },
+      {
+        label: "Kuala Lumpur–Singapore high-speed rail — Wikipedia",
+        href: "https://en.wikipedia.org/wiki/Kuala_Lumpur%E2%80%93Singapore_high-speed_rail",
       },
     ],
   },
@@ -473,40 +674,42 @@ export const infrastructureProjects: InfrastructureProject[] = [
     lat: 15.12,
     lng: 108.8,
     countryNumeric: "704",
-    route: {
-      path: [
-        [105.84, 20.93],
-        [105.91, 20.54],
-        [106.17, 20.42],
-        [105.97, 20.25],
-        [105.78, 19.8],
-        [105.68, 18.68],
-        [105.9, 18.34],
-        [106.37, 18.08],
-        [106.6, 17.47],
-        [107.1, 16.82],
-        [107.59, 16.46],
-        [108.2, 16.05],
-        [108.47, 15.57],
-        [108.8, 15.12],
-        [109.0, 14.42],
-        [109.14, 13.8],
-        [109.3, 13.09],
-        [109.19, 12.25],
-        [108.99, 11.58],
-        [108.53, 11.2],
-        [108.07, 10.97],
-        [107.04, 10.77],
-        [106.72, 10.79],
-      ],
-      stations: [
-        { name: "Hanoi", lat: 20.93, lng: 105.84, labelSide: "right" },
-        { name: "Vinh", lat: 18.68, lng: 105.68, labelSide: "right" },
-        { name: "Da Nang", lat: 16.05, lng: 108.2, labelSide: "right" },
-        { name: "Nha Trang", lat: 12.25, lng: 109.19, labelSide: "right" },
-        { name: "Ho Chi Minh City", lat: 10.79, lng: 106.72, labelSide: "right" },
-      ],
-    },
+    routes: [
+      {
+        path: [
+          [105.84, 20.93],
+          [105.91, 20.54],
+          [106.17, 20.42],
+          [105.97, 20.25],
+          [105.78, 19.8],
+          [105.68, 18.68],
+          [105.9, 18.34],
+          [106.37, 18.08],
+          [106.6, 17.47],
+          [107.1, 16.82],
+          [107.59, 16.46],
+          [108.2, 16.05],
+          [108.47, 15.57],
+          [108.8, 15.12],
+          [109.0, 14.42],
+          [109.14, 13.8],
+          [109.3, 13.09],
+          [109.19, 12.25],
+          [108.99, 11.58],
+          [108.53, 11.2],
+          [108.07, 10.97],
+          [107.04, 10.77],
+          [106.72, 10.79],
+        ],
+        stations: [
+          { name: "Hanoi", lat: 20.93, lng: 105.84, labelSide: "right" },
+          { name: "Vinh", lat: 18.68, lng: 105.68, labelSide: "right" },
+          { name: "Da Nang", lat: 16.05, lng: 108.2, labelSide: "right" },
+          { name: "Nha Trang", lat: 12.25, lng: 109.19, labelSide: "right" },
+          { name: "Ho Chi Minh City", lat: 10.79, lng: 106.72, labelSide: "right" },
+        ],
+      },
+    ],
     links: [
       {
         label: "North–South express railway — Wikipedia",
@@ -534,37 +737,40 @@ export const infrastructureProjects: InfrastructureProject[] = [
     lat: 3.45,
     lng: 102.42,
     countryNumeric: "458",
-    route: {
-      path: [
-        [101.39, 3.0],
-        [101.37, 3.13],
-        [101.45, 3.23],
-        [101.6, 3.35],
-        [101.72, 3.24],
-        [101.91, 3.52],
-        [102.42, 3.45],
-        [102.77, 3.58],
-        [103.2, 3.77],
-        [103.3, 3.83],
-        [103.43, 3.97],
-        [103.39, 4.13],
-        [103.42, 4.23],
-        [103.45, 4.43],
-        [103.42, 4.76],
-        [103.14, 5.33],
-        [102.75, 5.52],
-        [102.49, 5.74],
-        [102.4, 5.83],
-        [102.24, 6.13],
-      ],
-      stations: [
-        { name: "Port Klang", lat: 3.0, lng: 101.39, labelSide: "below" },
-        { name: "Gombak", lat: 3.24, lng: 101.72, labelSide: "left" },
-        { name: "Kuantan", lat: 3.97, lng: 103.43, labelSide: "right" },
-        { name: "Kuala Terengganu", lat: 5.33, lng: 103.14, labelSide: "right" },
-        { name: "Kota Bharu", lat: 6.13, lng: 102.24, labelSide: "right" },
-      ],
-    },
+    pinOffset: [24, 10],
+    routes: [
+      {
+        path: [
+          [101.39, 3.0],
+          [101.37, 3.13],
+          [101.45, 3.23],
+          [101.6, 3.35],
+          [101.72, 3.24],
+          [101.91, 3.52],
+          [102.42, 3.45],
+          [102.77, 3.58],
+          [103.2, 3.77],
+          [103.3, 3.83],
+          [103.43, 3.97],
+          [103.39, 4.13],
+          [103.42, 4.23],
+          [103.45, 4.43],
+          [103.42, 4.76],
+          [103.14, 5.33],
+          [102.75, 5.52],
+          [102.49, 5.74],
+          [102.4, 5.83],
+          [102.24, 6.13],
+        ],
+        stations: [
+          { name: "Port Klang", lat: 3.0, lng: 101.39, labelSide: "below" },
+          { name: "Gombak", lat: 3.24, lng: 101.72, labelSide: "above" },
+          { name: "Kuantan", lat: 3.97, lng: 103.43, labelSide: "right" },
+          { name: "Kuala Terengganu", lat: 5.33, lng: 103.14, labelSide: "right" },
+          { name: "Kota Bharu", lat: 6.13, lng: 102.24, labelSide: "right" },
+        ],
+      },
+    ],
     links: [
       {
         label: "Last section starts as opening nears (Railway Gazette)",
@@ -593,19 +799,21 @@ export const infrastructureProjects: InfrastructureProject[] = [
     lng: 107.45,
     countryNumeric: "360",
     pinOffset: [26, -4],
-    route: {
-      path: [
-        [106.89, -6.25],
-        [107.3, -6.37],
-        [107.45, -6.55],
-        [107.49, -6.84],
-        [107.75, -6.97],
-      ],
-      stations: [
-        { name: "Jakarta", lat: -6.25, lng: 106.89, labelSide: "left" },
-        { name: "Bandung", lat: -6.97, lng: 107.75, labelSide: "left" },
-      ],
-    },
+    routes: [
+      {
+        path: [
+          [106.89, -6.25],
+          [107.3, -6.37],
+          [107.45, -6.55],
+          [107.49, -6.84],
+          [107.75, -6.97],
+        ],
+        stations: [
+          { name: "Jakarta", lat: -6.25, lng: 106.89, labelSide: "left" },
+          { name: "Bandung", lat: -6.97, lng: 107.75, labelSide: "left" },
+        ],
+      },
+    ],
     links: [
       { label: "High-speed rail in Indonesia — Wikipedia", href: "https://en.wikipedia.org/wiki/High-speed_rail_in_Indonesia" },
       {

@@ -8,6 +8,8 @@ import {
   useMemo,
   useRef,
   useState,
+  type MouseEvent as ReactMouseEvent,
+  type PointerEvent as ReactPointerEvent,
   type ReactNode,
 } from "react";
 import { geoMercator, geoPath } from "d3-geo";
@@ -18,6 +20,7 @@ import {
   type InfrastructureImage,
   type InfrastructureProject,
   type RouteStation,
+  type RouteTone,
 } from "@/app/infrastructure-data";
 
 const GEO_URL = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json";
@@ -30,6 +33,25 @@ const REGION: [number, number][] = [
   [124, 33],
 ];
 const CLOSE_DELAY_MS = 180;
+const MIN_K = 1;
+const MAX_K = 8;
+/** Pointer travel (screen px) before a press becomes a pan, so pin clicks still register. */
+const DRAG_THRESHOLD = 4;
+
+type ViewTransform = { k: number; x: number; y: number };
+
+function clamp(value: number, min: number, max: number): number {
+  return Math.min(max, Math.max(min, value));
+}
+
+function clampPan(k: number, x: number, y: number): ViewTransform {
+  if (k <= MIN_K) return { k: MIN_K, x: 0, y: 0 };
+  return {
+    k,
+    x: clamp(x, WIDTH - WIDTH * k, 0),
+    y: clamp(y, HEIGHT - HEIGHT * k, 0),
+  };
+}
 
 type CountryFeature = Feature<Geometry, { name?: string }> & { id?: string | number };
 
@@ -133,6 +155,23 @@ function stationLabelPlacement(side: RouteStation["labelSide"]): {
       return { dx: 0, dy: 15, anchor: "middle" };
     default: {
       const unreachable: never = side;
+      return unreachable;
+    }
+  }
+}
+
+function routeColor(tone: RouteTone): string {
+  switch (tone) {
+    case "theme":
+      return "rgb(var(--color-primary))";
+    case "central":
+      return "#1e90dc";
+    case "eastern":
+      return "#2fb54a";
+    case "western":
+      return "#f2852a";
+    default: {
+      const unreachable: never = tone;
       return unreachable;
     }
   }
@@ -395,7 +434,18 @@ export function InfrastructureMap() {
   const [pinnedId, setPinnedId] = useState<string | null>(null);
   const [mode, setMode] = useState<WindowMode>("normal");
   const [lastId, setLastId] = useState<string | null>(null);
+  const [view, setView] = useState<ViewTransform>({ k: 1, x: 0, y: 0 });
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
+  const dragRef = useRef<{
+    pointerId: number;
+    startX: number;
+    startY: number;
+    origX: number;
+    origY: number;
+    panning: boolean;
+  } | null>(null);
+  const suppressClick = useRef(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -439,29 +489,134 @@ export function InfrastructureMap() {
       infrastructureProjects.flatMap((project, index) => {
         const xy = projection([project.lng, project.lat]);
         if (!xy) return [];
+        const ax = xy[0] * view.k + view.x;
+        const ay = xy[1] * view.k + view.y;
         const [dx, dy] = project.pinOffset ?? [0, 0];
-        return [{ project, index, x: xy[0] + dx, y: xy[1] + dy, ax: xy[0], ay: xy[1] }];
+        return [{ project, index, x: ax + dx, y: ay + dy, ax, ay }];
       }),
-    [projection],
+    [projection, view],
   );
 
   const routes = useMemo(
     () =>
-      infrastructureProjects.flatMap((project) => {
-        if (!project.route) return [];
-        const points = project.route.path.flatMap((coord) => {
-          const xy = projection(coord);
-          return xy ? [xy] : [];
-        });
-        const stations = project.route.stations.flatMap((station) => {
-          const xy = projection([station.lng, station.lat]);
-          return xy ? [{ ...station, x: xy[0], y: xy[1] }] : [];
-        });
-        const d = points.map(([x, y], i) => `${i === 0 ? "M" : "L"}${x.toFixed(1)} ${y.toFixed(1)}`).join(" ");
-        return [{ project, d, stations }];
-      }),
-    [projection],
+      infrastructureProjects
+        .flatMap((project) =>
+          (project.routes ?? []).map((route, routeIndex) => {
+            const toScreen = (coord: [number, number]): [number, number] | null => {
+              const xy = projection(coord);
+              return xy ? [xy[0] * view.k + view.x, xy[1] * view.k + view.y] : null;
+            };
+            const points = route.path.flatMap((coord) => {
+              const xy = toScreen(coord);
+              return xy ? [xy] : [];
+            });
+            const stations = route.stations.flatMap((station) => {
+              const xy = toScreen([station.lng, station.lat]);
+              return xy ? [{ ...station, x: xy[0], y: xy[1] }] : [];
+            });
+            const d = points.map(([x, y], i) => `${i === 0 ? "M" : "L"}${x.toFixed(1)} ${y.toFixed(1)}`).join(" ");
+            return {
+              key: `${project.id}-${routeIndex}`,
+              project,
+              d,
+              stations,
+              color: routeColor(route.tone ?? "theme"),
+              planned: route.planned ?? false,
+            };
+          }),
+        )
+        .sort((a, b) => Number(b.planned) - Number(a.planned)),
+    [projection, view],
   );
+
+  const toViewBox = useCallback((clientX: number, clientY: number) => {
+    const el = svgRef.current;
+    if (!el) return { mx: WIDTH / 2, my: HEIGHT / 2 };
+    const rect = el.getBoundingClientRect();
+    return {
+      mx: ((clientX - rect.left) / rect.width) * WIDTH,
+      my: ((clientY - rect.top) / rect.height) * HEIGHT,
+    };
+  }, []);
+
+  const zoomAt = useCallback((mx: number, my: number, factor: number) => {
+    setView((current) => {
+      const nextK = clamp(current.k * factor, MIN_K, MAX_K);
+      const nx = mx - ((mx - current.x) / current.k) * nextK;
+      const ny = my - ((my - current.y) / current.k) * nextK;
+      return clampPan(nextK, nx, ny);
+    });
+  }, []);
+
+  const mapReady = countries.length > 0;
+
+  useEffect(() => {
+    const el = svgRef.current;
+    if (!el) return;
+    const onWheel = (event: WheelEvent) => {
+      event.preventDefault();
+      const { mx, my } = toViewBox(event.clientX, event.clientY);
+      zoomAt(mx, my, Math.exp(-event.deltaY * 0.002));
+    };
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
+  }, [mapReady, toViewBox, zoomAt]);
+
+  const onPointerDown = useCallback(
+    (event: ReactPointerEvent<SVGSVGElement>) => {
+      if (event.button !== 0) return;
+      suppressClick.current = false;
+      dragRef.current = {
+        pointerId: event.pointerId,
+        startX: event.clientX,
+        startY: event.clientY,
+        origX: view.x,
+        origY: view.y,
+        panning: false,
+      };
+    },
+    [view.x, view.y],
+  );
+
+  const onPointerMove = useCallback((event: ReactPointerEvent<SVGSVGElement>) => {
+    const drag = dragRef.current;
+    if (!drag || drag.pointerId !== event.pointerId) return;
+    const moveX = event.clientX - drag.startX;
+    const moveY = event.clientY - drag.startY;
+    if (!drag.panning) {
+      if (Math.hypot(moveX, moveY) < DRAG_THRESHOLD) return;
+      drag.panning = true;
+      event.currentTarget.setPointerCapture(event.pointerId);
+    }
+    const rect = event.currentTarget.getBoundingClientRect();
+    const dx = (moveX / rect.width) * WIDTH;
+    const dy = (moveY / rect.height) * HEIGHT;
+    setView((current) => clampPan(current.k, drag.origX + dx, drag.origY + dy));
+  }, []);
+
+  const onPointerUp = useCallback((event: ReactPointerEvent<SVGSVGElement>) => {
+    const drag = dragRef.current;
+    if (drag?.pointerId !== event.pointerId) return;
+    suppressClick.current = drag.panning;
+    dragRef.current = null;
+  }, []);
+
+  const onClickCapture = useCallback((event: ReactMouseEvent<SVGSVGElement>) => {
+    if (!suppressClick.current) return;
+    suppressClick.current = false;
+    event.stopPropagation();
+  }, []);
+
+  const onDoubleClick = useCallback(
+    (event: ReactMouseEvent<SVGSVGElement>) => {
+      const { mx, my } = toViewBox(event.clientX, event.clientY);
+      zoomAt(mx, my, 1.6);
+    },
+    [toViewBox, zoomAt],
+  );
+
+  const canZoomOut = view.k > MIN_K + 0.01;
+  const canZoomIn = view.k < MAX_K - 0.01;
 
   const preview = useCallback((id: string) => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -522,70 +677,107 @@ export function InfrastructureMap() {
             <p className="px-4 py-12 text-center text-body-sm text-mute">Loading map…</p>
           ) : (
             <svg
+              ref={svgRef}
               viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
-              className="h-auto w-full select-none overflow-hidden rounded-md"
+              className={`h-auto w-full select-none overflow-hidden rounded-md ${view.k > 1 ? "cursor-grab active:cursor-grabbing" : ""}`}
+              style={{ touchAction: "none" }}
               role="img"
-              aria-label={`Map of Southeast and East Asia marking ${infrastructureProjects.length} infrastructure megaprojects`}
+              aria-label={`Zoomable map of Southeast and East Asia marking ${infrastructureProjects.length} infrastructure megaprojects`}
+              onPointerDown={onPointerDown}
+              onPointerMove={onPointerMove}
+              onPointerUp={onPointerUp}
+              onPointerCancel={onPointerUp}
+              onClickCapture={onClickCapture}
+              onDoubleClick={onDoubleClick}
             >
-              {countries.map((geo, i) => {
-                const id = String(geo.id ?? "");
-                const d = pathGenerator(geo);
-                if (!d) return null;
-                const isHost = hostCountries.has(id.padStart(3, "0"));
-                return (
-                  <path
-                    key={`${id || geo.properties?.name}-${i}`}
-                    d={d}
-                    fill={isHost ? "rgb(var(--color-primary) / 0.45)" : "rgb(var(--color-surface-elevated))"}
-                    stroke={isHost ? "rgb(var(--color-primary) / 0.8)" : "rgb(var(--color-hairline-strong))"}
-                    strokeWidth={isHost ? 0.9 : 0.6}
-                  />
-                );
-              })}
+              <g transform={`translate(${view.x} ${view.y}) scale(${view.k})`}>
+                {countries.map((geo, i) => {
+                  const id = String(geo.id ?? "");
+                  const d = pathGenerator(geo);
+                  if (!d) return null;
+                  const isHost = hostCountries.has(id.padStart(3, "0"));
+                  return (
+                    <path
+                      key={`${id || geo.properties?.name}-${i}`}
+                      d={d}
+                      fill={isHost ? "rgb(var(--color-primary) / 0.45)" : "rgb(var(--color-surface-elevated))"}
+                      stroke={isHost ? "rgb(var(--color-primary) / 0.8)" : "rgb(var(--color-hairline-strong))"}
+                      strokeWidth={isHost ? 0.9 : 0.6}
+                      vectorEffect="non-scaling-stroke"
+                    />
+                  );
+                })}
+              </g>
 
-              {routes.map(({ project, d }) => {
+              {routes.map(({ key, project, d, color, planned }) => {
                 const isActive = project.id === highlightId;
                 return (
                   <g
-                    key={`${project.id}-route`}
+                    key={key}
                     className="cursor-pointer"
                     onMouseEnter={() => preview(project.id)}
                     onMouseLeave={scheduleHide}
                     onClick={() => pin(project.id)}
                   >
                     <path d={d} fill="none" stroke="transparent" strokeWidth={14} strokeLinejoin="round" />
-                    <path
-                      d={d}
-                      fill="none"
-                      stroke="rgb(var(--color-canvas))"
-                      strokeWidth={isActive ? 6.5 : 5.5}
-                      strokeLinejoin="round"
-                      strokeLinecap="round"
-                    />
-                    <path
-                      d={d}
-                      fill="none"
-                      stroke="rgb(var(--color-primary))"
-                      strokeWidth={isActive ? 3.5 : 2.6}
-                      strokeLinejoin="round"
-                      strokeLinecap="round"
-                      className="transition-[stroke-width] duration-200"
-                    />
-                    <path
-                      d={d}
-                      fill="none"
-                      stroke="rgb(var(--color-canvas))"
-                      strokeWidth={1}
-                      strokeDasharray="3 4"
-                      opacity={0.7}
-                      className="pointer-events-none"
-                    />
+                    {planned ? (
+                      <>
+                        <path
+                          d={d}
+                          fill="none"
+                          stroke="rgb(var(--color-canvas))"
+                          strokeWidth={isActive ? 5.5 : 4.5}
+                          strokeLinejoin="round"
+                          strokeLinecap="round"
+                          strokeDasharray="0.1 5.5"
+                        />
+                        <path
+                          d={d}
+                          fill="none"
+                          stroke={color}
+                          strokeWidth={isActive ? 3.6 : 2.8}
+                          strokeLinejoin="round"
+                          strokeLinecap="round"
+                          strokeDasharray="0.1 5.5"
+                          className="transition-[stroke-width] duration-200"
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <path
+                          d={d}
+                          fill="none"
+                          stroke="rgb(var(--color-canvas))"
+                          strokeWidth={isActive ? 6.5 : 5.5}
+                          strokeLinejoin="round"
+                          strokeLinecap="round"
+                        />
+                        <path
+                          d={d}
+                          fill="none"
+                          stroke={color}
+                          strokeWidth={isActive ? 3.5 : 2.6}
+                          strokeLinejoin="round"
+                          strokeLinecap="round"
+                          className="transition-[stroke-width] duration-200"
+                        />
+                        <path
+                          d={d}
+                          fill="none"
+                          stroke="rgb(var(--color-canvas))"
+                          strokeWidth={1}
+                          strokeDasharray="3 4"
+                          opacity={0.7}
+                          className="pointer-events-none"
+                        />
+                      </>
+                    )}
                   </g>
                 );
               })}
 
-              {routes.map(({ project, stations }) => (
-                <g key={`${project.id}-stations`} className="pointer-events-none">
+              {routes.map(({ key, stations, color }) => (
+                <g key={`${key}-stations`} className="pointer-events-none">
                   {stations.map((station) => {
                     const label = stationLabelPlacement(station.labelSide);
                     return (
@@ -595,7 +787,7 @@ export function InfrastructureMap() {
                           cy={station.y}
                           r={4}
                           fill="rgb(var(--color-canvas))"
-                          stroke="rgb(var(--color-primary))"
+                          stroke={color}
                           strokeWidth={2}
                         />
                         <text
@@ -685,6 +877,38 @@ export function InfrastructureMap() {
             </svg>
           )}
 
+          {mapReady ? (
+            <div className="absolute left-2 top-2 z-10 flex flex-col gap-1">
+              <button
+                type="button"
+                className="focus-ring inline-flex h-8 w-8 items-center justify-center rounded-md border border-hairline bg-surface-elevated text-body-sm-strong text-on-dark disabled:opacity-40"
+                aria-label="Zoom in"
+                disabled={!canZoomIn}
+                onClick={() => zoomAt(WIDTH / 2, HEIGHT / 2, 1.4)}
+              >
+                +
+              </button>
+              <button
+                type="button"
+                className="focus-ring inline-flex h-8 w-8 items-center justify-center rounded-md border border-hairline bg-surface-elevated text-body-sm-strong text-on-dark disabled:opacity-40"
+                aria-label="Zoom out"
+                disabled={!canZoomOut}
+                onClick={() => zoomAt(WIDTH / 2, HEIGHT / 2, 1 / 1.4)}
+              >
+                −
+              </button>
+              <button
+                type="button"
+                className="focus-ring inline-flex h-8 min-w-8 items-center justify-center rounded-md border border-hairline bg-surface-elevated px-1.5 text-caption-sm text-on-dark disabled:opacity-40"
+                aria-label="Reset map"
+                disabled={!canZoomOut}
+                onClick={() => setView({ k: 1, x: 0, y: 0 })}
+              >
+                Reset
+              </button>
+            </div>
+          ) : null}
+
           {hoverPin ? (
             <AnchoredCard
               key={hoverPin.project.id}
@@ -773,7 +997,7 @@ export function InfrastructureMap() {
       </ol>
 
       <p className="-mt-3 text-center text-caption-md text-mute lg:mt-0 lg:text-left">
-        Hover a pin to peek · click a pin or list item to open its card window.
+        Scroll or use +/− to zoom · drag to pan · hover a pin to peek · click a pin or list item to open its card window.
       </p>
     </div>
   );
