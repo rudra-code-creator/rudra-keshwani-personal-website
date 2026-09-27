@@ -18,6 +18,7 @@ import {
   type InfrastructureImage,
   type InfrastructureProject,
   type RouteStation,
+  type RouteTone,
 } from "@/app/infrastructure-data";
 
 const GEO_URL = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json";
@@ -133,6 +134,23 @@ function stationLabelPlacement(side: RouteStation["labelSide"]): {
       return { dx: 0, dy: 15, anchor: "middle" };
     default: {
       const unreachable: never = side;
+      return unreachable;
+    }
+  }
+}
+
+function routeColor(tone: RouteTone): string {
+  switch (tone) {
+    case "theme":
+      return "rgb(var(--color-primary))";
+    case "central":
+      return "#1e90dc";
+    case "eastern":
+      return "#2fb54a";
+    case "western":
+      return "#f2852a";
+    default: {
+      const unreachable: never = tone;
       return unreachable;
     }
   }
@@ -447,19 +465,29 @@ export function InfrastructureMap() {
 
   const routes = useMemo(
     () =>
-      infrastructureProjects.flatMap((project) => {
-        if (!project.route) return [];
-        const points = project.route.path.flatMap((coord) => {
-          const xy = projection(coord);
-          return xy ? [xy] : [];
-        });
-        const stations = project.route.stations.flatMap((station) => {
-          const xy = projection([station.lng, station.lat]);
-          return xy ? [{ ...station, x: xy[0], y: xy[1] }] : [];
-        });
-        const d = points.map(([x, y], i) => `${i === 0 ? "M" : "L"}${x.toFixed(1)} ${y.toFixed(1)}`).join(" ");
-        return [{ project, d, stations }];
-      }),
+      infrastructureProjects
+        .flatMap((project) =>
+          (project.routes ?? []).map((route, routeIndex) => {
+            const points = route.path.flatMap((coord) => {
+              const xy = projection(coord);
+              return xy ? [xy] : [];
+            });
+            const stations = route.stations.flatMap((station) => {
+              const xy = projection([station.lng, station.lat]);
+              return xy ? [{ ...station, x: xy[0], y: xy[1] }] : [];
+            });
+            const d = points.map(([x, y], i) => `${i === 0 ? "M" : "L"}${x.toFixed(1)} ${y.toFixed(1)}`).join(" ");
+            return {
+              key: `${project.id}-${routeIndex}`,
+              project,
+              d,
+              stations,
+              color: routeColor(route.tone ?? "theme"),
+              planned: route.planned ?? false,
+            };
+          }),
+        )
+        .sort((a, b) => Number(b.planned) - Number(a.planned)),
     [projection],
   );
 
@@ -543,49 +571,75 @@ export function InfrastructureMap() {
                 );
               })}
 
-              {routes.map(({ project, d }) => {
+              {routes.map(({ key, project, d, color, planned }) => {
                 const isActive = project.id === highlightId;
                 return (
                   <g
-                    key={`${project.id}-route`}
+                    key={key}
                     className="cursor-pointer"
                     onMouseEnter={() => preview(project.id)}
                     onMouseLeave={scheduleHide}
                     onClick={() => pin(project.id)}
                   >
                     <path d={d} fill="none" stroke="transparent" strokeWidth={14} strokeLinejoin="round" />
-                    <path
-                      d={d}
-                      fill="none"
-                      stroke="rgb(var(--color-canvas))"
-                      strokeWidth={isActive ? 6.5 : 5.5}
-                      strokeLinejoin="round"
-                      strokeLinecap="round"
-                    />
-                    <path
-                      d={d}
-                      fill="none"
-                      stroke="rgb(var(--color-primary))"
-                      strokeWidth={isActive ? 3.5 : 2.6}
-                      strokeLinejoin="round"
-                      strokeLinecap="round"
-                      className="transition-[stroke-width] duration-200"
-                    />
-                    <path
-                      d={d}
-                      fill="none"
-                      stroke="rgb(var(--color-canvas))"
-                      strokeWidth={1}
-                      strokeDasharray="3 4"
-                      opacity={0.7}
-                      className="pointer-events-none"
-                    />
+                    {planned ? (
+                      <>
+                        <path
+                          d={d}
+                          fill="none"
+                          stroke="rgb(var(--color-canvas))"
+                          strokeWidth={isActive ? 5.5 : 4.5}
+                          strokeLinejoin="round"
+                          strokeLinecap="round"
+                          strokeDasharray="0.1 5.5"
+                        />
+                        <path
+                          d={d}
+                          fill="none"
+                          stroke={color}
+                          strokeWidth={isActive ? 3.6 : 2.8}
+                          strokeLinejoin="round"
+                          strokeLinecap="round"
+                          strokeDasharray="0.1 5.5"
+                          className="transition-[stroke-width] duration-200"
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <path
+                          d={d}
+                          fill="none"
+                          stroke="rgb(var(--color-canvas))"
+                          strokeWidth={isActive ? 6.5 : 5.5}
+                          strokeLinejoin="round"
+                          strokeLinecap="round"
+                        />
+                        <path
+                          d={d}
+                          fill="none"
+                          stroke={color}
+                          strokeWidth={isActive ? 3.5 : 2.6}
+                          strokeLinejoin="round"
+                          strokeLinecap="round"
+                          className="transition-[stroke-width] duration-200"
+                        />
+                        <path
+                          d={d}
+                          fill="none"
+                          stroke="rgb(var(--color-canvas))"
+                          strokeWidth={1}
+                          strokeDasharray="3 4"
+                          opacity={0.7}
+                          className="pointer-events-none"
+                        />
+                      </>
+                    )}
                   </g>
                 );
               })}
 
-              {routes.map(({ project, stations }) => (
-                <g key={`${project.id}-stations`} className="pointer-events-none">
+              {routes.map(({ key, stations, color }) => (
+                <g key={`${key}-stations`} className="pointer-events-none">
                   {stations.map((station) => {
                     const label = stationLabelPlacement(station.labelSide);
                     return (
@@ -595,7 +649,7 @@ export function InfrastructureMap() {
                           cy={station.y}
                           r={4}
                           fill="rgb(var(--color-canvas))"
-                          stroke="rgb(var(--color-primary))"
+                          stroke={color}
                           strokeWidth={2}
                         />
                         <text
