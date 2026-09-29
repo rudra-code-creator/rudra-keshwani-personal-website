@@ -1,0 +1,209 @@
+# Project showcase thread
+Assets: `social/project-thread/`
+- Post 1 image: `00-collage-all-projects.png`
+- Posts 2–8 images: `01` … `07` matching each project below
+- Sign-off: no new image required (or reuse collage)
+
+Use the LinkedIn version on LinkedIn (longer). Use the Twitter/X version on X (trimmed for length). Attach the matching image to each post.
+
+---
+
+## LINKEDIN THREAD
+
+### 1/9 — Overview
+Image: `00-collage-all-projects.png`
+
+I’ve been building in public — so here’s every project I’ve shipped so far (maps, aviation, career tools, client sites, and my own home base).
+
+1) IntelliGIS — AI geospatial planner
+Web: https://intelligis-mvp.netlify.app
+GitHub: https://github.com/rudra-code-creator/intelliGIS-MVP
+
+2) World Metro Visualiser — global metro networks on one map
+Web: https://world-metro-visualiser.netlify.app/
+GitHub: https://github.com/rudra-code-creator/world-metro-visualiser
+
+3) Leap Ahead — AI career guidance (hackathon)
+Web: https://leap-uqies-hackathon-sandy.vercel.app/
+GitHub: https://github.com/rudra-code-creator/leap-UQIES-hackathon
+
+4) Airline Data Explorer — airline / route analytics
+GitHub: https://github.com/rudra-code-creator/airline-data-explorer
+(local app — clone & run)
+
+5) FlightRadar67 — live ADS-B radar on a Cesium globe
+Web: https://flightradar67.netlify.app
+GitHub: https://github.com/rudra-code-creator/flightradar67
+
+6) Arya Clark Luxury Real Estate — agent marketing site
+Web: https://arya-clark-website.vercel.app
+
+7) My personal website — portfolio, resume, blog, checklist & more
+Web: https://rudra-keshwani-personal-website.vercel.app/
+GitHub: https://github.com/rudra-code-creator/rudra-keshwani-personal-website
+
+Thread ↓ one post per project.
+
+### 2/9 — IntelliGIS
+Image: `01-intelligis.png`
+
+IntelliGIS is my geospatial AI product: ask plain-English questions of maps, satellite imagery, and planning data without traditional GIS complexity.
+
+I founded it to make AI-powered geospatial analysis more accessible — product strategy, architecture, customer discovery, and early go-to-market all in one loop. The MVP lets you prompt against a live map context (think master-plan style questions over a city) instead of fighting layers and toolbars.
+
+Live: https://intelligis-mvp.netlify.app
+Code: https://github.com/rudra-code-creator/intelliGIS-MVP
+
+### 3/9 — World Metro Visualiser
+Image: `02-world-metro-visualiser.png`
+
+World Metro Visualiser is for exploring and comparing metro systems worldwide — lines, stations, and network layouts across major cities in one interactive map.
+
+It’s the kind of project I love: dense spatial data, clear visual hierarchy, and a UI that makes “how does Beijing’s network compare?” feel obvious at a glance.
+
+Live: https://world-metro-visualiser.netlify.app/
+Code: https://github.com/rudra-code-creator/world-metro-visualiser
+
+### 4/9 — Leap Ahead
+Image: `03-leap-ahead.png`
+
+Leap Ahead came out of the UQIES × January Capital × Lovable Hackathon 2026.
+
+It’s AI career guidance for students and early-career builders — personalized pathways, skill gaps, weekly focus, and opportunities in a student-hub style dashboard. Built fast under hackathon constraints, but aimed at a real problem: turning “I don’t know what to do next” into a concrete plan.
+
+Live: https://leap-uqies-hackathon-sandy.vercel.app/
+Code: https://github.com/rudra-code-creator/leap-UQIES-hackathon
+
+### 5/9 — Airline Data Explorer
+Image: `04-airline-data-explorer.png`
+
+Airline Data Explorer is interactive aviation analytics — airline networks, routes, airports, and global connectivity patterns.
+
+It’s a local Python app (clone → venv → run). First launch may take longer while data caches build. Great if you want to dig into fleet / route structure without a black-box dashboard.
+
+Code + setup: https://github.com/rudra-code-creator/airline-data-explorer
+
+### 6/9 — FlightRadar67
+Image: `05-flightradar67.png`
+
+FlightRadar67 is a real-time aviation radar on a full CesiumJS globe.
+
+Live ADS-B traffic loads in viewport chunks, aircraft are colour-coded by altitude, and selecting a flight reveals its flown trail with route context — more radar screen than dashboard. Filters, airport markers, callsigns, and geolocation make it feel like an ops console, not a toy map.
+
+Live: https://flightradar67.netlify.app
+Code: https://github.com/rudra-code-creator/flightradar67
+
+### 7/9 — Arya Clark Luxury Real Estate
+Image: `06-arya-clark.png`
+
+Client-facing marketing site for luxury real estate agent Arya Clark.
+
+Dark theme, gold accents, full-bleed estate photography, and a clear path to book an appraisal — plus featured homes, property browse, map, and services. Built to feel premium without getting in the way of the inventory and the CTA.
+
+Live: https://arya-clark-website.vercel.app
+
+### 8/9 — Personal website
+Image: `07-personal-website.png`
+
+My own site is the home base for everything else: profile + TIBER framework, experience, skills, resume (view/download), featured projects carousel, LinkedIn posts, travel map, life checklist, blog, and a pop quiz — with light/dark theme, sidebar nav, and a command palette.
+
+Stack: Next.js 15, TypeScript, Tailwind. Deployed via GitHub → Vercel.
+
+Live: https://rudra-keshwani-personal-website.vercel.app/
+Code: https://github.com/rudra-code-creator/rudra-keshwani-personal-website
+
+### 9/9 — Sign-off
+
+That’s the full set so far.
+
+You can browse a carousel of all of them here:
+https://rudra-keshwani-personal-website.vercel.app/
+
+Always building. Feedback welcome — and if something here is useful to you, the repos are open.
+
+— Rudra Keshwani (The TIBER guy)
+
+---
+
+## TWITTER / X THREAD
+(Keep each post under ~280 chars where possible; attach the same images.)
+
+### 1/9
+Image: collage
+
+Everything I’ve shipped so far ↓
+
+1 IntelliGIS — intelligis-mvp.netlify.app | github.com/rudra-code-creator/intelliGIS-MVP
+2 World Metro — world-metro-visualiser.netlify.app | github.com/rudra-code-creator/world-metro-visualiser
+3 Leap Ahead — leap-uqies-hackathon-sandy.vercel.app | github.com/rudra-code-creator/leap-UQIES-hackathon
+4 Airline Data Explorer — github.com/rudra-code-creator/airline-data-explorer
+5 FlightRadar67 — flightradar67.netlify.app | github.com/rudra-code-creator/flightradar67
+6 Arya Clark — arya-clark-website.vercel.app
+7 Personal site — rudra-keshwani-personal-website.vercel.app | github.com/rudra-code-creator/rudra-keshwani-personal-website
+
+Thread ↓
+
+### 2/9
+Image: IntelliGIS
+
+IntelliGIS: AI geospatial intelligence. Ask maps + planning data questions in plain English — without classic GIS complexity. Founder build: product, architecture, GTM.
+
+🌐 intelligis-mvp.netlify.app
+💻 github.com/rudra-code-creator/intelliGIS-MVP
+
+### 3/9
+Image: World Metro
+
+World Metro Visualiser: explore & compare metro systems worldwide — lines, stations, network layouts on one interactive map.
+
+🌐 world-metro-visualiser.netlify.app
+💻 github.com/rudra-code-creator/world-metro-visualiser
+
+### 4/9
+Image: Leap Ahead
+
+Leap Ahead (UQIES × January Capital × Lovable Hackathon 2026): AI career guidance — pathways, skill gaps, weekly focus for students & early-career builders.
+
+🌐 leap-uqies-hackathon-sandy.vercel.app
+💻 github.com/rudra-code-creator/leap-UQIES-hackathon
+
+### 5/9
+Image: Airline Data Explorer
+
+Airline Data Explorer: interactive aviation analytics — airlines, routes, airports, global connectivity. Local Python app (clone & run; first launch may cache data).
+
+💻 github.com/rudra-code-creator/airline-data-explorer
+
+### 6/9
+Image: FlightRadar67
+
+FlightRadar67: live ADS-B radar on a CesiumJS globe. Viewport-chunked traffic, altitude colouring, select a flight → trail + route context. Radar screen, not a dashboard.
+
+🌐 flightradar67.netlify.app
+💻 github.com/rudra-code-creator/flightradar67
+
+### 7/9
+Image: Arya Clark
+
+Arya Clark Luxury Real Estate: dark + gold agent site — hero estates, featured homes, map, services, appraisal booking for high-end buyers & sellers.
+
+🌐 arya-clark-website.vercel.app
+
+### 8/9
+Image: Personal site
+
+Personal site: TIBER profile, resume, projects carousel, LinkedIn posts, travel map, life checklist, blog, pop quiz. Next.js 15 + Tailwind. GitHub → Vercel.
+
+🌐 rudra-keshwani-personal-website.vercel.app
+💻 github.com/rudra-code-creator/rudra-keshwani-personal-website
+
+### 9/9
+
+That’s everything so far.
+
+Carousel of all projects:
+https://rudra-keshwani-personal-website.vercel.app/
+
+Always building. Feedback welcome.
+
+— Rudra (The TIBER guy)

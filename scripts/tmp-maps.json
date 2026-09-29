@@ -1,0 +1,62 @@
+[
+  {
+    "id": "tavan-tolgoi-rail-map",
+    "title": "Tavan Tolgoi–Gashuunsukhait Railway",
+    "subtitle": "233 km heavy-haul coal line · Ganqimaodu border link due 2027",
+    "bbox": [105.2, 42.2, 107.9, 43.8],
+    "lines": [
+      { "color": "#a16207", "coords": [[105.52, 43.6], [105.8, 43.48], [106.1, 43.34], [106.4, 43.2], [106.65, 43.05], [106.9, 42.88], [107.1, 42.74], [107.3, 42.6], [107.5, 42.48]] },
+      { "color": "#a16207", "dashed": true, "coords": [[107.5, 42.48], [107.55, 42.43], [107.56, 42.39]] }
+    ],
+    "points": [
+      { "lat": 43.6, "lng": 105.52, "label": "Tavan Tolgoi", "major": true, "color": "#a16207", "side": "right" },
+      { "lat": 42.48, "lng": 107.5, "label": "Gashuunsukhait", "major": true, "color": "#a16207", "side": "left" },
+      { "lat": 42.39, "lng": 107.56, "label": "Ganqimaodu (China)", "color": "#a16207", "side": "right" },
+      { "lat": 43.0083, "lng": 106.8431, "label": "Oyu Tolgoi", "color": "#475569", "side": "right" }
+    ],
+    "legend": [
+      { "color": "#a16207", "label": "Railway (open 2022, approx.)" },
+      { "color": "#a16207", "dashed": true, "label": "Border link under construction" }
+    ]
+  },
+  {
+    "id": "new-kharkhorum-map",
+    "title": "New Kharkhorum City",
+    "subtitle": "Planned new capital-scale city in the Orkhon Valley",
+    "bbox": [102.4, 46.9, 103.3, 47.5],
+    "areas": [
+      { "color": "#7c3aed", "opacity": 0.2, "dashed": true, "coords": [[102.65, 47.1], [102.95, 47.1], [102.98, 47.28], [102.68, 47.3]], "label": "Planned city (approx.)", "labelAt": [102.82, 47.35] }
+    ],
+    "points": [
+      { "lat": 47.2, "lng": 102.82, "label": "Kharkhorin", "major": true, "color": "#7c3aed", "side": "below" }
+    ],
+    "legend": [{ "color": "#7c3aed", "dashed": true, "label": "Indicative site (not officially published)" }]
+  },
+  {
+    "id": "hwasong-map",
+    "tiles": "osm",
+    "title": "Pyongyang 50,000 Homes · Hwasong district",
+    "subtitle": "40,000 flats built in Hwasong 2023–26 · fifth stage under way",
+    "bbox": [125.7, 39.0, 125.85, 39.13],
+    "points": [
+      { "lat": 39.0965, "lng": 125.7774, "label": "Hwasong district", "major": true, "color": "#e11d48", "side": "right" },
+      { "lat": 39.019, "lng": 125.753, "label": "Central Pyongyang", "color": "#475569", "side": "right" }
+    ],
+    "legend": [{ "color": "#e11d48", "label": "Hwasong new-housing district" }]
+  },
+  {
+    "id": "tumen-bridge-map",
+    "tiles": "osm",
+    "title": "Yakov Novichenko Bridge",
+    "subtitle": "First road link between Russia and North Korea · opened Sep 2026",
+    "bbox": [130.58, 42.39, 130.68, 42.44],
+    "lines": [
+      { "color": "#2563eb", "coords": [[130.652, 42.425], [130.65, 42.419], [130.648, 42.414], [130.6458, 42.412], [130.64, 42.41], [130.63, 42.412], [130.618, 42.416], [130.608, 42.4214]] }
+    ],
+    "points": [
+      { "lat": 42.428, "lng": 130.646, "label": "Khasan (Russia)", "major": true, "color": "#2563eb", "side": "right" },
+      { "lat": 42.4214, "lng": 130.6081, "label": "Tumangang (N. Korea)", "major": true, "color": "#2563eb", "side": "left" }
+    ],
+    "legend": [{ "color": "#2563eb", "label": "Road crossing incl. 1 km bridge (approx.)" }]
+  }
+]
