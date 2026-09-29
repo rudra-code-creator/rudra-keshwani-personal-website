@@ -1,0 +1,50 @@
+[
+  {
+    "dest": "oyu-tolgoi-geology",
+    "file": "/images/infrastructure/oyu-tolgoi-geology.png",
+    "license": "Public domain",
+    "artist": "Gombosuren Badarch, Gunchin Dejidmaa, Ochir Gerel, Alexander A. Obolenskiy, Andrei V. Prokopiev, Vladimir F. Timofeev, a",
+    "page": "https://commons.wikimedia.org/wiki/File:Hugo_Dummett_northern_Oyu_Tolgoi_geologic_map.png",
+    "size": "660x610"
+  },
+  {
+    "dest": "oyu-tolgoi-site",
+    "file": "/images/infrastructure/oyu-tolgoi-site.jpg",
+    "license": "CC0",
+    "artist": "Sino-German Urbanisation Partnership",
+    "page": "https://commons.wikimedia.org/wiki/File:Oyutolgoi_mine_industrial_area.jpg",
+    "size": "1183x783"
+  },
+  {
+    "dest": "wonsan-kalma-satellite",
+    "file": "/images/infrastructure/wonsan-kalma-satellite.jpg",
+    "license": "Public domain",
+    "artist": "NASA World Wind",
+    "page": "https://commons.wikimedia.org/wiki/File:Kalma_Airport.jpg",
+    "size": "890x883"
+  },
+  {
+    "dest": "hwasong-map",
+    "file": "/images/infrastructure/hwasong-map.png",
+    "license": "CC BY-SA 4.0",
+    "artist": "Dingyday",
+    "page": "https://commons.wikimedia.org/wiki/File:Pyongyang_Hwasong-guyok.svg",
+    "size": "512x512"
+  },
+  {
+    "dest": "novichenko-bridge-aerial",
+    "file": "/images/infrastructure/novichenko-bridge-aerial.jpg",
+    "license": "CC BY 4.0",
+    "artist": "Росавтодор",
+    "page": "https://commons.wikimedia.org/wiki/File:%D0%9C%D0%BE%D1%81%D1%82_%D0%AF%D0%BA%D0%BE%D0%B2%D0%B0_%D0%9D%D0%BE%D0%B2%D0%B8%D1%87%D0%B5%D0%BD%D0%BA%D0%BE_%D1%81_%D0%B2%D1%8B%D1%81%D0%BE%D1%82%D1%8B_%D0%BF%D1%82%D0%B8%D1%87%D1%8C%D0%B5%D0%B3%D0%BE_%D0%BF%D0%BE%D0%BB%D1%91%D1%82%D0%B0.jpg",
+    "size": "5092x3815"
+  },
+  {
+    "dest": "kharkhorin-aerial",
+    "file": "/images/infrastructure/kharkhorin-aerial.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "Kirill Burtasovsky",
+    "page": "https://commons.wikimedia.org/wiki/File:Kharkhorin_Mongolia_(Photo_by_Kirill_Burtasovsky).jpg",
+    "size": "4000x2250"
+  }
+]
