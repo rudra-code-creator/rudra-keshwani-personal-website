@@ -1,13 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   featuredProjects,
   featuredProjectsPeekCount,
   featuredProjectsPreviewCount,
   type FeaturedProject,
+  type ProjectImage,
 } from "@/app/projects-data";
+
+const CAROUSEL_MS = 5500;
 
 function CodeBlock({ commands }: { commands: string[] }) {
   return (
@@ -55,19 +58,162 @@ function ProjectSetup({ project }: { project: NonNullable<FeaturedProject["setup
   );
 }
 
-function ProjectCard({ project }: { project: FeaturedProject }) {
-  const primaryIsWebsite = Boolean(project.websiteUrl);
+function badgeLabel(badge: NonNullable<FeaturedProject["badge"]>): string {
+  switch (badge) {
+    case "new":
+      return "New";
+    case "deprecated":
+      return "Old · deprecated";
+    default: {
+      const _exhaustive: never = badge;
+      return _exhaustive;
+    }
+  }
+}
+
+function ProjectBadge({ badge }: { badge: NonNullable<FeaturedProject["badge"]> }) {
+  const isNew = badge === "new";
+  return (
+    <span
+      className={[
+        "inline-flex shrink-0 items-center rounded-sm px-2 py-0.5 text-caption-sm font-medium uppercase tracking-wide",
+        isNew ? "bg-accent-green-soft text-accent-green" : "bg-accent-yellow-soft text-accent-yellow",
+      ].join(" ")}
+    >
+      {badgeLabel(badge)}
+    </span>
+  );
+}
+
+function ProjectCarousel({
+  images,
+  sizes,
+  featured,
+}: {
+  images: readonly ProjectImage[];
+  sizes: string;
+  featured?: boolean;
+}) {
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const count = images.length;
+  const current = images[Math.min(active, count - 1)];
+
+  const goTo = useCallback(
+    (next: number) => {
+      if (count === 0) return;
+      setActive(((next % count) + count) % count);
+    },
+    [count],
+  );
+
+  useEffect(() => {
+    if (count <= 1 || paused) return;
+    const timer = window.setInterval(() => {
+      setActive((i) => (i + 1) % count);
+    }, CAROUSEL_MS);
+    return () => window.clearInterval(timer);
+  }, [count, paused]);
+
+  if (!current) {
+    return (
+      <div className="flex h-full min-h-[10rem] items-center justify-center px-4 text-center text-caption-md text-mute">
+        Preview coming soon
+      </div>
+    );
+  }
 
   return (
-    <article className="flex h-full flex-col overflow-hidden rounded-lg border border-hairline bg-surface">
-      <div className="relative aspect-[16/10] border-b border-hairline bg-surface-card">
-        {project.imageSrc ? (
-          <Image
-            src={project.imageSrc}
-            alt={project.imageAlt}
-            fill
-            className="object-cover object-top"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+    <div
+      className={`group/gallery relative bg-canvas ${featured ? "" : "aspect-[16/10]"}`}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocusCapture={() => setPaused(true)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node)) setPaused(false);
+      }}
+    >
+      {featured ? (
+        <Image
+          key={current.src}
+          src={current.src}
+          alt={current.alt}
+          width={1920}
+          height={1080}
+          className="mx-auto block h-auto w-auto max-w-full object-contain"
+          sizes={sizes}
+          priority
+        />
+      ) : (
+        <Image
+          key={current.src}
+          src={current.src}
+          alt={current.alt}
+          fill
+          className="object-cover object-top"
+          sizes={sizes}
+        />
+      )}
+      {count > 1 ? (
+        <>
+          {([-1, 1] as const).map((delta) => (
+            <button
+              key={delta}
+              type="button"
+              aria-label={delta < 0 ? "Previous screenshot" : "Next screenshot"}
+              onClick={() => goTo(active + delta)}
+              className={[
+                "absolute top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-hairline-strong bg-surface-elevated/90 text-on-dark opacity-80 transition hover:opacity-100",
+                delta < 0 ? "left-3" : "right-3",
+              ].join(" ")}
+            >
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden>
+                <path d={delta < 0 ? "M7.5 2.5 4 6l3.5 3.5" : "M4.5 2.5 8 6l-3.5 3.5"} />
+              </svg>
+            </button>
+          ))}
+          <div className="absolute bottom-2.5 left-1/2 flex -translate-x-1/2 gap-1.5 rounded-full bg-surface-elevated/85 px-2 py-1">
+            {images.map((image, i) => (
+              <button
+                key={image.src}
+                type="button"
+                aria-label={`Show screenshot ${i + 1} of ${count}`}
+                aria-current={i === active ? "true" : undefined}
+                onClick={() => goTo(i)}
+                className={`h-1.5 rounded-full transition-all ${i === active ? "w-4 bg-primary" : "w-1.5 bg-mute/60"}`}
+              />
+            ))}
+          </div>
+        </>
+      ) : null}
+    </div>
+  );
+}
+
+function ProjectCard({ project }: { project: FeaturedProject }) {
+  const primaryIsWebsite = Boolean(project.websiteUrl);
+  const featured = Boolean(project.featured);
+  const images: ProjectImage[] =
+    project.images && project.images.length > 0
+      ? project.images
+      : project.imageSrc
+        ? [{ src: project.imageSrc, alt: project.imageAlt }]
+        : [];
+  const websiteLabel = project.badge === "deprecated" ? "Legacy site" : "Website";
+
+  return (
+    <article
+      className={[
+        "flex h-full flex-col overflow-hidden rounded-lg border border-hairline bg-surface",
+        featured ? "sm:col-span-2" : "",
+      ].join(" ")}
+    >
+      <div className="relative border-b border-hairline bg-surface-card">
+        {images.length > 0 ? (
+          <ProjectCarousel
+            images={images}
+            featured={featured}
+            sizes={featured ? "(max-width: 1024px) 100vw, 70vw" : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"}
           />
         ) : (
           <div className="flex h-full min-h-[10rem] items-center justify-center px-4 text-center text-caption-md text-mute">
@@ -76,7 +222,10 @@ function ProjectCard({ project }: { project: FeaturedProject }) {
         )}
       </div>
       <div className="flex flex-1 flex-col p-5 lg:p-6">
-        <h3 className="text-heading-sm text-on-dark">{project.name}</h3>
+        <div className="flex flex-wrap items-center gap-2">
+          <h3 className="text-heading-sm text-on-dark">{project.name}</h3>
+          {project.badge ? <ProjectBadge badge={project.badge} /> : null}
+        </div>
         <p className="mt-2 text-body-sm text-body">{project.description}</p>
         {project.setup ? <ProjectSetup project={project.setup} /> : null}
         <div className="mt-auto flex flex-wrap gap-2 pt-5">
@@ -87,7 +236,7 @@ function ProjectCard({ project }: { project: FeaturedProject }) {
               rel="noopener noreferrer"
               className="focus-ring btn-primary"
             >
-              Website
+              {websiteLabel}
             </a>
           ) : null}
           {project.githubUrl ? (
@@ -103,6 +252,16 @@ function ProjectCard({ project }: { project: FeaturedProject }) {
         </div>
       </div>
     </article>
+  );
+}
+
+function ProjectGrid({ projects }: { projects: FeaturedProject[] }) {
+  return (
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-5">
+      {projects.map((project) => (
+        <ProjectCard key={project.id} project={project} />
+      ))}
+    </div>
   );
 }
 
@@ -123,11 +282,7 @@ export function FeaturedProjectsBento() {
     <div className="mt-8">
       {expanded || !needsToggle ? (
         <>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-5">
-            {projects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
-          </div>
+          <ProjectGrid projects={projects} />
           {needsToggle ? (
             <div className="mt-6 flex justify-center">
               <button
@@ -143,11 +298,7 @@ export function FeaturedProjectsBento() {
         </>
       ) : (
         <>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-5">
-            {previewProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
-          </div>
+          <ProjectGrid projects={previewProjects} />
 
           {peekProjects.length > 0 ? (
             <div className="relative mt-4">

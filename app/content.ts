@@ -100,7 +100,7 @@ export const experience = [
     date: "Jun 2026 – Present",
     place: "Brisbane, Queensland, Australia · Hybrid",
     summary:
-      "Founded intelliGIS to make AI-powered geospatial analysis more accessible and actionable. Leading product strategy, architecture, customer discovery, partnerships, and early go-to-market execution. Check it out here: https://intelligis-mvp.netlify.app",
+      "Founded intelliGIS to make AI-powered geospatial analysis more accessible and actionable. Leading product strategy, architecture, customer discovery, partnerships, and early go-to-market execution. Flagship is IntelliGIS Marine: https://intelligis-marine.netlify.app",
     skills: "Founder, Geospatial AI, Product Strategy",
   },
   {
