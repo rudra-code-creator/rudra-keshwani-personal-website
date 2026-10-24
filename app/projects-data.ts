@@ -5,14 +5,23 @@ export type ProjectSetupStep = {
   note?: string;
 };
 
+export type ProjectImage = {
+  src: string;
+  alt: string;
+};
+
 export type FeaturedProject = {
   id: string;
   name: string;
   description: string;
   imageSrc?: string;
   imageAlt: string;
+  images?: ProjectImage[];
   websiteUrl?: string;
   githubUrl?: string;
+  /** Spans both columns of the bento grid — reserved for the flagship. */
+  featured?: boolean;
+  badge?: "new" | "deprecated";
   setup?: {
     title?: string;
     steps: ProjectSetupStep[];
@@ -23,10 +32,53 @@ export type FeaturedProject = {
 /** Featured builds for the homepage projects bento grid (display order). */
 export const featuredProjects: FeaturedProject[] = [
   {
+    id: "intelligis-marine",
+    name: "IntelliGIS Marine",
+    featured: true,
+    badge: "new",
+    description:
+      "Ask the ocean a question in plain language. An AI-native marine GIS where a language model plans and a deterministic spatial engine computes — storm-surge exposure, offshore wind siting, MPA loitering, port operations and dark-vessel detection on a live South China Sea digital twin.",
+    imageSrc: "/images/projects/intelligis-marine/live-ais.webp",
+    imageAlt: "IntelliGIS Marine console with live AIS traffic around Hong Kong and Shenzhen",
+    images: [
+      {
+        src: "/images/projects/intelligis-marine/mpa-guangdong.jpg",
+        alt: "IntelliGIS Marine console over Guangdong with 3D terrain, Typhoon 2618, and flagged vessels from an MPA loitering analysis",
+      },
+      {
+        src: "/images/projects/intelligis-marine/mpa-south-china-sea.jpg",
+        alt: "IntelliGIS Marine regional South China Sea view with AIS trails from Vietnam to the Philippines and a flagged-vessel table",
+      },
+      {
+        src: "/images/projects/intelligis-marine/live-ais.webp",
+        alt: "IntelliGIS Marine console with live AIS traffic around Hong Kong, Shenzhen and the Pearl River Delta",
+      },
+      {
+        src: "/images/projects/intelligis-marine/typhoon.webp",
+        alt: "Typhoon 2618 forecast cone and wind radii approaching the Guangdong coast in the marine console",
+      },
+      {
+        src: "/images/projects/intelligis-marine/density.webp",
+        alt: "H3 hexagon shipping-density overlay across the Pearl River Delta approaches",
+      },
+      {
+        src: "/images/projects/intelligis-marine/region.webp",
+        alt: "Regional South China Sea twin with typhoon track, ports and AIS from Vietnam to Guangdong",
+      },
+      {
+        src: "/images/projects/intelligis-marine/pearl-river.webp",
+        alt: "Pearl River Delta map view with AIS trails, ports and marine protected areas",
+      },
+    ],
+    websiteUrl: "https://intelligis-marine.netlify.app",
+    githubUrl: "https://github.com/rudra-code-creator/intelligis-marine",
+  },
+  {
     id: "intelligis",
     name: "IntelliGIS",
+    badge: "deprecated",
     description:
-      "AI-powered geospatial intelligence — ask plain-English questions of maps, satellite imagery, and planning data without traditional GIS complexity.",
+      "The original planner MVP — ask plain-English questions of maps, satellite imagery, and planning data. Superseded by IntelliGIS Marine; kept here as the earlier prototype.",
     imageSrc: "/images/projects/intelligis.png",
     imageAlt: "IntelliGIS planner with Brisbane map and AI master-plan prompt",
     websiteUrl: "https://intelligis-mvp.netlify.app",
@@ -140,6 +192,6 @@ export const featuredProjects: FeaturedProject[] = [
   },
 ];
 
-/** Fully visible cards before the fade; the next 2 peek underneath the show-more control. */
-export const featuredProjectsPreviewCount = 4;
+/** Fully visible cards before the fade (flagship spans two columns, so 5 fills three complete rows). */
+export const featuredProjectsPreviewCount = 5;
 export const featuredProjectsPeekCount = 2;
