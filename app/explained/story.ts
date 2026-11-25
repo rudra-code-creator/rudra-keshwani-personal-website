@@ -142,8 +142,7 @@ export function getExplainerStory(): ExplainerStory {
       { href: "/#about", label: "About", hint: "Who" },
       { href: "/#tiber", label: "TIBER", hint: "The framework" },
       { href: "/#projects", label: "Projects", hint: "Builds" },
-      { href: "/#resume", label: "Resume", hint: "Read on the page" },
-      { href: "/resume.pdf", label: "Download PDF", hint: "resume.pdf" },
+      { href: "/#resume", label: "Document hub", hint: "Resumes and web links" },
     ],
   };
 }

@@ -168,12 +168,12 @@ function CommandPaletteDialog({
         run: () => go(contact.cursor),
       },
       {
-        id: "link-resume",
-        label: "Resume PDF",
-        sub: "View or download",
+        id: "link-documents",
+        label: "Document hub",
+        sub: "Resumes and web links",
         group: "Links",
-        keywords: "cv pdf",
-        run: () => go("/resume.pdf"),
+        keywords: "resume cv pdf technical business weblinks",
+        run: () => go("/#resume"),
       },
     ];
 
