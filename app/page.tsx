@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { EducationGraphic } from "@/components/EducationGraphic";
 import { EducationStockImage } from "@/components/EducationStockImage";
+import { DocumentHub } from "@/components/DocumentHub";
 import { FeaturedLinkedInPostsCarousel } from "@/components/FeaturedLinkedInPostsCarousel";
 import { FeaturedProjectsBento } from "@/components/FeaturedProjectsBento";
 import { ExpandableList } from "@/components/ExpandableList";
@@ -409,24 +410,13 @@ export default async function Home() {
 
         <section id="resume" aria-labelledby="resume-heading" className="section-y">
           <div className="mx-auto max-w-content px-gutter rounded-lg border border-hairline bg-surface p-6 lg:p-8">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <SectionTitle id="resume-heading" icon={<DocumentIcon width={18} height={18} />}>
-                Resume
-              </SectionTitle>
-              <a href="/resume.pdf" className="focus-ring btn-primary" download>
-                Download PDF
-              </a>
-            </div>
+            <SectionTitle id="resume-heading" icon={<DocumentIcon width={18} height={18} />}>
+              Document hub
+            </SectionTitle>
             <p className="mt-3 text-body-sm text-mute">
-              Inline preview below. If it does not load in your browser, use the download button.
+              Different contexts call for different introductions. Preview a document inline, download it, or expand it for a closer look.
             </p>
-            <div className="mt-6 overflow-hidden rounded-md border border-hairline">
-              <iframe
-                src="/resume.pdf"
-                title="Rudra Keshwani resume"
-                className="h-[70vh] w-full bg-canvas"
-              />
-            </div>
+            <DocumentHub />
           </div>
         </section>
 

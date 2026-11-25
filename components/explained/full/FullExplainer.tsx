@@ -574,7 +574,7 @@ export function FullExplainer({ story }: { story: FullExplainerStory }) {
         <Piece a={-0.4} b={0} spin="-6deg">
           <div className="explained-full-card">
             <span>Chapter</span>
-            <strong>GitHub, resume, LinkedIn</strong>
+            <strong>GitHub, documents, LinkedIn</strong>
           </div>
         </Piece>
         <Piece a={0.02} b={0.16} c={0.46} d={0.6} spin="3deg">
@@ -603,12 +603,8 @@ export function FullExplainer({ story }: { story: FullExplainerStory }) {
           <div className="explained-full-list">
             <Link className="explained-full-line focus-ring" href="/#resume">
               <b>01</b>
-              <span>Resume on the site — inline preview at /#resume</span>
+              <span>Document hub on the site — inline previews at /#resume</span>
             </Link>
-            <a className="explained-full-line focus-ring" href="/resume.pdf" download>
-              <b>02</b>
-              <span>Download PDF — resume.pdf</span>
-            </a>
           </div>
         </Piece>
         <Piece a={0.52} b={0.68} spin="4deg">
